@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on sáb 22 sep 2018 12:24:01 CST by Netedit Version 0.30.0
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <sumo-net-file value="/home/juan/Documents/Research/Veins_Research/simulations/SimpleSimulation/net.net.xml"/>
+    </input>
+
+    <output>
+        <output-file value="/home/juan/Documents/Research/Veins_Research/simulations/SimpleSimulation/net.net.xml"/>
+    </output>
+
+    <processing>
+        <no-turnarounds value="true"/>
+        <offset.disable-normalization value="true"/>
+        <lefthand value="false"/>
+        <junctions.corner-detail value="0"/>
+        <rectangular-lane-cut value="false"/>
+    </processing>
+
+</configuration>
+-->
+
+<net version="0.27" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/net_file.xsd">
+
+    <location netOffset="500.00,500.00" convBoundary="0.00,500.00,500.00,500.00" origBoundary="-500.00,-500.00,500.00,500.00" projParameter="!"/>
+
+    <edge id=":0_0" function="internal">
+        <lane id=":0_0_0" index="0" speed="15.28" length="4.82" shape="500.00,498.35 501.24,499.18 501.65,500.00 501.24,500.82 500.00,501.65"/>
+    </edge>
+    <edge id=":1_0" function="internal">
+        <lane id=":1_0_0" index="0" speed="15.28" length="4.82" shape="0.00,501.65 -1.24,500.82 -1.65,500.00 -1.24,499.18 0.00,498.35"/>
+    </edge>
+
+    <edge id="1i" from="1" to="0" priority="78">
+        <lane id="1i_0" index="0" speed="19.44" length="500.00" shape="0.00,498.35 500.00,498.35"/>
+    </edge>
+    <edge id="1o" from="0" to="1" priority="46">
+        <lane id="1o_0" index="0" speed="11.11" length="500.00" shape="500.00,501.65 0.00,501.65"/>
+    </edge>
+
+    <junction id="0" type="priority" x="500.00" y="500.00" incLanes="1i_0" intLanes=":0_0_0" shape="500.00,500.05 500.00,496.75 500.00,499.95">
+        <request index="0" response="0" foes="0" cont="0"/>
+    </junction>
+    <junction id="1" type="priority" x="0.00" y="500.00" incLanes="1o_0" intLanes=":1_0_0" shape="0.00,499.95 0.00,503.25 0.00,500.05">
+        <request index="0" response="0" foes="0" cont="0"/>
+    </junction>
+
+    <connection from="1i" to="1o" fromLane="0" toLane="0" via=":0_0_0" dir="t" state="M"/>
+    <connection from="1o" to="1i" fromLane="0" toLane="0" via=":1_0_0" dir="t" state="M"/>
+
+    <connection from=":0_0" to="1o" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":1_0" to="1i" fromLane="0" toLane="0" dir="s" state="M"/>
+
+</net>
