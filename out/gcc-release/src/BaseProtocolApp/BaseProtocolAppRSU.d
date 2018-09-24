@@ -1,5 +1,6 @@
-out/gcc-release//src/MaxNetworkApp/TraCIDemo11p.o: \
- src/MaxNetworkApp/TraCIDemo11p.cc src/MaxNetworkApp/TraCIDemo11p.h \
+out/gcc-release//src/BaseProtocolApp/BaseProtocolAppRSU.o: \
+ src/BaseProtocolApp/BaseProtocolAppRSU.cc \
+ src/BaseProtocolApp/BaseProtocolAppRSU.h \
  /home/juan/veins-veins-4.6/src/veins/modules/application/ieee80211p/BaseWaveApplLayer.h \
  /home/juan/veins-veins-4.6/src/veins/base/modules/BaseApplLayer.h \
  /home/juan/veins-veins-4.6/src/veins/base/utils/MiXiMDefs.h \
@@ -36,9 +37,10 @@ out/gcc-release//src/MaxNetworkApp/TraCIDemo11p.o: \
  /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCIColor.h \
  /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCIConnection.h \
  /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICoord.h \
- /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICommandInterface.h
+ /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICommandInterface.h \
+ src/BaseProtocolApp/SplitHelper.h
 
-src/MaxNetworkApp/TraCIDemo11p.h:
+src/BaseProtocolApp/BaseProtocolAppRSU.h:
 
 /home/juan/veins-veins-4.6/src/veins/modules/application/ieee80211p/BaseWaveApplLayer.h:
 
@@ -113,3 +115,5 @@ src/MaxNetworkApp/TraCIDemo11p.h:
 /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICoord.h:
 
 /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICommandInterface.h:
+
+src/BaseProtocolApp/SplitHelper.h:
