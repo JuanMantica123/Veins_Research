@@ -1,6 +1,5 @@
 out/gcc-release//src/MaxNetworkApp/TraCIDemoRSU11p.o: \
- src/MaxNetworkApp/TraCIDemoRSU11p.cc \
- /home/juan/veins-veins-4.6/src/veins/modules/application/traci/TraCIDemoRSU11p.h \
+ src/MaxNetworkApp/TraCIDemoRSU11p.cc src/MaxNetworkApp/TraCIDemoRSU11p.h \
  /home/juan/veins-veins-4.6/src/veins/modules/application/ieee80211p/BaseWaveApplLayer.h \
  /home/juan/veins-veins-4.6/src/veins/base/modules/BaseApplLayer.h \
  /home/juan/veins-veins-4.6/src/veins/base/utils/MiXiMDefs.h \
@@ -39,7 +38,7 @@ out/gcc-release//src/MaxNetworkApp/TraCIDemoRSU11p.o: \
  /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICoord.h \
  /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICommandInterface.h
 
-/home/juan/veins-veins-4.6/src/veins/modules/application/traci/TraCIDemoRSU11p.h:
+src/MaxNetworkApp/TraCIDemoRSU11p.h:
 
 /home/juan/veins-veins-4.6/src/veins/modules/application/ieee80211p/BaseWaveApplLayer.h:
 

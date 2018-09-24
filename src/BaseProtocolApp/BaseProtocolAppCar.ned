@@ -1,9 +1,9 @@
 
-package MaxNetworkApp;
+package BaseProtocolApp;
 import org.car2x.veins.modules.application.ieee80211p.BaseWaveApplLayer;
 
-simple TraCIDemo11p extends BaseWaveApplLayer
+simple BaseProtocolAppCar extends BaseWaveApplLayer
 {
-    @class(TraCIDemo11p);
+    @class(BaseProtocolAppCar);
     @display("i=block/app2");
 }
