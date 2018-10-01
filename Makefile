@@ -30,10 +30,18 @@ PROJECTRELATIVE_PATH =
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc, .msg and .sm files
-OBJS = $O/src/BaseProtocolApp/BaseProtocolAppCar.o $O/src/BaseProtocolApp/BaseProtocolAppRSU.o $O/src/BaseProtocolApp/SplitHelper.o $O/src/MaxNetworkApp/TraCIDemo11p.o $O/src/MaxNetworkApp/TraCIDemoRSU11p.o
+OBJS = \
+    $O/src/BaseProtocolApp/BaseProtocolAppCar.o \
+    $O/src/BaseProtocolApp/BaseProtocolAppRSU.o \
+    $O/src/MaxNetworkApp/TraCIDemo11p.o \
+    $O/src/MaxNetworkApp/TraCIDemoRSU11p.o \
+    $O/src/messages/RequestMessage_m.o \
+    $O/src/messages/ResponseMessage_m.o
 
 # Message files
-MSGFILES =
+MSGFILES = \
+    src/messages/RequestMessage.msg \
+    src/messages/ResponseMessage.msg
 
 # SM files
 SMFILES =

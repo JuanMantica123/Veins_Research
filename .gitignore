@@ -1,0 +1,15 @@
+*.log
+*.out/gcc-release/
+*.results
+Veins_Research_dbg
+out/gcc-debug/
+/simulations/SimpleSimulation/results/
+simulations/ProvidedSimulation/results/WithoutChannelSwitching-#0.vci
+simulations/ProvidedSimulation/results/WithoutChannelSwitching-#0.vec
+simulations/ProvidedSimulation/run
+simulations/SimpleSimulation/.tkenvlog
+simulations/SimpleSimulation/.tkenvrc
+
+
+
+
