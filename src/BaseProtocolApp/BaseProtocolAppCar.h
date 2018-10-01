@@ -2,6 +2,8 @@
 #define BaseProtocolAppCar_H
 
 #include "veins/modules/application/ieee80211p/BaseWaveApplLayer.h"
+#include "../messages/RequestMessage_m.h"
+#include "../messages/ResponseMessage_m.h"
 
 class BaseProtocolAppCar : public BaseWaveApplLayer {
     public:
@@ -10,12 +12,8 @@ class BaseProtocolAppCar : public BaseWaveApplLayer {
         virtual void onWSM(WaveShortMessage* wsm);
         virtual void handleSelfMsg(cMessage* msg);
     private:
-        WaveShortMessage* generateValuePetitionWSM();
-        simtime_t interval;
-        cMessage* sendWSMEvt;
-        int lookedValue;
-        std::string rsuSignature;
-        std::string carSignature;
+        RequestMessage* generateRequestMessage();
+        int requestedValue;
         bool found;
 };
 
