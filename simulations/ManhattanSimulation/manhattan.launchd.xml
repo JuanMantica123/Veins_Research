@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!-- debug config -->
+<launch>
+	<copy file="manhattan_grid.net.xml" />
+	<copy file="trips.trips.xml" />
+	<copy file="manhattan.sumocfg" type="config" />
+</launch>
+

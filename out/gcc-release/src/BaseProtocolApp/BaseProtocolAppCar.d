@@ -4,7 +4,7 @@ out/gcc-release//src/BaseProtocolApp/BaseProtocolAppCar.o: \
  /home/juan/veins-veins-4.6/src/veins/modules/application/ieee80211p/BaseWaveApplLayer.h \
  /home/juan/veins-veins-4.6/src/veins/base/modules/BaseApplLayer.h \
  /home/juan/veins-veins-4.6/src/veins/base/utils/MiXiMDefs.h \
- /home/juan/omnetpp-5.3/include/omnetpp.h \
+ /home/juan/Desktop/new_veins/omnetpp-5.3/include/omnetpp.h \
  /home/juan/veins-veins-4.6/src/veins/base/utils/miximkerneldefs.h \
  /home/juan/veins-veins-4.6/src/veins/base/modules/BaseLayer.h \
  /home/juan/veins-veins-4.6/src/veins/base/modules/BatteryAccess.h \
@@ -38,7 +38,8 @@ out/gcc-release//src/BaseProtocolApp/BaseProtocolAppCar.o: \
  /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCIConnection.h \
  /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICoord.h \
  /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICommandInterface.h \
- src/BaseProtocolApp/SplitHelper.h
+ src/BaseProtocolApp/../messages/RequestMessage_m.h \
+ src/BaseProtocolApp/../messages/ResponseMessage_m.h
 
 src/BaseProtocolApp/BaseProtocolAppCar.h:
 
@@ -48,7 +49,7 @@ src/BaseProtocolApp/BaseProtocolAppCar.h:
 
 /home/juan/veins-veins-4.6/src/veins/base/utils/MiXiMDefs.h:
 
-/home/juan/omnetpp-5.3/include/omnetpp.h:
+/home/juan/Desktop/new_veins/omnetpp-5.3/include/omnetpp.h:
 
 /home/juan/veins-veins-4.6/src/veins/base/utils/miximkerneldefs.h:
 
@@ -116,4 +117,6 @@ src/BaseProtocolApp/BaseProtocolAppCar.h:
 
 /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICommandInterface.h:
 
-src/BaseProtocolApp/SplitHelper.h:
+src/BaseProtocolApp/../messages/RequestMessage_m.h:
+
+src/BaseProtocolApp/../messages/ResponseMessage_m.h:

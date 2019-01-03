@@ -1,0 +1,404 @@
+file 69017 1546494036                                           
+version 2
+run General-0-20190102-23:40:28-16215
+attr configname General
+attr datetime 20190102-23:40:28
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network BoxSimulation.MCBoxScenario
+attr processid 16215
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+param **.debug false
+param **.coreDebug false
+param *.playgroundSizeX 560m
+param *.playgroundSizeY 560m
+param *.playgroundSizeZ 560m
+param *.annotations.draw true
+param *.manager.updateInterval 1s
+param *.manager.host "\"localhost\""
+param *.manager.port 9998
+param *.manager.autoShutdown true
+param *.manager.launchConfig "xmldoc(\"box.launchd.xml\")"
+param *.rsu[0].mobility.x 280
+param *.rsu[0].mobility.y 140
+param *.rsu[0].mobility.z 0
+param *.rsu[1].mobility.x 440
+param *.rsu[1].mobility.y 300
+param *.rsu[1].mobility.z 0
+param *.rsu[2].mobility.x 280
+param *.rsu[2].mobility.y 460
+param *.rsu[2].mobility.z 0
+param *.rsu[3].mobility.x 120
+param *.rsu[3].mobility.y 300
+param *.rsu[3].mobility.z 0
+param *.rsu[*].applType "\"CNNApp.CNNAppRSU\""
+param *.rsu[*].appl.headerLength "80 bit"
+param *.rsu[*].appl.sendBeacons false
+param *.rsu[*].appl.dataOnSch false
+param *.rsu[*].appl.beaconInterval 1s
+param *.rsu[*].appl.beaconUserPriority 7
+param *.rsu[*].appl.dataUserPriority 5
+param *.connectionManager.sendDirect true
+param *.connectionManager.maxInterfDist 2600m
+param *.connectionManager.drawMaxIntfDist false
+param *.**.nic.mac1609_4.useServiceChannel false
+param *.**.nic.mac1609_4.txPower 20mW
+param *.**.nic.mac1609_4.bitrate 6Mbps
+param *.**.nic.phy80211p.sensitivity -89dBm
+param *.**.nic.phy80211p.useThermalNoise true
+param *.**.nic.phy80211p.thermalNoise -110dBm
+param *.**.nic.phy80211p.decider "xmldoc(\"config.xml\")"
+param *.**.nic.phy80211p.analogueModels "xmldoc(\"config.xml\")"
+param *.**.nic.phy80211p.usePropagationDelay true
+param *.**.nic.phy80211p.antenna "xmldoc(\"antenna.xml\", \"/root/Antenna[@id='monopole']\")"
+param *.node[*].applType "\"CNNApp.CNNAppCar\""
+param *.node[*].appl.headerLength "80 bit"
+param *.node[*].appl.sendBeacons false
+param *.node[*].appl.dataOnSch false
+param *.node[*].appl.beaconInterval 1s
+param *.node[*].veinsmobilityType.debug true
+param *.node[*].veinsmobility.x -1
+param *.node[*].veinsmobility.y -1
+param *.node[*].veinsmobility.z 1.895
+param *.**.nic.mac1609_4.useServiceChannel true
+param *.node[*].appl.dataOnSch true
+param *.rsu[*].appl.dataOnSch true
+
+vector 0 MCBoxScenario.node[0].veinsmobility posx ETV
+vector 1 MCBoxScenario.node[0].veinsmobility posy ETV
+vector 2 MCBoxScenario.node[1].veinsmobility posx ETV
+vector 3 MCBoxScenario.node[1].veinsmobility posy ETV
+vector 4 MCBoxScenario.node[0].veinsmobility speed ETV
+vector 5 MCBoxScenario.node[2].veinsmobility posx ETV
+vector 6 MCBoxScenario.node[2].veinsmobility posy ETV
+vector 7 MCBoxScenario.node[0].veinsmobility acceleration ETV
+vector 8 MCBoxScenario.node[0].veinsmobility co2emission ETV
+vector 9 MCBoxScenario.node[1].veinsmobility speed ETV
+vector 10 MCBoxScenario.node[3].veinsmobility posx ETV
+vector 11 MCBoxScenario.node[3].veinsmobility posy ETV
+vector 12 MCBoxScenario.node[1].veinsmobility acceleration ETV
+vector 13 MCBoxScenario.node[1].veinsmobility co2emission ETV
+vector 14 MCBoxScenario.node[2].veinsmobility speed ETV
+vector 15 MCBoxScenario.node[4].veinsmobility posx ETV
+vector 16 MCBoxScenario.node[4].veinsmobility posy ETV
+vector 17 MCBoxScenario.node[2].veinsmobility acceleration ETV
+vector 18 MCBoxScenario.node[2].veinsmobility co2emission ETV
+vector 19 MCBoxScenario.node[3].veinsmobility speed ETV
+vector 20 MCBoxScenario.node[5].veinsmobility posx ETV
+vector 21 MCBoxScenario.node[5].veinsmobility posy ETV
+vector 22 MCBoxScenario.node[3].veinsmobility acceleration ETV
+vector 23 MCBoxScenario.node[3].veinsmobility co2emission ETV
+vector 24 MCBoxScenario.node[4].veinsmobility speed ETV
+vector 25 MCBoxScenario.node[6].veinsmobility posx ETV
+vector 26 MCBoxScenario.node[6].veinsmobility posy ETV
+vector 27 MCBoxScenario.node[4].veinsmobility acceleration ETV
+vector 28 MCBoxScenario.node[4].veinsmobility co2emission ETV
+vector 29 MCBoxScenario.node[5].veinsmobility speed ETV
+vector 30 MCBoxScenario.node[7].veinsmobility posx ETV
+vector 31 MCBoxScenario.node[7].veinsmobility posy ETV
+vector 32 MCBoxScenario.node[5].veinsmobility acceleration ETV
+vector 33 MCBoxScenario.node[5].veinsmobility co2emission ETV
+vector 34 MCBoxScenario.node[6].veinsmobility speed ETV
+vector 35 MCBoxScenario.node[8].veinsmobility posx ETV
+vector 36 MCBoxScenario.node[8].veinsmobility posy ETV
+vector 37 MCBoxScenario.node[6].veinsmobility acceleration ETV
+vector 38 MCBoxScenario.node[6].veinsmobility co2emission ETV
+vector 39 MCBoxScenario.node[7].veinsmobility speed ETV
+vector 40 MCBoxScenario.node[9].veinsmobility posx ETV
+vector 41 MCBoxScenario.node[9].veinsmobility posy ETV
+vector 42 MCBoxScenario.node[7].veinsmobility acceleration ETV
+vector 43 MCBoxScenario.node[7].veinsmobility co2emission ETV
+vector 44 MCBoxScenario.node[8].veinsmobility speed ETV
+vector 45 MCBoxScenario.node[10].veinsmobility posx ETV
+vector 46 MCBoxScenario.node[10].veinsmobility posy ETV
+vector 47 MCBoxScenario.node[8].veinsmobility acceleration ETV
+vector 48 MCBoxScenario.node[8].veinsmobility co2emission ETV
+vector 49 MCBoxScenario.node[9].veinsmobility speed ETV
+vector 50 MCBoxScenario.node[11].veinsmobility posx ETV
+vector 51 MCBoxScenario.node[11].veinsmobility posy ETV
+vector 52 MCBoxScenario.node[9].veinsmobility acceleration ETV
+vector 53 MCBoxScenario.node[9].veinsmobility co2emission ETV
+vector 54 MCBoxScenario.node[10].veinsmobility speed ETV
+vector 55 MCBoxScenario.node[12].veinsmobility posx ETV
+vector 56 MCBoxScenario.node[12].veinsmobility posy ETV
+vector 57 MCBoxScenario.node[10].veinsmobility acceleration ETV
+vector 58 MCBoxScenario.node[10].veinsmobility co2emission ETV
+vector 59 MCBoxScenario.node[11].veinsmobility speed ETV
+vector 60 MCBoxScenario.node[13].veinsmobility posx ETV
+vector 61 MCBoxScenario.node[13].veinsmobility posy ETV
+vector 62 MCBoxScenario.node[11].veinsmobility acceleration ETV
+vector 63 MCBoxScenario.node[11].veinsmobility co2emission ETV
+vector 64 MCBoxScenario.node[12].veinsmobility speed ETV
+vector 65 MCBoxScenario.node[14].veinsmobility posx ETV
+vector 66 MCBoxScenario.node[14].veinsmobility posy ETV
+vector 67 MCBoxScenario.node[12].veinsmobility acceleration ETV
+vector 68 MCBoxScenario.node[12].veinsmobility co2emission ETV
+vector 69 MCBoxScenario.node[13].veinsmobility speed ETV
+vector 70 MCBoxScenario.node[15].veinsmobility posx ETV
+vector 71 MCBoxScenario.node[15].veinsmobility posy ETV
+vector 72 MCBoxScenario.node[13].veinsmobility acceleration ETV
+vector 73 MCBoxScenario.node[13].veinsmobility co2emission ETV
+vector 74 MCBoxScenario.node[14].veinsmobility speed ETV
+vector 75 MCBoxScenario.node[16].veinsmobility posx ETV
+vector 76 MCBoxScenario.node[16].veinsmobility posy ETV
+vector 77 MCBoxScenario.node[14].veinsmobility acceleration ETV
+vector 78 MCBoxScenario.node[14].veinsmobility co2emission ETV
+vector 79 MCBoxScenario.node[15].veinsmobility speed ETV
+vector 80 MCBoxScenario.node[17].veinsmobility posx ETV
+vector 81 MCBoxScenario.node[17].veinsmobility posy ETV
+vector 82 MCBoxScenario.node[15].veinsmobility acceleration ETV
+vector 83 MCBoxScenario.node[15].veinsmobility co2emission ETV
+vector 84 MCBoxScenario.node[16].veinsmobility speed ETV
+vector 85 MCBoxScenario.node[18].veinsmobility posx ETV
+vector 86 MCBoxScenario.node[18].veinsmobility posy ETV
+vector 87 MCBoxScenario.node[16].veinsmobility acceleration ETV
+vector 88 MCBoxScenario.node[16].veinsmobility co2emission ETV
+vector 89 MCBoxScenario.node[17].veinsmobility speed ETV
+vector 90 MCBoxScenario.node[19].veinsmobility posx ETV
+vector 91 MCBoxScenario.node[19].veinsmobility posy ETV
+vector 92 MCBoxScenario.node[17].veinsmobility acceleration ETV
+vector 93 MCBoxScenario.node[17].veinsmobility co2emission ETV
+vector 94 MCBoxScenario.node[18].veinsmobility speed ETV
+vector 95 MCBoxScenario.node[20].veinsmobility posx ETV
+vector 96 MCBoxScenario.node[20].veinsmobility posy ETV
+vector 97 MCBoxScenario.node[18].veinsmobility acceleration ETV
+vector 98 MCBoxScenario.node[18].veinsmobility co2emission ETV
+vector 99 MCBoxScenario.node[19].veinsmobility speed ETV
+vector 100 MCBoxScenario.node[21].veinsmobility posx ETV
+vector 101 MCBoxScenario.node[21].veinsmobility posy ETV
+vector 102 MCBoxScenario.node[19].veinsmobility acceleration ETV
+vector 103 MCBoxScenario.node[19].veinsmobility co2emission ETV
+vector 104 MCBoxScenario.node[20].veinsmobility speed ETV
+vector 105 MCBoxScenario.node[22].veinsmobility posx ETV
+vector 106 MCBoxScenario.node[22].veinsmobility posy ETV
+vector 107 MCBoxScenario.node[20].veinsmobility acceleration ETV
+vector 108 MCBoxScenario.node[20].veinsmobility co2emission ETV
+vector 109 MCBoxScenario.node[21].veinsmobility speed ETV
+vector 110 MCBoxScenario.node[23].veinsmobility posx ETV
+vector 111 MCBoxScenario.node[23].veinsmobility posy ETV
+vector 112 MCBoxScenario.node[21].veinsmobility acceleration ETV
+vector 113 MCBoxScenario.node[21].veinsmobility co2emission ETV
+vector 114 MCBoxScenario.node[22].veinsmobility speed ETV
+vector 115 MCBoxScenario.node[24].veinsmobility posx ETV
+vector 116 MCBoxScenario.node[24].veinsmobility posy ETV
+vector 117 MCBoxScenario.node[22].veinsmobility acceleration ETV
+vector 118 MCBoxScenario.node[22].veinsmobility co2emission ETV
+vector 119 MCBoxScenario.node[23].veinsmobility speed ETV
+vector 120 MCBoxScenario.node[25].veinsmobility posx ETV
+vector 121 MCBoxScenario.node[25].veinsmobility posy ETV
+vector 122 MCBoxScenario.node[23].veinsmobility acceleration ETV
+vector 123 MCBoxScenario.node[23].veinsmobility co2emission ETV
+vector 124 MCBoxScenario.node[24].veinsmobility speed ETV
+vector 125 MCBoxScenario.node[26].veinsmobility posx ETV
+vector 126 MCBoxScenario.node[26].veinsmobility posy ETV
+vector 127 MCBoxScenario.node[24].veinsmobility acceleration ETV
+vector 128 MCBoxScenario.node[24].veinsmobility co2emission ETV
+vector 129 MCBoxScenario.node[25].veinsmobility speed ETV
+vector 130 MCBoxScenario.node[27].veinsmobility posx ETV
+vector 131 MCBoxScenario.node[27].veinsmobility posy ETV
+vector 132 MCBoxScenario.node[25].veinsmobility acceleration ETV
+vector 133 MCBoxScenario.node[25].veinsmobility co2emission ETV
+vector 134 MCBoxScenario.node[26].veinsmobility speed ETV
+vector 135 MCBoxScenario.node[28].veinsmobility posx ETV
+vector 136 MCBoxScenario.node[28].veinsmobility posy ETV
+vector 137 MCBoxScenario.node[26].veinsmobility acceleration ETV
+vector 138 MCBoxScenario.node[26].veinsmobility co2emission ETV
+vector 139 MCBoxScenario.node[27].veinsmobility speed ETV
+vector 140 MCBoxScenario.node[29].veinsmobility posx ETV
+vector 141 MCBoxScenario.node[29].veinsmobility posy ETV
+vector 142 MCBoxScenario.node[27].veinsmobility acceleration ETV
+vector 143 MCBoxScenario.node[27].veinsmobility co2emission ETV
+vector 144 MCBoxScenario.node[28].veinsmobility speed ETV
+vector 145 MCBoxScenario.node[30].veinsmobility posx ETV
+vector 146 MCBoxScenario.node[30].veinsmobility posy ETV
+vector 147 MCBoxScenario.node[28].veinsmobility acceleration ETV
+vector 148 MCBoxScenario.node[28].veinsmobility co2emission ETV
+vector 149 MCBoxScenario.node[29].veinsmobility speed ETV
+vector 150 MCBoxScenario.node[31].veinsmobility posx ETV
+vector 151 MCBoxScenario.node[31].veinsmobility posy ETV
+vector 152 MCBoxScenario.node[29].veinsmobility acceleration ETV
+vector 153 MCBoxScenario.node[29].veinsmobility co2emission ETV
+vector 154 MCBoxScenario.node[30].veinsmobility speed ETV
+vector 155 MCBoxScenario.node[32].veinsmobility posx ETV
+vector 156 MCBoxScenario.node[32].veinsmobility posy ETV
+vector 157 MCBoxScenario.node[30].veinsmobility acceleration ETV
+vector 158 MCBoxScenario.node[30].veinsmobility co2emission ETV
+vector 159 MCBoxScenario.node[31].veinsmobility speed ETV
+vector 160 MCBoxScenario.node[31].veinsmobility acceleration ETV
+vector 161 MCBoxScenario.node[31].veinsmobility co2emission ETV
+vector 162 MCBoxScenario.node[32].veinsmobility speed ETV
+vector 163 MCBoxScenario.node[32].veinsmobility acceleration ETV
+vector 164 MCBoxScenario.node[32].veinsmobility co2emission ETV
+0	12276 527 3 40 2 39 38 26.65 30.942666666667 1016.9926666667 27235.681120444
+1	12803 572 3 40 2 39 38 26.65 516.65 12964.401 5389068.1498871
+2	13375 548 4 40 3 39 37 33.35 514.0195 7412.249 2349331.8273871
+3	13923 505 4 40 3 39 37 26.65 26.65 986.05 26278.2325
+4	14428 499 4 40 3 39 37 0.8 25.6 504.47477777778 8766.2525579012
+5	14927 529 5 40 4 39 36 523.35 523.35 18840.6 9860228.01
+6	15456 533 5 40 4 39 36 33.35 498.21633333333 6898.2295 2085115.7810068
+7	15989 451 5 40 4 39 36 -3.86 0.8 10.002111111111 65.612402253087
+8	16440 785 5 40 4 39 36 0.973 8.8304844235981 154.08333858716 867.5494931086
+9	17225 477 5 40 4 39 36 0.8 25.6 493.67266666667 8649.5669534444
+10	17702 559 6 40 5 39 35 71.086833333333 516.65 12849.986833333 5384381.7828734
+11	18261 551 6 40 5 39 35 523.35 523.35 18317.25 9586332.7875
+12	18812 463 6 40 5 39 35 -3.86 0.8 12.203166666667 60.767756694445
+13	19275 808 6 40 5 39 35 0.973 8.8304844235981 153.11033858716 866.6027641086
+14	20083 490 6 40 5 39 35 0.8 25.6 480.6695 8480.4846100833
+15	20573 503 7 40 6 39 34 26.65 26.65 906.1 24147.565
+16	21076 536 7 40 6 39 34 94.25 516.65 12778.9 5379328.445
+17	21612 451 7 40 6 39 34 -3.86 0.8 15.003166666667 52.927756694445
+18	22063 795 7 40 6 39 34 0.973 8.8304844235981 152.13733858716 865.6560351086
+19	22858 467 7 40 6 39 34 0.8 25.6 464.86633333333 8230.7445333889
+20	23325 509 8 40 7 39 33 33.35 430.15 5465.35 1399830.3825
+21	23834 490 8 40 7 39 33 26.65 26.65 879.45 23437.3425
+22	24324 439 8 40 7 39 33 -3.86 0.8 18.503166666667 40.677756694445
+23	24763 782 8 40 7 39 33 0.973 8.8304844235981 151.16433858716 864.7093061086
+24	25545 444 8 40 7 39 33 0.8 25.6 446.44633333333 7899.8261467778
+25	25989 509 9 40 8 39 32 523.35 523.35 16747.2 8764647.12
+26	26498 495 9 40 8 39 32 33.35 405.35 5035.2 1214801.36
+27	26993 426 9 40 8 39 32 -1.5536666666667 0.8 23.246333333333 22.253880111111
+28	27419 769 9 40 8 39 32 0.973 8.8304844235981 150.19133858716 863.7625771086
+29	28188 421 9 40 8 39 32 0.8 25.6 422.4 7321.6
+30	28609 495 10 40 9 39 31 168.65 516.65 12420.15 5335157.7375
+31	29104 495 10 40 9 39 31 523.35 523.35 16223.85 8490751.8975
+32	29599 402 10 40 9 39 31 0.8 0.8 24.8 19.84
+33	30001 756 10 40 9 39 31 1.4960423838925 8.8304844235981 149.21833858716 862.8158481086
+34	30757 409 10 40 9 39 31 0.8 24.8 396.8 6666.24
+35	31166 450 11 40 10 39 30 26.65 26.65 799.5 21306.675
+36	31616 480 11 40 10 39 30 191.85 516.65 12251.5 5306714.915
+37	32096 390 11 40 10 39 30 0.8 0.8 24 19.2
+38	32486 732 11 40 10 39 30 1.4960423838925 8.496846317609 140.38785416356 784.83839295319
+39	33218 396 11 40 10 39 30 0.8 24 372 6051.2
+40	33614 450 12 40 11 39 29 33.35 335.75 3890.35 776793.4925
+41	34064 435 12 40 11 39 29 26.65 26.65 772.85 20596.4525
+42	34499 377 12 40 11 39 29 0.8 0.8 23.2 18.56
+43	34876 708 12 40 11 39 29 1.4960423838925 8.17200563712 131.89100784595 712.64199560813
+44	35584 384 12 40 11 39 29 0.8 23.2 348 5475.2
+45	35968 448 13 40 12 39 28 523.35 523.35 14653.8 7669066.23
+46	36416 434 13 40 12 39 28 33.35 314.15 3554.6 664065.43
+47	36850 364 13 40 12 39 28 0.8 0.8 22.4 17.92
+48	37214 685 13 40 12 39 28 1.4960423838925 7.8556785942118 123.71900220883 645.86031947501
+49	37899 370 13 40 12 39 28 0.8 22.4 324.8 4936.96
+50	38269 432 14 40 13 39 27 256.65 516.65 11609.55 5168380.2075
+51	38701 432 14 40 13 39 27 523.35 523.35 14130.45 7395171.0075
+52	39133 351 14 40 13 39 27 0.8 0.8 21.6 17.28
+53	39484 660 14 40 13 39 27 1.4960423838925 7.5475814009651 115.86332361462 584.14863329945
+54	40144 356 14 40 13 39 27 0.8 21.6 302.4 4435.2
+55	40500 390 15 40 14 39 26 26.65 26.65 692.9 18465.785
+56	40890 416 15 40 14 39 26 276.65 516.65 11352.9 5102510.985
+57	41306 338 15 40 14 39 26 0.8 0.8 20.8 16.64
+58	41644 635 15 40 14 39 26 1.4960423838925 7.2474302694605 108.31574221365 527.18264829525
+59	42279 342 15 40 14 39 26 0.8 20.8 280.8 3968.64
+60	42621 386 16 40 15 39 25 33.35 254.15 2673.75 404600.7625
+61	43007 375 16 40 15 39 25 26.65 26.65 666.25 17755.5625
+62	43382 325 16 40 15 39 25 0.8 0.8 20 16
+63	43707 610 16 40 15 39 25 1.4960423838925 6.9549414117786 101.06831194419 474.65740278456
+64	44317 328 16 40 15 39 25 0.8 20 260 3536
+65	44645 384 17 40 16 39 24 523.35 523.35 12560.4 6573485.34
+66	45029 370 17 40 16 39 24 33.35 235.75 2419.6 340008.54
+67	45399 312 17 40 16 39 24 0.8 0.8 19.2 15.36
+68	45711 585 17 40 16 39 24 1.4960423838925 6.66983104 94.113370532413 426.28619274329
+69	46296 316 17 40 16 39 24 0.8 19.2 240 3136
+70	46612 368 18 40 17 39 23 331.85 516.65 10466.15 4839695.4775
+71	46980 368 18 40 17 39 23 523.35 523.35 12037.05 6299590.1175
+72	47348 299 18 40 17 39 23 0.8 0.8 18.4 14.72
+73	47647 565 18 40 17 39 23 1.4960423838925 6.3918153662054 87.443539492413 381.79954664114
+74	48212 302 18 40 17 39 23 0.8 18.4 220.8 2767.36
+75	48514 330 19 40 18 39 22 26.65 26.65 586.3 15624.895
+76	48844 352 19 40 18 39 22 348.65 516.65 10134.3 4729571.055
+77	49196 286 19 40 18 39 22 0.8 0.8 17.6 14.08
+78	49482 540 19 40 18 39 22 1.4960423838925 6.1206106024755 81.051724126208 340.94424296548
+79	50022 288 19 40 18 39 22 0.8 17.6 202.4 2428.8
+80	50310 322 20 40 19 39 21 33.35 185.35 1764.35 196299.2325
+81	50632 315 20 40 19 39 21 26.65 26.65 559.65 14914.6725
+82	50947 273 20 40 19 39 21 0.8 0.8 16.8 13.44
+83	51220 515 20 40 19 39 21 1.4960423838925 5.8559329608909 74.931113523733 303.48236881835
+84	51735 274 20 40 19 39 21 0.8 16.8 184.8 2119.04
+85	52009 320 21 40 20 39 20 523.35 523.35 10467 5477904.45
+86	52329 306 21 40 20 39 20 33.35 170.15 1579 161944.61
+87	52635 260 21 40 20 39 20 0.8 0.8 16 12.8
+88	52895 490 21 40 20 39 20 1.4960423838925 5.5974986535322 69.075180562842 269.1904179759
+89	53385 260 21 40 20 39 20 0.8 16 168 1836.8
+90	53645 304 22 40 21 39 19 394.25 516.65 9041.15 4330758.5875
+91	53949 304 22 40 21 39 19 523.35 523.35 9943.65 5204009.2275
+92	54253 247 22 40 21 39 19 0.8 0.8 15.2 12.16
+93	54500 465 22 40 21 39 19 1.4960423838925 5.34502389248 63.477681909309 237.8584267996
+94	54965 248 22 40 21 39 19 0.8 15.2 152 1580.8
+95	55213 270 23 40 22 39 18 26.65 26.65 479.7 12784.005
+96	55483 288 23 40 22 39 18 407.85 516.65 8646.9 4175325.525
+97	55771 234 23 40 22 39 18 0.8 0.8 14.4 11.52
+98	56005 442 23 40 22 39 18 1.4960423838925 5.098224889815 58.132658016829 209.28914638842
+99	56447 234 23 40 22 39 18 0.8 14.4 136.8 1349.76
+100	56681 275 24 40 23 39 17 33.35 129.35 1110.95 88528.9025
+101	56956 272 24 40 23 39 17 26.65 26.65 453.05 12073.7825
+102	57228 238 24 40 23 39 17 0.8 0.8 13.6 10.88
+103	57466 435 24 40 23 39 17 1.4960423838925 4.8568178576179 53.034433127014 183.29724936129
+104	57901 237 24 40 23 39 17 0.8 13.6 122.4 1142.4
+105	58138 272 25 40 24 39 16 523.35 523.35 8373.6 4382323.56
+106	58410 258 25 40 24 39 16 33.35 117.35 981.6 71797.48
+107	58668 224 25 40 24 39 16 0.8 0.8 12.8 10.24
+108	58892 409 25 40 24 39 16 1.4960423838925 4.6205190079693 48.177615269396 159.70856965922
+109	59301 222 25 40 24 39 16 0.8 12.8 108.8 957.44
+110	59523 255 26 40 25 39 15 443.85 516.65 7385.75 3644851.4575
+111	59778 255 26 40 25 39 15 523.35 523.35 7850.25 4108428.3375
+112	60033 210 26 40 25 39 15 0.8 0.8 12 9.6
+113	60243 383 26 40 25 39 15 1.4960423838925 4.3890445529498 43.557096261427 138.35937375621
+114	60626 207 26 40 25 39 15 0.8 12 96 793.6
+115	60833 224 27 40 26 39 14 26.65 26.65 373.1 9943.115
+116	61057 238 27 40 26 39 14 454.25 516.65 6941.9 3447848.635
+117	61295 196 27 40 26 39 14 0.8 0.8 11.2 8.96
+118	61491 357 27 40 26 39 14 1.4960423838925 4.16211070464 39.168051708477 119.09566166843
+119	61848 194 27 40 26 39 14 0.8 11.2 84 649.6
+120	62042 208 28 40 27 39 13 33.35 86.15 662.35 37590.5725
+121	62250 208 28 40 27 39 13 26.65 26.65 346.45 9232.8925
+122	62458 182 28 40 27 39 13 0.8 0.8 10.4 8.32
+123	62640 333 28 40 27 39 13 1.4960423838925 3.9394336751206 35.005941003837 101.77249615075
+124	62973 179 28 40 27 39 13 0.8 10.4 72.8 524.16
+125	63152 204 29 40 28 39 12 523.35 523.35 6280.2 3286742.67
+126	63356 192 29 40 28 39 12 33.35 77.35 576.2 30168.75
+127	63548 168 29 40 28 39 12 0.8 0.8 9.6 7.68
+128	63716 307 29 40 28 39 12 1.4960423838925 3.7207296764723 31.066507328717 86.253358470079
+129	64023 164 29 40 28 39 12 0.8 9.6 62.4 416
+130	64187 187 30 40 29 39 11 480.65 516.65 5551.15 2802950.7275
+131	64374 187 30 40 29 39 11 523.35 523.35 5756.85 3012847.4475
+132	64561 154 30 40 29 39 11 0.8 0.8 8.8 7.04
+133	64715 281 30 40 29 39 11 1.4960423838925 3.5057149207757 27.345777652244 72.409529144697
+134	64996 150 30 40 29 39 11 0.8 8.8 52.8 323.84
+135	65146 160 31 40 30 39 10 26.65 26.65 266.5 7102.225
+136	65306 170 31 40 30 39 10 487.85 516.65 5070.5 2571926.305
+137	65476 140 31 40 30 39 10 0.8 0.8 8 6.4
+138	65616 255 31 40 30 39 10 1.4960423838925 3.2941056201114 23.840062731469 60.119492038948
+139	65871 136 31 40 30 39 10 0.8 8 44 246.4
+140	66007 144 32 40 31 39 9 33.35 55.75 367.35 15513.6825
+141	66151 144 32 40 31 39 9 26.65 26.65 239.85 6392.0025
+142	66295 126 32 40 31 39 9 0.8 0.8 7.2 5.76
+143	66421 229 32 40 31 39 9 1.4960423838925 3.08561798656 20.545957111357 49.268360202499
+144	66650 124 32 40 31 39 9 0.8 7.2 36 182.4
+145	66774 136 33 40 32 39 8 523.35 523.35 4186.8 2191161.78
+146	66910 128 33 40 32 39 8 33.35 50.15 311.6 12405.62
+147	67038 112 33 40 32 39 8 0.8 0.8 6.4 5.12
+148	67150 205 33 40 32 39 8 1.4960423838925 2.8799682322022 17.460339124797 39.747321843516
+149	67355 110 33 40 32 39 8 0.8 6.4 28.8 130.56
+150	67465 119 34 40 33 39 7 504.65 516.65 3588.55 1839795.5975
+151	67584 119 34 40 33 39 7 523.35 523.35 3663.45 1917266.5575
+152	67703 98 34 40 33 39 7 0.8 0.8 5.6 4.48
+153	67801 179 34 40 33 39 7 1.4960423838925 2.6768725691187 14.580370892595 31.453104825022
+154	67980 96 34 40 33 39 7 0.8 5.6 22.4 89.6
+155	68076 96 35 40 34 39 6 26.65 26.65 159.9 4261.335
+156	68172 102 35 40 34 39 6 508.65 516.65 3083.9 1585123.975
+157	68274 84 35 40 34 39 6 0.8 0.8 4.8 3.84
+158	68358 153 35 40 34 39 6 1.4960423838925 2.4760472093901 11.903498323476 24.287458073722
+159	68511 82 35 40 34 39 6 0.8 4.8 16.8 58.24
+160	68593 70 36 40 35 39 5 0.8 0.8 4 3.2
+161	68663 127 36 40 35 39 5 1.4960423838925 2.277208365097 9.4274511140864 18.156648290593
+162	68790 68 36 40 35 39 5 0.8 4 12 35.2
+163	68858 56 37 40 36 39 4 0.8 0.8 3.2 2.56
+164	68914 102 37 40 36 39 4 1.4960423838925 2.08007224832 7.1502427489894 12.970970352526
+

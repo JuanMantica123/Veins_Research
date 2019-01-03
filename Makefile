@@ -33,13 +33,21 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 OBJS = \
     $O/src/BaseProtocolApp/BaseProtocolAppCar.o \
     $O/src/BaseProtocolApp/BaseProtocolAppRSU.o \
+    $O/src/CNNApp/CNNAppCar.o \
+    $O/src/CNNApp/CNNAppRSU.o \
     $O/src/MaxNetworkApp/TraCIDemo11p.o \
     $O/src/MaxNetworkApp/TraCIDemoRSU11p.o \
+    $O/src/messages/ContentDelivery_m.o \
+    $O/src/messages/ContentRequest_m.o \
+    $O/src/messages/ContentResponse_m.o \
     $O/src/messages/RequestMessage_m.o \
     $O/src/messages/ResponseMessage_m.o
 
 # Message files
 MSGFILES = \
+    src/messages/ContentDelivery.msg \
+    src/messages/ContentRequest.msg \
+    src/messages/ContentResponse.msg \
     src/messages/RequestMessage.msg \
     src/messages/ResponseMessage.msg
 

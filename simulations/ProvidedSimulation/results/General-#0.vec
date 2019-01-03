@@ -1,0 +1,111 @@
+version 2
+run General-0-20190102-23:36:41-15628
+attr configname General
+attr datetime 20190102-23:36:41
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network ProvidedSimulation.RSUScenario
+attr processid 15628
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+param **.debug false
+param **.coreDebug false
+param *.playgroundSizeX 2500m
+param *.playgroundSizeY 2500m
+param *.playgroundSizeZ 50m
+param *.annotations.draw true
+param *.obstacles.debug false
+param *.obstacles.obstacles "xmldoc(\"config.xml\", \"//AnalogueModel[@type='SimpleObstacleShadowing']/obstacles\")"
+param *.manager.updateInterval 1s
+param *.manager.host "\"localhost\""
+param *.manager.port 9998
+param *.manager.autoShutdown true
+param *.manager.launchConfig "xmldoc(\"erlangen.launchd.xml\")"
+param *.rsu[0].mobility.x 2000
+param *.rsu[0].mobility.y 2000
+param *.rsu[0].mobility.z 3
+param *.rsu[*].applType "\"MaxNetworkApp.TraCIDemoRSU11p\""
+param *.rsu[*].appl.headerLength "80 bit"
+param *.rsu[*].appl.sendBeacons false
+param *.rsu[*].appl.dataOnSch false
+param *.rsu[*].appl.beaconInterval 1s
+param *.rsu[*].appl.beaconUserPriority 7
+param *.rsu[*].appl.dataUserPriority 5
+param *.connectionManager.sendDirect true
+param *.connectionManager.maxInterfDist 2600m
+param *.connectionManager.drawMaxIntfDist false
+param *.**.nic.mac1609_4.useServiceChannel false
+param *.**.nic.mac1609_4.txPower 20mW
+param *.**.nic.mac1609_4.bitrate 6Mbps
+param *.**.nic.phy80211p.sensitivity -89dBm
+param *.**.nic.phy80211p.useThermalNoise true
+param *.**.nic.phy80211p.thermalNoise -110dBm
+param *.**.nic.phy80211p.decider "xmldoc(\"config.xml\")"
+param *.**.nic.phy80211p.analogueModels "xmldoc(\"config.xml\")"
+param *.**.nic.phy80211p.usePropagationDelay true
+param *.**.nic.phy80211p.antenna "xmldoc(\"antenna.xml\", \"/root/Antenna[@id='monopole']\")"
+param *.node[*].applType "\"MaxNetworkApp.TraCIDemo11p\""
+param *.node[*].appl.headerLength "80 bit"
+param *.node[*].appl.sendBeacons false
+param *.node[*].appl.dataOnSch false
+param *.node[*].appl.beaconInterval 1s
+param *.node[*].veinsmobilityType.debug true
+param *.node[*].veinsmobility.x -1
+param *.node[*].veinsmobility.y -1
+param *.node[*].veinsmobility.z 1.895
+param *.**.nic.mac1609_4.useServiceChannel true
+param *.node[*].appl.dataOnSch true
+param *.rsu[*].appl.dataOnSch true
+
+vector 0 RSUScenario.node[0].veinsmobility posx ETV
+vector 1 RSUScenario.node[0].veinsmobility posy ETV
+vector 2 RSUScenario.node[0].veinsmobility speed ETV
+vector 3 RSUScenario.node[0].veinsmobility acceleration ETV
+vector 4 RSUScenario.node[0].veinsmobility co2emission ETV
+vector 5 RSUScenario.node[1].veinsmobility posx ETV
+vector 6 RSUScenario.node[1].veinsmobility posy ETV
+vector 7 RSUScenario.node[1].veinsmobility speed ETV
+vector 8 RSUScenario.node[1].veinsmobility acceleration ETV
+vector 9 RSUScenario.node[1].veinsmobility co2emission ETV
+0	2	1	2414.9014220152
+0	4	2	2414.9014220152
+0	16	3	2412.0282535021
+0	28	4	2407.434272861
+0	47	5	2402.6086066293
+0	78	6	2396.4772731521
+1	2	1	1578.4416120471
+1	4	2	1578.4416120471
+1	16	3	1579.4966245294
+1	28	4	1581.2776015159
+1	47	5	1586.1653365986
+1	78	6	1592.3755327258
+2	4	2	3.9572089270348
+2	16	3	5.7922925953529
+2	28	4	7.6194012491274
+2	47	5	9.5894080545995
+2	78	6	11.533503466331
+3	16	3	1.8350836683181
+3	28	4	1.8271086537745
+3	47	5	1.9700068054721
+3	78	6	1.9440954117314
+4	16	3	3.9690439751639
+4	28	4	4.8734986088453
+4	47	5	6.2068327255978
+4	78	6	7.2118621755177
+5	28	4	2414.8859801291
+5	47	5	2414.8859801291
+5	78	6	2411.9954222892
+6	28	4	1578.4472822268
+6	47	5	1578.4472822268
+6	78	6	1579.5086799795
+7	47	5	4.0425376740037
+7	78	6	5.9899797741635
+8	78	6	1.9474421001598
+9	78	6	4.2301091069722
+

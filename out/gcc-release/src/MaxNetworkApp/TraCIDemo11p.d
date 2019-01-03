@@ -3,7 +3,7 @@ out/gcc-release//src/MaxNetworkApp/TraCIDemo11p.o: \
  /home/juan/veins-veins-4.6/src/veins/modules/application/ieee80211p/BaseWaveApplLayer.h \
  /home/juan/veins-veins-4.6/src/veins/base/modules/BaseApplLayer.h \
  /home/juan/veins-veins-4.6/src/veins/base/utils/MiXiMDefs.h \
- /home/juan/omnetpp-5.3/include/omnetpp.h \
+ /home/juan/Desktop/new_veins/omnetpp-5.3/include/omnetpp.h \
  /home/juan/veins-veins-4.6/src/veins/base/utils/miximkerneldefs.h \
  /home/juan/veins-veins-4.6/src/veins/base/modules/BaseLayer.h \
  /home/juan/veins-veins-4.6/src/veins/base/modules/BatteryAccess.h \
@@ -46,7 +46,7 @@ src/MaxNetworkApp/TraCIDemo11p.h:
 
 /home/juan/veins-veins-4.6/src/veins/base/utils/MiXiMDefs.h:
 
-/home/juan/omnetpp-5.3/include/omnetpp.h:
+/home/juan/Desktop/new_veins/omnetpp-5.3/include/omnetpp.h:
 
 /home/juan/veins-veins-4.6/src/veins/base/utils/miximkerneldefs.h:
 

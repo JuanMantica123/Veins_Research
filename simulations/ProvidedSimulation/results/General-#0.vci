@@ -1,0 +1,87 @@
+file 3772 1546493813                                            
+version 2
+run General-0-20190102-23:36:41-15628
+attr configname General
+attr datetime 20190102-23:36:41
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network ProvidedSimulation.RSUScenario
+attr processid 15628
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+param **.debug false
+param **.coreDebug false
+param *.playgroundSizeX 2500m
+param *.playgroundSizeY 2500m
+param *.playgroundSizeZ 50m
+param *.annotations.draw true
+param *.obstacles.debug false
+param *.obstacles.obstacles "xmldoc(\"config.xml\", \"//AnalogueModel[@type='SimpleObstacleShadowing']/obstacles\")"
+param *.manager.updateInterval 1s
+param *.manager.host "\"localhost\""
+param *.manager.port 9998
+param *.manager.autoShutdown true
+param *.manager.launchConfig "xmldoc(\"erlangen.launchd.xml\")"
+param *.rsu[0].mobility.x 2000
+param *.rsu[0].mobility.y 2000
+param *.rsu[0].mobility.z 3
+param *.rsu[*].applType "\"MaxNetworkApp.TraCIDemoRSU11p\""
+param *.rsu[*].appl.headerLength "80 bit"
+param *.rsu[*].appl.sendBeacons false
+param *.rsu[*].appl.dataOnSch false
+param *.rsu[*].appl.beaconInterval 1s
+param *.rsu[*].appl.beaconUserPriority 7
+param *.rsu[*].appl.dataUserPriority 5
+param *.connectionManager.sendDirect true
+param *.connectionManager.maxInterfDist 2600m
+param *.connectionManager.drawMaxIntfDist false
+param *.**.nic.mac1609_4.useServiceChannel false
+param *.**.nic.mac1609_4.txPower 20mW
+param *.**.nic.mac1609_4.bitrate 6Mbps
+param *.**.nic.phy80211p.sensitivity -89dBm
+param *.**.nic.phy80211p.useThermalNoise true
+param *.**.nic.phy80211p.thermalNoise -110dBm
+param *.**.nic.phy80211p.decider "xmldoc(\"config.xml\")"
+param *.**.nic.phy80211p.analogueModels "xmldoc(\"config.xml\")"
+param *.**.nic.phy80211p.usePropagationDelay true
+param *.**.nic.phy80211p.antenna "xmldoc(\"antenna.xml\", \"/root/Antenna[@id='monopole']\")"
+param *.node[*].applType "\"MaxNetworkApp.TraCIDemo11p\""
+param *.node[*].appl.headerLength "80 bit"
+param *.node[*].appl.sendBeacons false
+param *.node[*].appl.dataOnSch false
+param *.node[*].appl.beaconInterval 1s
+param *.node[*].veinsmobilityType.debug true
+param *.node[*].veinsmobility.x -1
+param *.node[*].veinsmobility.y -1
+param *.node[*].veinsmobility.z 1.895
+param *.**.nic.mac1609_4.useServiceChannel true
+param *.node[*].appl.dataOnSch true
+param *.rsu[*].appl.dataOnSch true
+
+vector 0 RSUScenario.node[0].veinsmobility posx ETV
+vector 1 RSUScenario.node[0].veinsmobility posy ETV
+vector 2 RSUScenario.node[0].veinsmobility speed ETV
+vector 3 RSUScenario.node[0].veinsmobility acceleration ETV
+vector 4 RSUScenario.node[0].veinsmobility co2emission ETV
+vector 5 RSUScenario.node[1].veinsmobility posx ETV
+vector 6 RSUScenario.node[1].veinsmobility posy ETV
+vector 7 RSUScenario.node[1].veinsmobility speed ETV
+vector 8 RSUScenario.node[1].veinsmobility acceleration ETV
+vector 9 RSUScenario.node[1].veinsmobility co2emission ETV
+0	2972 135 2 78 1 6 6 2396.4772731521 2414.9014220152 14448.351250175 34792749.267323
+1	3107 136 2 78 1 6 6 1578.4416120471 1592.3755327258 9496.198319464 15029784.59749
+2	3243 114 4 78 2 6 5 3.9572089270348 11.533503466331 38.491814292445 332.24388044307
+3	3357 92 16 78 3 6 4 1.8271086537745 1.9700068054721 7.5762945392961 14.366291885947
+4	3449 92 16 78 3 6 4 3.9690439751639 7.2118621755177 22.261237485125 130.04002728942
+5	3541 69 28 78 4 6 3 2411.9954222892 2414.8859801291 7241.7673825475 17481070.511193
+6	3610 69 28 78 4 6 3 1578.4472822268 1579.5086799795 4736.403244433 7477839.3156686
+7	3679 46 47 78 5 6 2 4.0425376740037 5.9899797741635 10.032517448167 52.221968540627
+8	3725 23 78 78 6 6 1 1.9474421001598 1.9474421001598 1.9474421001598 3.7925307334749
+9	3748 23 78 78 6 6 1 4.2301091069722 4.2301091069722 4.2301091069722 17.893823056889
+

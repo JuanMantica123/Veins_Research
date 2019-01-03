@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!-- debug config -->
+<launch>
+	<copy file="input_routes.rou.xml" />
+	<copy file="net.net.xml" />
+	<copy file="box1l.sumocfg" type="config" />
+</launch>
+

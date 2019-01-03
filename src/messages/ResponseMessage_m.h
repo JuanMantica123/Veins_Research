@@ -1,5 +1,5 @@
 //
-// Generated file, do not edit! Created by nedtool 5.3 from src/BaseProtocolApp/messages/ResponseMessage.msg.
+// Generated file, do not edit! Created by nedtool 5.3 from src/messages/ResponseMessage.msg.
 //
 
 #if defined(__clang__)
@@ -23,7 +23,7 @@
 // }}
 
 /**
- * Class generated from <tt>src/BaseProtocolApp/messages/ResponseMessage.msg:7</tt> by nedtool.
+ * Class generated from <tt>src/messages/ResponseMessage.msg:7</tt> by nedtool.
  * <pre>
  * packet ResponseMessage extends WaveShortMessage
  * {
