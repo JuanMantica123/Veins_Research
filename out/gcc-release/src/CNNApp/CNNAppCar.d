@@ -39,7 +39,7 @@ out/gcc-release//src/CNNApp/CNNAppCar.o: src/CNNApp/CNNAppCar.cc \
  /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICommandInterface.h \
  src/CNNApp/../messages/ContentRequest_m.h \
  src/CNNApp/../messages/VectorWrapper.h \
- src/CNNApp/../messages/ContentResponse_m.h
+ src/CNNApp/../messages/ContentDelivery_m.h
 
 src/CNNApp/CNNAppCar.h:
 
@@ -121,4 +121,4 @@ src/CNNApp/../messages/ContentRequest_m.h:
 
 src/CNNApp/../messages/VectorWrapper.h:
 
-src/CNNApp/../messages/ContentResponse_m.h:
+src/CNNApp/../messages/ContentDelivery_m.h:

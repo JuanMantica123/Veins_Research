@@ -181,6 +181,7 @@ Register_Class(ContentDelivery)
 
 ContentDelivery::ContentDelivery(const char *name, short kind) : ::WaveShortMessage(name,kind)
 {
+    this->rsuId = 0;
 }
 
 ContentDelivery::ContentDelivery(const ContentDelivery& other) : ::WaveShortMessage(other)
@@ -203,18 +204,21 @@ ContentDelivery& ContentDelivery::operator=(const ContentDelivery& other)
 void ContentDelivery::copy(const ContentDelivery& other)
 {
     this->carId = other.carId;
+    this->rsuId = other.rsuId;
 }
 
 void ContentDelivery::parsimPack(omnetpp::cCommBuffer *b) const
 {
     ::WaveShortMessage::parsimPack(b);
     doParsimPacking(b,this->carId);
+    doParsimPacking(b,this->rsuId);
 }
 
 void ContentDelivery::parsimUnpack(omnetpp::cCommBuffer *b)
 {
     ::WaveShortMessage::parsimUnpack(b);
     doParsimUnpacking(b,this->carId);
+    doParsimUnpacking(b,this->rsuId);
 }
 
 const char * ContentDelivery::getCarId() const
@@ -225,6 +229,16 @@ const char * ContentDelivery::getCarId() const
 void ContentDelivery::setCarId(const char * carId)
 {
     this->carId = carId;
+}
+
+int ContentDelivery::getRsuId() const
+{
+    return this->rsuId;
+}
+
+void ContentDelivery::setRsuId(int rsuId)
+{
+    this->rsuId = rsuId;
 }
 
 class ContentDeliveryDescriptor : public omnetpp::cClassDescriptor
@@ -292,7 +306,7 @@ const char *ContentDeliveryDescriptor::getProperty(const char *propertyname) con
 int ContentDeliveryDescriptor::getFieldCount() const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 1+basedesc->getFieldCount() : 1;
+    return basedesc ? 2+basedesc->getFieldCount() : 2;
 }
 
 unsigned int ContentDeliveryDescriptor::getFieldTypeFlags(int field) const
@@ -305,8 +319,9 @@ unsigned int ContentDeliveryDescriptor::getFieldTypeFlags(int field) const
     }
     static unsigned int fieldTypeFlags[] = {
         FD_ISEDITABLE,
+        FD_ISEDITABLE,
     };
-    return (field>=0 && field<1) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<2) ? fieldTypeFlags[field] : 0;
 }
 
 const char *ContentDeliveryDescriptor::getFieldName(int field) const
@@ -319,8 +334,9 @@ const char *ContentDeliveryDescriptor::getFieldName(int field) const
     }
     static const char *fieldNames[] = {
         "carId",
+        "rsuId",
     };
-    return (field>=0 && field<1) ? fieldNames[field] : nullptr;
+    return (field>=0 && field<2) ? fieldNames[field] : nullptr;
 }
 
 int ContentDeliveryDescriptor::findField(const char *fieldName) const
@@ -328,6 +344,7 @@ int ContentDeliveryDescriptor::findField(const char *fieldName) const
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount() : 0;
     if (fieldName[0]=='c' && strcmp(fieldName, "carId")==0) return base+0;
+    if (fieldName[0]=='r' && strcmp(fieldName, "rsuId")==0) return base+1;
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 
@@ -341,8 +358,9 @@ const char *ContentDeliveryDescriptor::getFieldTypeString(int field) const
     }
     static const char *fieldTypeStrings[] = {
         "string",
+        "int",
     };
-    return (field>=0 && field<1) ? fieldTypeStrings[field] : nullptr;
+    return (field>=0 && field<2) ? fieldTypeStrings[field] : nullptr;
 }
 
 const char **ContentDeliveryDescriptor::getFieldPropertyNames(int field) const
@@ -410,6 +428,7 @@ std::string ContentDeliveryDescriptor::getFieldValueAsString(void *object, int f
     ContentDelivery *pp = (ContentDelivery *)object; (void)pp;
     switch (field) {
         case 0: return oppstring2string(pp->getCarId());
+        case 1: return long2string(pp->getRsuId());
         default: return "";
     }
 }
@@ -425,6 +444,7 @@ bool ContentDeliveryDescriptor::setFieldValueAsString(void *object, int field, i
     ContentDelivery *pp = (ContentDelivery *)object; (void)pp;
     switch (field) {
         case 0: pp->setCarId((value)); return true;
+        case 1: pp->setRsuId(string2long(value)); return true;
         default: return false;
     }
 }

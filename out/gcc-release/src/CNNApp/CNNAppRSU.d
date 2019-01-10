@@ -37,8 +37,9 @@ out/gcc-release//src/CNNApp/CNNAppRSU.o: src/CNNApp/CNNAppRSU.cc \
  /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCIConnection.h \
  /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICoord.h \
  /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICommandInterface.h \
- src/CNNApp/../messages/RequestMessage_m.h \
- src/CNNApp/../messages/ResponseMessage_m.h
+ src/CNNApp/../messages/ContentRequest_m.h \
+ src/CNNApp/../messages/VectorWrapper.h \
+ src/CNNApp/../messages/ContentDelivery_m.h
 
 src/CNNApp/CNNAppRSU.h:
 
@@ -116,6 +117,8 @@ src/CNNApp/CNNAppRSU.h:
 
 /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICommandInterface.h:
 
-src/CNNApp/../messages/RequestMessage_m.h:
+src/CNNApp/../messages/ContentRequest_m.h:
 
-src/CNNApp/../messages/ResponseMessage_m.h:
+src/CNNApp/../messages/VectorWrapper.h:
+
+src/CNNApp/../messages/ContentDelivery_m.h:

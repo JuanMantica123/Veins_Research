@@ -3,8 +3,8 @@
 
 #include "veins/modules/application/ieee80211p/BaseWaveApplLayer.h"
 #include <unordered_set>
-#include "../messages/RequestMessage_m.h"
-#include "../messages/ResponseMessage_m.h"
+#include "../messages/ContentRequest_m.h"
+#include "../messages/ContentDelivery_m.h"
 
 class CNNAppRSU : public BaseWaveApplLayer {
     public:
@@ -13,6 +13,7 @@ class CNNAppRSU : public BaseWaveApplLayer {
 		virtual void onWSM(WaveShortMessage* wsm);
 	private:
 		std::unordered_set<int> storedValues;
+		int rsuId;
 };
 
 #endif

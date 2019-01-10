@@ -39,7 +39,6 @@ OBJS = \
     $O/src/MaxNetworkApp/TraCIDemoRSU11p.o \
     $O/src/messages/ContentDelivery_m.o \
     $O/src/messages/ContentRequest_m.o \
-    $O/src/messages/ContentResponse_m.o \
     $O/src/messages/RequestMessage_m.o \
     $O/src/messages/ResponseMessage_m.o
 
@@ -47,7 +46,6 @@ OBJS = \
 MSGFILES = \
     src/messages/ContentDelivery.msg \
     src/messages/ContentRequest.msg \
-    src/messages/ContentResponse.msg \
     src/messages/RequestMessage.msg \
     src/messages/ResponseMessage.msg
 

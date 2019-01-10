@@ -3,7 +3,7 @@
 
 #include "veins/modules/application/ieee80211p/BaseWaveApplLayer.h"
 #include "../messages/ContentRequest_m.h"
-#include "../messages/ContentResponse_m.h"
+#include "../messages/ContentDelivery_m.h"
 
 class CNNAppCar : public BaseWaveApplLayer {
     public:

@@ -28,6 +28,7 @@
  * packet ContentDelivery extends WaveShortMessage
  * {
  *     string carId;
+ *     int rsuId;
  * }
  * </pre>
  */
@@ -35,6 +36,7 @@ class ContentDelivery : public ::WaveShortMessage
 {
   protected:
     ::omnetpp::opp_string carId;
+    int rsuId;
 
   private:
     void copy(const ContentDelivery& other);
@@ -55,6 +57,8 @@ class ContentDelivery : public ::WaveShortMessage
     // field getter/setter methods
     virtual const char * getCarId() const;
     virtual void setCarId(const char * carId);
+    virtual int getRsuId() const;
+    virtual void setRsuId(int rsuId);
 };
 
 inline void doParsimPacking(omnetpp::cCommBuffer *b, const ContentDelivery& obj) {obj.parsimPack(b);}

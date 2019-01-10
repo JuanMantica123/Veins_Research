@@ -6,4 +6,5 @@ class WaveShortMessage;
 
 packet ContentDelivery extends WaveShortMessage {
 	string carId;
+	int rsuId;
 }
