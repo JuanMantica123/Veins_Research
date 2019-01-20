@@ -5,7 +5,7 @@ simple VirtualServer extends BaseWaveApplLayer
 
 {
     parameters:
-        int computation_power;
+        int computationPower;
         int reliability;
         
     @class(VirtualServer);

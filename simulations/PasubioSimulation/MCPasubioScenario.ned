@@ -18,10 +18,10 @@ import org.car2x.veins.nodes.RSU;
 import org.car2x.veins.nodes.Car;
 import org.car2x.veins.nodes.Scenario;
 
-network MCManhattanScenario extends Scenario
+network MCPasubioScenario extends Scenario
 {
     submodules:
-        rsu[4]: RSU {
+        rsu[2]: RSU {
             @display("p=87,155;i=veins/sign/yellowdiamond;is=vs");
         }
 }

@@ -20,7 +20,7 @@ class LoadBalancer : public BaseWaveApplLayer {
         void distributeWorkLoad();
         void clearFailingMicroClouds();
         TaskRequest* generateTaskRequest(double virtualServertask,int virtualServerId);
-        ConnectionApproval* generateConnectionApproval(int virtualServerId);
+        ConnectionApproval * generateConnectionApproval(int virtualServerId);
         int id;
         int computationPower;
         int heartbeatTime;

@@ -18,12 +18,13 @@ void VirtualServer::initialize(int stage) {
         computationPower = par("computationPower").intValue();
         reliability = par("reliability").intValue();
         sendDelayedDown(generateConnectionRequest(), uniform(0, 5));
-        scheduleAt(simTime() + beaconInterval + uniform(0, 5), sendWSMEvt);
+        scheduleAt(simTime() + uniform(0, 5), sendWSMEvt);
     }
 
 }
 void VirtualServer::handleSelfMsg(cMessage* msg) {
     if (rand() < reliability) {
+//it fails
         currentComputationTask = -1;
         progress = 0;
         loadBalancerId = -1;
@@ -38,24 +39,26 @@ void VirtualServer::handleSelfMsg(cMessage* msg) {
                 sendDown(generateHeartbeat());
             }
         }
-        scheduleAt(simTime() + beaconInterval, msg);
 
     }
+    scheduleAt(simTime() + beaconInterval, msg);
 }
 
 void VirtualServer::onWSM(WaveShortMessage* wsm) {
     if (ConnectionApproval* approval = dynamic_cast<ConnectionApproval*>(wsm)) {
-        if(loadBalancerId==-1){
-            int requestingLoadBalancerId = approval->getLoadBalancerId();
-            sendDown(generateConnectionConfirmation(requestingLoadBalancerId));
+        if (loadBalancerId == -1) {
+            loadBalancerId = approval->getLoadBalancerId();
+            sendDown(generateConnectionConfirmation(loadBalancerId));
+            EV_WARN << "Virtual Server with id: " << id
+                           << " sent connection confirmation to "
+                           << loadBalancerId << endl;
         }
-    }
-    else if(ConnectionConfirmation* confirmation= dynamic_cast<ConnectionConfirmation*>(wsm) ){
-        loadBalancerId = confirmation->getLoadBalancerId();
-    }
-    else if (TaskRequest* task = dynamic_cast<TaskRequest*>(wsm)){
-        if(loadBalancerId==task->getLoadBalancerId() && id == task->getVirtualServerId() && currentComputationTask<=0){
+    } else if (TaskRequest* task = dynamic_cast<TaskRequest*>(wsm)) {
+        if (loadBalancerId == task->getLoadBalancerId()
+                && id == task->getVirtualServerId()
+                && currentComputationTask <= 0) {
             currentComputationTask = task->getComputationTask();
+            EV_WARN << "Virtual Server with id: " << id <<" received task of :"<<currentComputationTask<< endl;
         }
     }
 }
@@ -72,21 +75,27 @@ TaskCompletion * VirtualServer::generateTaskCompletion(double computationTask) {
     populateWSM(taskCompletion);
     taskCompletion->setVirtualServerId(id);
     taskCompletion->setComputationTask(computationTask);
+    EV_WARN << "Virtual Server with id: " << id
+                   << " sending task completion message for a task load of : "<<computationTask << endl;
     return taskCompletion;
 }
 ConnectionRequest* VirtualServer::generateConnectionRequest() {
     ConnectionRequest * connectionRequest = new ConnectionRequest();
     populateWSM(connectionRequest);
     connectionRequest->setVirtualServerId(id);
+    EV_WARN << "Virtual Server with id: " << id
+                   << " generating connection request" << endl;
     return connectionRequest;
 }
-ConnectionConfirmation * VirtualServer::generateConnectionConfirmation(int loadBalancerId){
-    ConnectionConfirmation * connectionConfirmation = new ConnectionConfirmation();
+ConnectionConfirmation * VirtualServer::generateConnectionConfirmation(
+        int loadBalancerId) {
+    ConnectionConfirmation * connectionConfirmation =
+            new ConnectionConfirmation();
     populateWSM(connectionConfirmation);
     connectionConfirmation->setVirtualServerId(id);
     connectionConfirmation->setLoadBalancerId(loadBalancerId);
+    connectionConfirmation->setComputationPower(computationPower);
     return connectionConfirmation;
-
 
 }
 

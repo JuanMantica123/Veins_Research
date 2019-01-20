@@ -6,6 +6,8 @@
 class NoAppCar : public BaseWaveApplLayer {
     public:
         virtual void initialize(int stage);
+    private:
+        void printCoord(double x, double y);
 };
 
 #endif
