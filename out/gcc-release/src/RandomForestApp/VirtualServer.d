@@ -39,10 +39,7 @@ out/gcc-release//src/RandomForestApp/VirtualServer.o: \
  /home/juan/veins-veins-4.6/src/veins/modules/mobility/traci/TraCICommandInterface.h \
  src/RandomForestApp/RandomForestMessages/Heartbeat_m.h \
  src/RandomForestApp/RandomForestMessages/TaskCompletion_m.h \
- src/RandomForestApp/RandomForestMessages/TaskRequest_m.h \
- src/RandomForestApp/RandomForestMessages/ConnectionRequest_m.h \
- src/RandomForestApp/RandomForestMessages/ConnectionApproval_m.h \
- src/RandomForestApp/RandomForestMessages/ConnectionConfirmation_m.h
+ src/RandomForestApp/RandomForestMessages/TaskRequest_m.h
 
 src/RandomForestApp/VirtualServer.h:
 
@@ -125,9 +122,3 @@ src/RandomForestApp/RandomForestMessages/Heartbeat_m.h:
 src/RandomForestApp/RandomForestMessages/TaskCompletion_m.h:
 
 src/RandomForestApp/RandomForestMessages/TaskRequest_m.h:
-
-src/RandomForestApp/RandomForestMessages/ConnectionRequest_m.h:
-
-src/RandomForestApp/RandomForestMessages/ConnectionApproval_m.h:
-
-src/RandomForestApp/RandomForestMessages/ConnectionConfirmation_m.h:

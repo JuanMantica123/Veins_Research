@@ -6,7 +6,8 @@ simple VirtualServer extends BaseWaveApplLayer
 {
     parameters:
         int computationPower;
-        int reliability;
+        int id;
+        int loadBalancerId;
         
     @class(VirtualServer);
     @display("i=block/app2");

@@ -40,9 +40,6 @@ OBJS = \
     $O/src/RandomForestApp/LoadBalancer.o \
     $O/src/RandomForestApp/NoAppCar.o \
     $O/src/RandomForestApp/VirtualServer.o \
-    $O/src/RandomForestApp/RandomForestMessages/ConnectionApproval_m.o \
-    $O/src/RandomForestApp/RandomForestMessages/ConnectionConfirmation_m.o \
-    $O/src/RandomForestApp/RandomForestMessages/ConnectionRequest_m.o \
     $O/src/RandomForestApp/RandomForestMessages/Heartbeat_m.o \
     $O/src/RandomForestApp/RandomForestMessages/TaskCompletion_m.o \
     $O/src/RandomForestApp/RandomForestMessages/TaskRequest_m.o \
@@ -53,9 +50,6 @@ OBJS = \
 
 # Message files
 MSGFILES = \
-    src/RandomForestApp/RandomForestMessages/ConnectionApproval.msg \
-    src/RandomForestApp/RandomForestMessages/ConnectionConfirmation.msg \
-    src/RandomForestApp/RandomForestMessages/ConnectionRequest.msg \
     src/RandomForestApp/RandomForestMessages/Heartbeat.msg \
     src/RandomForestApp/RandomForestMessages/TaskCompletion.msg \
     src/RandomForestApp/RandomForestMessages/TaskRequest.msg \

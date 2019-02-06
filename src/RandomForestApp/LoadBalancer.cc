@@ -12,62 +12,74 @@ void LoadBalancer::initialize(int stage) {
         currentComputationTask = 0;
         sendWSMEvt = new cMessage("wsm evt");
     } else if (stage == 1) {
-        id = getId();
-        scheduleAt(simTime() + uniform(0, 5), sendWSMEvt);
+        id = par("id").intValue();
+        lowerBound = par("lowerBound").intValue();
+        upperBound = par("uperBound").intValue();
+        heartBeatTimeout = 3 *beaconInterval.dbl();
+        for(int i=lowerBound;i<=upperBound;i++){
+            MicroCloud microcloud;
+            microcloud.setVirtualServerId(i);
+            microcloud.setLastHeartbeat(-heartBeatTimeout);
+            microcloud.setReputation(1);
+            microcloud.setComputationPower(-1);
+            microcloud.setLatestComputationTask(-1);
+            microcloud.setIdle(true);
+            microcloud.setFunctioning(true);
+            idToMicrocloud[i] = microcloud;
+        }
+        scheduleAt(simTime() +  beaconInterval+uniform(.2, .4), sendWSMEvt);
     }
 }
 
 void LoadBalancer::handleSelfMsg(cMessage* msg) {
-//    clearFailingMicroClouds();
     if (currentComputationTask <= 0) {
-        currentComputationTask = 10;
+        //Absolute value in the extremely unlikely case the value from the normal distribution is negative
+        currentComputationTask = abs(normal(10, 2, 0));
+        distributeWorkLoad(currentComputationTask);
     }
-    distributeWorkLoad();
-    scheduleAt(simTime() + 5 + uniform(0, 5), sendWSMEvt);
+    else{
+        double failedTask = clearFailingMicroClouds();
+        distributeWorkLoad(failedTask);
+    }
+    scheduleAt(simTime() +  beaconInterval+uniform(.2, .4), sendWSMEvt);
 }
 
 void LoadBalancer::onWSM(WaveShortMessage* wsm) {
-    if (ConnectionRequest* request = dynamic_cast<ConnectionRequest*>(wsm)) {
-        int virtualServerId = request->getVirtualServerId();
-        sendDown(generateConnectionApproval(virtualServerId));
-        EV_WARN << "Sending connection approval to: " << virtualServerId
-                       << endl;
-    } else if (ConnectionConfirmation* confirmation =
-            dynamic_cast<ConnectionConfirmation*>(wsm)) {
-        if (confirmation->getLoadBalancerId() == id) {
-            int virtualServerId = confirmation->getVirtualServerId();
-            MicroCloud microcloud;
-            microcloud.setLastHeartbeat(simTime().dbl());
-            microcloud.setComputationPower(confirmation->getComputationPower());
-            microcloud.setIdle(true);
-            microcloud.setVirtualServerId(virtualServerId);
-            idToMicrocloud[virtualServerId] = microcloud;
-            EV_WARN << "Received connection confirmation from: "
-                           << virtualServerId << endl;
-        }
-    } else if (Heartbeat* heartbeat = dynamic_cast<Heartbeat*>(wsm)) {
+    if (Heartbeat* heartbeat = dynamic_cast<Heartbeat*>(wsm)) {
         int virtualServerId = heartbeat->getVirtualServerId();
         MicroCloud microcloud = idToMicrocloud[virtualServerId];
+        if(!microcloud.isFunctioning()){
+            microcloud.setFunctioning(true);
+            microcloud.setIdle(true);
+        }
         microcloud.setLastHeartbeat(simTime().dbl());
         EV_WARN << "Received heart beat from " << virtualServerId << endl;
 
     } else if (TaskCompletion* completion = dynamic_cast<TaskCompletion*>(wsm)) {
         int virtualServerId = completion->getVirtualServerId();
-        double completedComputationTask = completion->getComputationTask();
-        currentComputationTask -= completedComputationTask;
         MicroCloud microcloud = idToMicrocloud[virtualServerId];
+
+        microcloud.setLastHeartbeat(simTime().dbl());
         microcloud.setIdle(true);
+        microcloud.setFunctioning(true);
+
+        double completedComputationTask = completion->getComputationTask();
+
+        // Will handle failures most of the time, but might not work for a couple improbable edge cases
+        if(microcloud.getLatestComputationTask()==completedComputationTask){
+            currentComputationTask -= completedComputationTask;
+        }
         EV_WARN << "Received task completion message from: " << virtualServerId
                        << " which completed a task of :" <<completedComputationTask<<endl;
     }
 }
 
-void LoadBalancer::distributeWorkLoad() {
+void LoadBalancer::distributeWorkLoad(double computationTask) {
     double idleComputation = 0;
     std::vector<MicroCloud> idleClouds;
     for (auto const& x : idToMicrocloud) {
         MicroCloud mc = x.second;
-        if (mc.isIdle()) {
+        if (mc.isFunctioning() && mc.isIdle()) {
             idleClouds.push_back(mc);
             idleComputation += mc.getComputationPower();
         }
@@ -75,7 +87,7 @@ void LoadBalancer::distributeWorkLoad() {
     for (MicroCloud mc : idleClouds) {
         mc.setIdle(false);
         double computationFraction = mc.getComputationPower() / idleComputation;
-        double virtualServertask = computationFraction * currentComputationTask;
+        double virtualServertask = computationFraction * computationTask;
         EV_WARN << "Sending computation task of: " << virtualServertask << endl;
         sendDown(
                 generateTaskRequest(virtualServertask,
@@ -84,26 +96,20 @@ void LoadBalancer::distributeWorkLoad() {
 
 }
 
-void LoadBalancer::clearFailingMicroClouds() {
+double LoadBalancer::clearFailingMicroClouds() {
+    double failedTask = 0;
     double time = simTime().dbl();
     for (auto const& x : idToMicrocloud) {
-        int virtualServerId = x.first;
         MicroCloud mc = x.second;
-        if (mc.getLastHeartbeat() + 10 > time) {
-            idToMicrocloud.erase(virtualServerId);
+        if (mc.getLastHeartbeat() + heartBeatTimeout  < simTime().dbl()) {
+            mc.setFunctioning(false);
+            failedTask+= mc.getLatestComputationTask();
+            mc.setLatestComputationTask(-1);
         }
 
     }
+    return failedTask;
 
-}
-
-ConnectionApproval* LoadBalancer::generateConnectionApproval(
-        int virtualServerId) {
-    ConnectionApproval* approval = new ConnectionApproval();
-    populateWSM(approval);
-    approval->setVirtualServerId(virtualServerId);
-    approval->setLoadBalancerId(id);
-    return approval;
 }
 
 TaskRequest* LoadBalancer::generateTaskRequest(double virtualServertask,

@@ -21,7 +21,7 @@ import org.car2x.veins.nodes.Scenario;
 network MCPasubioScenario extends Scenario
 {
     submodules:
-        rsu[2]: RSU {
+        rsu[3]: RSU {
             @display("p=87,155;i=veins/sign/yellowdiamond;is=vs");
         }
 }
