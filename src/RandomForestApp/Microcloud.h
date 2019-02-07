@@ -43,11 +43,11 @@ public:
         this->reputation = reputation;
     }
 
-    int getLatestComputationTask() const {
+    double getLatestComputationTask() const {
         return latestComputationTask;
     }
 
-    void setLatestComputationTask(int latestComputationTask) {
+    void setLatestComputationTask(double latestComputationTask) {
         this->latestComputationTask = latestComputationTask;
     }
 
@@ -59,14 +59,23 @@ public:
         this->functioning = functioning;
     }
 
+    int getTaskCounter() const {
+        return taskCounter;
+    }
+
+    void setTaskCounter(int taskCounter) {
+        this->taskCounter = taskCounter;
+    }
+
 private:
-    int virtualServerId;
+    double latestComputationTask;
     double lastHeartbeat;
+    int virtualServerId;
+    int computationPower;
+    int reputation;
+    int taskCounter;
     bool idle;
     bool functioning;
-    int computationPower;
-    int latestComputationTask;
-    int reputation;
 
 };
 

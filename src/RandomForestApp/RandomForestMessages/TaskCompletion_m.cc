@@ -182,6 +182,7 @@ Register_Class(TaskCompletion)
 TaskCompletion::TaskCompletion(const char *name, short kind) : ::WaveShortMessage(name,kind)
 {
     this->virtualServerId = 0;
+    this->taskCounter = 0;
     this->computationTask = 0;
 }
 
@@ -205,6 +206,7 @@ TaskCompletion& TaskCompletion::operator=(const TaskCompletion& other)
 void TaskCompletion::copy(const TaskCompletion& other)
 {
     this->virtualServerId = other.virtualServerId;
+    this->taskCounter = other.taskCounter;
     this->computationTask = other.computationTask;
 }
 
@@ -212,6 +214,7 @@ void TaskCompletion::parsimPack(omnetpp::cCommBuffer *b) const
 {
     ::WaveShortMessage::parsimPack(b);
     doParsimPacking(b,this->virtualServerId);
+    doParsimPacking(b,this->taskCounter);
     doParsimPacking(b,this->computationTask);
 }
 
@@ -219,6 +222,7 @@ void TaskCompletion::parsimUnpack(omnetpp::cCommBuffer *b)
 {
     ::WaveShortMessage::parsimUnpack(b);
     doParsimUnpacking(b,this->virtualServerId);
+    doParsimUnpacking(b,this->taskCounter);
     doParsimUnpacking(b,this->computationTask);
 }
 
@@ -230,6 +234,16 @@ int TaskCompletion::getVirtualServerId() const
 void TaskCompletion::setVirtualServerId(int virtualServerId)
 {
     this->virtualServerId = virtualServerId;
+}
+
+int TaskCompletion::getTaskCounter() const
+{
+    return this->taskCounter;
+}
+
+void TaskCompletion::setTaskCounter(int taskCounter)
+{
+    this->taskCounter = taskCounter;
 }
 
 double TaskCompletion::getComputationTask() const
@@ -307,7 +321,7 @@ const char *TaskCompletionDescriptor::getProperty(const char *propertyname) cons
 int TaskCompletionDescriptor::getFieldCount() const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 2+basedesc->getFieldCount() : 2;
+    return basedesc ? 3+basedesc->getFieldCount() : 3;
 }
 
 unsigned int TaskCompletionDescriptor::getFieldTypeFlags(int field) const
@@ -321,8 +335,9 @@ unsigned int TaskCompletionDescriptor::getFieldTypeFlags(int field) const
     static unsigned int fieldTypeFlags[] = {
         FD_ISEDITABLE,
         FD_ISEDITABLE,
+        FD_ISEDITABLE,
     };
-    return (field>=0 && field<2) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<3) ? fieldTypeFlags[field] : 0;
 }
 
 const char *TaskCompletionDescriptor::getFieldName(int field) const
@@ -335,9 +350,10 @@ const char *TaskCompletionDescriptor::getFieldName(int field) const
     }
     static const char *fieldNames[] = {
         "virtualServerId",
+        "taskCounter",
         "computationTask",
     };
-    return (field>=0 && field<2) ? fieldNames[field] : nullptr;
+    return (field>=0 && field<3) ? fieldNames[field] : nullptr;
 }
 
 int TaskCompletionDescriptor::findField(const char *fieldName) const
@@ -345,7 +361,8 @@ int TaskCompletionDescriptor::findField(const char *fieldName) const
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount() : 0;
     if (fieldName[0]=='v' && strcmp(fieldName, "virtualServerId")==0) return base+0;
-    if (fieldName[0]=='c' && strcmp(fieldName, "computationTask")==0) return base+1;
+    if (fieldName[0]=='t' && strcmp(fieldName, "taskCounter")==0) return base+1;
+    if (fieldName[0]=='c' && strcmp(fieldName, "computationTask")==0) return base+2;
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 
@@ -359,9 +376,10 @@ const char *TaskCompletionDescriptor::getFieldTypeString(int field) const
     }
     static const char *fieldTypeStrings[] = {
         "int",
+        "int",
         "double",
     };
-    return (field>=0 && field<2) ? fieldTypeStrings[field] : nullptr;
+    return (field>=0 && field<3) ? fieldTypeStrings[field] : nullptr;
 }
 
 const char **TaskCompletionDescriptor::getFieldPropertyNames(int field) const
@@ -429,7 +447,8 @@ std::string TaskCompletionDescriptor::getFieldValueAsString(void *object, int fi
     TaskCompletion *pp = (TaskCompletion *)object; (void)pp;
     switch (field) {
         case 0: return long2string(pp->getVirtualServerId());
-        case 1: return double2string(pp->getComputationTask());
+        case 1: return long2string(pp->getTaskCounter());
+        case 2: return double2string(pp->getComputationTask());
         default: return "";
     }
 }
@@ -445,7 +464,8 @@ bool TaskCompletionDescriptor::setFieldValueAsString(void *object, int field, in
     TaskCompletion *pp = (TaskCompletion *)object; (void)pp;
     switch (field) {
         case 0: pp->setVirtualServerId(string2long(value)); return true;
-        case 1: pp->setComputationTask(string2double(value)); return true;
+        case 1: pp->setTaskCounter(string2long(value)); return true;
+        case 2: pp->setComputationTask(string2double(value)); return true;
         default: return false;
     }
 }

@@ -16,14 +16,16 @@ class LoadBalancer : public BaseWaveApplLayer {
 	private:
         void distributeWorkLoad(double computationTask);
         double clearFailingMicroClouds();
-        TaskRequest* generateTaskRequest(double virtualServertask,int virtualServerId);
-        std::map<int,MicroCloud> idToMicrocloud;
+        bool isAnMCIdle();
+        TaskRequest* generateTaskRequest(double virtualServertask,int virtualServerId,int taskCounter);
+        std::map<int,MicroCloud *> idToMicrocloud;
         cMessage* sendWSMEvt;
+        double heartBeatTimeout;
+        double currentComputationTask;
+        double failedWork;
         int id;
         int upperBound;
         int lowerBound;
-        double heartBeatTimeout;
-        double currentComputationTask;
 };
 
 #endif

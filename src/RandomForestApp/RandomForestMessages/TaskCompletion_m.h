@@ -28,6 +28,7 @@
  * packet TaskCompletion extends WaveShortMessage
  * {
  *     int virtualServerId;
+ *     int taskCounter;
  *     double computationTask;
  * }
  * </pre>
@@ -36,6 +37,7 @@ class TaskCompletion : public ::WaveShortMessage
 {
   protected:
     int virtualServerId;
+    int taskCounter;
     double computationTask;
 
   private:
@@ -57,6 +59,8 @@ class TaskCompletion : public ::WaveShortMessage
     // field getter/setter methods
     virtual int getVirtualServerId() const;
     virtual void setVirtualServerId(int virtualServerId);
+    virtual int getTaskCounter() const;
+    virtual void setTaskCounter(int taskCounter);
     virtual double getComputationTask() const;
     virtual void setComputationTask(double computationTask);
 };

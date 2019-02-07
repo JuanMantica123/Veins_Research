@@ -6,5 +6,6 @@ class WaveShortMessage;
 
 packet TaskCompletion extends WaveShortMessage {
 	int virtualServerId;
+	int taskCounter;
 	double computationTask;
 }

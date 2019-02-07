@@ -16,15 +16,17 @@ class VirtualServer : public BaseWaveApplLayer {
         virtual void handleSelfMsg(cMessage* msg);
 	private:
         Heartbeat* generateHeartbeat();
-        TaskCompletion* generateTaskCompletion(double computationTask);
+        TaskCompletion* generateTaskCompletion(double computationTask,int taskCounter);
         double normalReliability();
 		double computationPower;
 		double reliability;
         double currentComputationTask;
         double progress;
-        double timeOfLatestMessage;
+        double latestWorkTime;
+        double penaltyTime;
         int id;
         int loadBalancerId;
+        int taskCounter;
         cMessage* sendWSMEvt;
 
 };

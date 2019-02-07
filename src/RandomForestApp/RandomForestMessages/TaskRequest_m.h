@@ -29,6 +29,7 @@
  * {
  *     int virtualServerId;
  *     int loadBalancerId;
+ *     int taskCounter;
  *     double computationTask;
  * }
  * </pre>
@@ -38,6 +39,7 @@ class TaskRequest : public ::WaveShortMessage
   protected:
     int virtualServerId;
     int loadBalancerId;
+    int taskCounter;
     double computationTask;
 
   private:
@@ -61,6 +63,8 @@ class TaskRequest : public ::WaveShortMessage
     virtual void setVirtualServerId(int virtualServerId);
     virtual int getLoadBalancerId() const;
     virtual void setLoadBalancerId(int loadBalancerId);
+    virtual int getTaskCounter() const;
+    virtual void setTaskCounter(int taskCounter);
     virtual double getComputationTask() const;
     virtual void setComputationTask(double computationTask);
 };
