@@ -35,11 +35,11 @@ public:
         this->virtualServerId = virtualServerId;
     }
 
-    int getReputation() const {
+    double getReputation() const {
         return reputation;
     }
 
-    void setReputation(int reputation) {
+    void setReputation(double reputation) {
         this->reputation = reputation;
     }
 
@@ -67,15 +67,33 @@ public:
         this->taskCounter = taskCounter;
     }
 
+    double getWorkDone() const {
+        return workDone;
+    }
+
+    void setWorkDone(double workDone) {
+        this->workDone = workDone;
+    }
+
+    bool isLatestTaskReplicated() const {
+        return latestTaskReplicated;
+    }
+
+    void setLatestTaskReplicated(bool latestTaskReplicated) {
+        this->latestTaskReplicated = latestTaskReplicated;
+    }
+
 private:
     double latestComputationTask;
     double lastHeartbeat;
+    double reputation;
+    double workDone;
     int virtualServerId;
     int computationPower;
-    int reputation;
     int taskCounter;
     bool idle;
     bool functioning;
+    bool latestTaskReplicated;
 
 };
 
