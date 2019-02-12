@@ -30,7 +30,7 @@
  *     int virtualServerId;
  *     int loadBalancerId;
  *     int taskCounter;
- *     double computationTask;
+ *     double computationWork;
  * }
  * </pre>
  */
@@ -40,7 +40,7 @@ class TaskRequest : public ::WaveShortMessage
     int virtualServerId;
     int loadBalancerId;
     int taskCounter;
-    double computationTask;
+    double computationWork;
 
   private:
     void copy(const TaskRequest& other);
@@ -65,8 +65,8 @@ class TaskRequest : public ::WaveShortMessage
     virtual void setLoadBalancerId(int loadBalancerId);
     virtual int getTaskCounter() const;
     virtual void setTaskCounter(int taskCounter);
-    virtual double getComputationTask() const;
-    virtual void setComputationTask(double computationTask);
+    virtual double getComputationWork() const;
+    virtual void setComputationWork(double computationWork);
 };
 
 inline void doParsimPacking(omnetpp::cCommBuffer *b, const TaskRequest& obj) {obj.parsimPack(b);}

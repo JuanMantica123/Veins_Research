@@ -28,6 +28,7 @@
  * packet Heartbeat extends WaveShortMessage
  * {
  *     int virtualServerId;
+ *     double computationPower;
  * }
  * </pre>
  */
@@ -35,6 +36,7 @@ class Heartbeat : public ::WaveShortMessage
 {
   protected:
     int virtualServerId;
+    double computationPower;
 
   private:
     void copy(const Heartbeat& other);
@@ -55,6 +57,8 @@ class Heartbeat : public ::WaveShortMessage
     // field getter/setter methods
     virtual int getVirtualServerId() const;
     virtual void setVirtualServerId(int virtualServerId);
+    virtual double getComputationPower() const;
+    virtual void setComputationPower(double computationPower);
 };
 
 inline void doParsimPacking(omnetpp::cCommBuffer *b, const Heartbeat& obj) {obj.parsimPack(b);}

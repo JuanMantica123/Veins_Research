@@ -5,7 +5,7 @@ simple LoadBalancer extends BaseWaveApplLayer
 
 {       
     parameters:
-        double expectedComputationTask;
+        double expectedComputationWork;
         double replicationFactor = default(1);
         int id;
         int lowerBound;

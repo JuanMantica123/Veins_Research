@@ -29,7 +29,8 @@
  * {
  *     int virtualServerId;
  *     int taskCounter;
- *     double computationTask;
+ *     double computationWork;
+ *     double computationPower;
  * }
  * </pre>
  */
@@ -38,7 +39,8 @@ class TaskCompletion : public ::WaveShortMessage
   protected:
     int virtualServerId;
     int taskCounter;
-    double computationTask;
+    double computationWork;
+    double computationPower;
 
   private:
     void copy(const TaskCompletion& other);
@@ -61,8 +63,10 @@ class TaskCompletion : public ::WaveShortMessage
     virtual void setVirtualServerId(int virtualServerId);
     virtual int getTaskCounter() const;
     virtual void setTaskCounter(int taskCounter);
-    virtual double getComputationTask() const;
-    virtual void setComputationTask(double computationTask);
+    virtual double getComputationWork() const;
+    virtual void setComputationWork(double computationWork);
+    virtual double getComputationPower() const;
+    virtual void setComputationPower(double computationPower);
 };
 
 inline void doParsimPacking(omnetpp::cCommBuffer *b, const TaskCompletion& obj) {obj.parsimPack(b);}

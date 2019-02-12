@@ -8,5 +8,5 @@ packet TaskRequest extends WaveShortMessage {
 	int virtualServerId;
 	int loadBalancerId;
 	int taskCounter;
-	double computationTask;
+	double computationWork;
 }

@@ -6,4 +6,5 @@ class WaveShortMessage;
 
 packet Heartbeat extends WaveShortMessage {
 	int virtualServerId;
+	double computationPower;
 }

@@ -19,10 +19,11 @@ class VirtualServer : public BaseWaveApplLayer {
         Heartbeat* generateHeartbeat();
         TaskCompletion* generateTaskCompletion(double computationTask,int taskCounter);
         double normalReliability(double expectedReliability);
+        bool failed();
+        void perhapsFinish();
 		double computationPower;
-		double expectedReliability;
-		double calculatedReliability;
-        double currentComputationTask;
+		double reliability;
+        double currentComputationWork;
         double progress;
         double latestWorkTime;
         double penaltyTime;
@@ -32,6 +33,7 @@ class VirtualServer : public BaseWaveApplLayer {
         int loadBalancerId;
         int taskCounter;
         bool finishCalled;
+        bool hasTask;
         cMessage* sendWSMEvt;
 
 };

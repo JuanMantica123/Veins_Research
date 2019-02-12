@@ -20,22 +20,29 @@ class LoadBalancer : public BaseWaveApplLayer {
         double clearFailingMicroClouds();
         bool isAnMCIdle();
         TaskRequest* generateTaskRequest(double virtualServertask,int virtualServerId,int taskCounter);
+        void perhapsFinish();
+        void sendFirstTask();
+
         std::map<int,MicroCloud *> idToMicrocloud;
         cMessage* sendWSMEvt;
+
         double heartBeatTimeout;
-        double currentComputationTask;
+        double currentComputationWork;
         double failedWork;
         double workFinished;
         double progress;
-        double expectedComputationTask;
+        double expectedComputationWork;
         double replicationFactor;
-        double taskRate;
+
         int id;
         int upperBound;
         int lowerBound;
         int taskCompleted;
+
         bool reputationOn;
+        bool sentFirstTask;
         bool finishCalled;
+
         cOutVector taskCompletedVector;
         cOutVector workFinishedVector;
 };

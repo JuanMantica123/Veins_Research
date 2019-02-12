@@ -182,6 +182,7 @@ Register_Class(Heartbeat)
 Heartbeat::Heartbeat(const char *name, short kind) : ::WaveShortMessage(name,kind)
 {
     this->virtualServerId = 0;
+    this->computationPower = 0;
 }
 
 Heartbeat::Heartbeat(const Heartbeat& other) : ::WaveShortMessage(other)
@@ -204,18 +205,21 @@ Heartbeat& Heartbeat::operator=(const Heartbeat& other)
 void Heartbeat::copy(const Heartbeat& other)
 {
     this->virtualServerId = other.virtualServerId;
+    this->computationPower = other.computationPower;
 }
 
 void Heartbeat::parsimPack(omnetpp::cCommBuffer *b) const
 {
     ::WaveShortMessage::parsimPack(b);
     doParsimPacking(b,this->virtualServerId);
+    doParsimPacking(b,this->computationPower);
 }
 
 void Heartbeat::parsimUnpack(omnetpp::cCommBuffer *b)
 {
     ::WaveShortMessage::parsimUnpack(b);
     doParsimUnpacking(b,this->virtualServerId);
+    doParsimUnpacking(b,this->computationPower);
 }
 
 int Heartbeat::getVirtualServerId() const
@@ -226,6 +230,16 @@ int Heartbeat::getVirtualServerId() const
 void Heartbeat::setVirtualServerId(int virtualServerId)
 {
     this->virtualServerId = virtualServerId;
+}
+
+double Heartbeat::getComputationPower() const
+{
+    return this->computationPower;
+}
+
+void Heartbeat::setComputationPower(double computationPower)
+{
+    this->computationPower = computationPower;
 }
 
 class HeartbeatDescriptor : public omnetpp::cClassDescriptor
@@ -293,7 +307,7 @@ const char *HeartbeatDescriptor::getProperty(const char *propertyname) const
 int HeartbeatDescriptor::getFieldCount() const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 1+basedesc->getFieldCount() : 1;
+    return basedesc ? 2+basedesc->getFieldCount() : 2;
 }
 
 unsigned int HeartbeatDescriptor::getFieldTypeFlags(int field) const
@@ -306,8 +320,9 @@ unsigned int HeartbeatDescriptor::getFieldTypeFlags(int field) const
     }
     static unsigned int fieldTypeFlags[] = {
         FD_ISEDITABLE,
+        FD_ISEDITABLE,
     };
-    return (field>=0 && field<1) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<2) ? fieldTypeFlags[field] : 0;
 }
 
 const char *HeartbeatDescriptor::getFieldName(int field) const
@@ -320,8 +335,9 @@ const char *HeartbeatDescriptor::getFieldName(int field) const
     }
     static const char *fieldNames[] = {
         "virtualServerId",
+        "computationPower",
     };
-    return (field>=0 && field<1) ? fieldNames[field] : nullptr;
+    return (field>=0 && field<2) ? fieldNames[field] : nullptr;
 }
 
 int HeartbeatDescriptor::findField(const char *fieldName) const
@@ -329,6 +345,7 @@ int HeartbeatDescriptor::findField(const char *fieldName) const
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount() : 0;
     if (fieldName[0]=='v' && strcmp(fieldName, "virtualServerId")==0) return base+0;
+    if (fieldName[0]=='c' && strcmp(fieldName, "computationPower")==0) return base+1;
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 
@@ -342,8 +359,9 @@ const char *HeartbeatDescriptor::getFieldTypeString(int field) const
     }
     static const char *fieldTypeStrings[] = {
         "int",
+        "double",
     };
-    return (field>=0 && field<1) ? fieldTypeStrings[field] : nullptr;
+    return (field>=0 && field<2) ? fieldTypeStrings[field] : nullptr;
 }
 
 const char **HeartbeatDescriptor::getFieldPropertyNames(int field) const
@@ -411,6 +429,7 @@ std::string HeartbeatDescriptor::getFieldValueAsString(void *object, int field, 
     Heartbeat *pp = (Heartbeat *)object; (void)pp;
     switch (field) {
         case 0: return long2string(pp->getVirtualServerId());
+        case 1: return double2string(pp->getComputationPower());
         default: return "";
     }
 }
@@ -426,6 +445,7 @@ bool HeartbeatDescriptor::setFieldValueAsString(void *object, int field, int i, 
     Heartbeat *pp = (Heartbeat *)object; (void)pp;
     switch (field) {
         case 0: pp->setVirtualServerId(string2long(value)); return true;
+        case 1: pp->setComputationPower(string2double(value)); return true;
         default: return false;
     }
 }

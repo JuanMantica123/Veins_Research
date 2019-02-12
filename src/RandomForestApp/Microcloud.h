@@ -38,17 +38,16 @@ public:
     double getReputation() const {
         return reputation;
     }
-
     void setReputation(double reputation) {
         this->reputation = reputation;
     }
 
-    double getLatestComputationTask() const {
-        return latestComputationTask;
+    double getLatestComputationWork() const {
+        return latestComputationWork;
     }
 
-    void setLatestComputationTask(double latestComputationTask) {
-        this->latestComputationTask = latestComputationTask;
+    void setLatestComputationWork(double latestComputationWork) {
+        this->latestComputationWork = latestComputationWork;
     }
 
     bool isFunctioning() const {
@@ -59,13 +58,6 @@ public:
         this->functioning = functioning;
     }
 
-    int getTaskCounter() const {
-        return taskCounter;
-    }
-
-    void setTaskCounter(int taskCounter) {
-        this->taskCounter = taskCounter;
-    }
 
     double getWorkDone() const {
         return workDone;
@@ -83,8 +75,20 @@ public:
         this->latestTaskReplicated = latestTaskReplicated;
     }
 
+    int getTaskCounter() const {
+        return taskCounter;
+    }
+
+    void initializeCounter(){
+        this->taskCounter = 0;
+    }
+    void incrementCounter() {
+        this->taskCounter++;
+    }
+
+
 private:
-    double latestComputationTask;
+    double latestComputationWork;
     double lastHeartbeat;
     double reputation;
     double workDone;
