@@ -37,7 +37,7 @@ class LoadBalancer : public BaseWaveApplLayer {
         int id;
         int upperBound;
         int lowerBound;
-        int taskCompleted;
+        int taskId;
 
         bool reputationOn;
         bool sentFirstTask;

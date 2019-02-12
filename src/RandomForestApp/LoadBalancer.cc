@@ -26,11 +26,11 @@ void LoadBalancer::initialize(int stage) {
         progress = 0;
         currentComputationWork = 0;
         failedWork = 0;
-        taskCompleted = 0;
+        taskId = 0;
 
         taskCompletedVector.setName("Task Completed");
         workFinishedVector.setName("Work finished");
-        taskCompletedVector.recordWithTimestamp(simTime(),taskCompleted);
+        taskCompletedVector.recordWithTimestamp(simTime(),taskId);
         workFinishedVector.recordWithTimestamp(simTime(),workFinished);
 
         finishCalled = false;
@@ -66,11 +66,11 @@ void LoadBalancer::handleSelfMsg(cMessage* msg) {
             //Note that if progress >= currentComputationWork than we also know that we received a completion message
             //from a virtual server and that at least one virtual server is idle
             workFinished+=currentComputationWork;
-            taskCompleted++;
+            taskId+=1;
             currentComputationWork = expectedComputationWork;
 
             if(!finishCalled){
-                taskCompletedVector.recordWithTimestamp(simTime(),taskCompleted);
+                taskCompletedVector.recordWithTimestamp(simTime(),taskId);
                 workFinishedVector.recordWithTimestamp(simTime(),workFinished);
             }
 
@@ -115,25 +115,29 @@ void LoadBalancer::onWSM(WaveShortMessage* wsm) {
         microcloud->setFunctioning(true);
         microcloud->setComputationPower(completion->getComputationPower());
 
-        //This counter/id is used to handle failures and make sure that no task completion is not double counted
+
+        //This taskCounter is used to handle failures and make sure that no task completion is not double counted
         int taskCounter = completion->getTaskCounter();
          if(microcloud->getTaskCounter()==taskCounter){
             double completedComputationWork = completion->getComputationWork();
-            progress += completedComputationWork;
-            microcloud->setWorkDone(microcloud->getWorkDone()+completedComputationWork);
             microcloud->incrementCounter();
+            microcloud->setWorkDone(microcloud->getWorkDone()+completedComputationWork);
+            //This taskId tag is to make sure that this work is not for a previous task
+            if(completion->getTaskId()==taskId){
+                progress += completedComputationWork;
+                if(reputationOn){
+                    microcloud ->setReputation(microcloud->getReputation()+.05);
+                    EV_WARN << "Received task completion message from: " << virtualServerId
+                                   << " which completed a task of load :" <<completedComputationWork<<" ,new reputation is : "
+                                   <<microcloud->getReputation()<<endl;
+                }
+                else{
+                    EV_WARN << "Received task completion message from: " << virtualServerId
+                                   << " which completed a task of load :" <<completedComputationWork<<endl;
+                }
+            }
 
-            if(reputationOn){
-                microcloud ->setReputation(microcloud->getReputation()+.05);
-                EV_WARN << "Received task completion message from: " << virtualServerId
-                               << " which completed a task of load :" <<completedComputationWork<<" ,new reputation is : "
-                               <<microcloud->getReputation()<<endl;
-            }
-            else{
-                EV_WARN << "Received task completion message from: " << virtualServerId
-                               << " which completed a task of load :" <<completedComputationWork<<endl;
-            }
-        }
+         }
     }
 }
 
@@ -162,21 +166,23 @@ void LoadBalancer::distributeWorkLoad(double computationWork) {
             computationFraction = mc->getComputationPower()/idleComputation;
         }
 
-        double virtaulServerWork;
+        double virtualServerWork;
         if(idleClouds.size()>1){
-            virtaulServerWork = replicationFactor*computationFraction * computationWork;
+            virtualServerWork = replicationFactor*computationFraction * computationWork;
             mc->setLatestTaskReplicated(true);
         }
         else{
-            virtaulServerWork = computationFraction * computationWork;
+            virtualServerWork = computationFraction * computationWork;
             mc->setLatestTaskReplicated(false);
         }
 
-        mc->setLatestComputationWork(virtaulServerWork);
-        EV_WARN << "Sending computation task with load of: " << mc->getLatestComputationWork() <<" to: "<<mc->getVirtualServerId()<< endl;
+        mc->setLatestComputationWork(virtualServerWork);
+        mc->setTaskId(taskId);
+        EV_WARN << "Sending computation task with load of: " << mc->getLatestComputationWork() <<" to: "<<mc->getVirtualServerId()
+                << " with task id of : "<<taskId<<endl;
 
         sendDown(
-                generateTaskRequest(virtaulServerWork,
+                generateTaskRequest(virtualServerWork,
                         mc->getVirtualServerId(),mc->getTaskCounter()));
     }
 
@@ -208,12 +214,13 @@ double LoadBalancer::clearFailingMicroClouds() {
                 EV_WARN << "Microcloud: " <<mc->getVirtualServerId()<<" with task load of:  "<<mc->getLatestComputationWork()<<" failed"<<endl;
 
             }
-            if(mc->isLatestTaskReplicated()){
-                failedWork+= mc->getLatestComputationWork()/replicationFactor;
-                mc->setLatestTaskReplicated(false);
-            }
-            else{
-                failedWork+=mc->getLatestComputationWork();
+            if(mc->getTaskId()==taskId){
+                if(mc->isLatestTaskReplicated()){
+                    failedWork+= mc->getLatestComputationWork()/replicationFactor;
+                }
+                else{
+                    failedWork+=mc->getLatestComputationWork();
+                }
             }
             mc->setLatestComputationWork(0);
             mc->incrementCounter();
@@ -240,6 +247,7 @@ TaskRequest* LoadBalancer::generateTaskRequest(double virtaulServerWork,
         int virtualServerId,int taskCounter) {
     TaskRequest* request = new TaskRequest();
     populateWSM(request);
+    request->setTaskId(taskId);
     request->setVirtualServerId(virtualServerId);
     request->setComputationWork(virtaulServerWork);
     request->setLoadBalancerId(id);
@@ -266,7 +274,7 @@ void LoadBalancer::finish(){
     std::string scWork = "Load Balancer : "+std::to_string(id)+" work finished";
     recordScalar(scWork.c_str(),workFinished);
     std::string scTask = "Load Balancer : "+std::to_string(id)+" task finished";
-    recordScalar(scTask.c_str(),taskCompleted);
-    EV_WARN << "Load balancer : " <<id<<" finished a total work of: "<<workFinished<<" and completed "<<taskCompleted<<" task"<<endl;
+    recordScalar(scTask.c_str(),taskId);
+    EV_WARN << "Load balancer : " <<id<<" finished a total work of: "<<workFinished<<" and completed "<<taskId<<" task"<<endl;
 }
 

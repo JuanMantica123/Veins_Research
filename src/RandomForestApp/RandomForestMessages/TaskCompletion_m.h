@@ -29,6 +29,7 @@
  * {
  *     int virtualServerId;
  *     int taskCounter;
+ *     int taskId;
  *     double computationWork;
  *     double computationPower;
  * }
@@ -39,6 +40,7 @@ class TaskCompletion : public ::WaveShortMessage
   protected:
     int virtualServerId;
     int taskCounter;
+    int taskId;
     double computationWork;
     double computationPower;
 
@@ -63,6 +65,8 @@ class TaskCompletion : public ::WaveShortMessage
     virtual void setVirtualServerId(int virtualServerId);
     virtual int getTaskCounter() const;
     virtual void setTaskCounter(int taskCounter);
+    virtual int getTaskId() const;
+    virtual void setTaskId(int taskId);
     virtual double getComputationWork() const;
     virtual void setComputationWork(double computationWork);
     virtual double getComputationPower() const;

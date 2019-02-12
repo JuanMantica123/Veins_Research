@@ -27,6 +27,7 @@
  * <pre>
  * packet TaskRequest extends WaveShortMessage
  * {
+ *     int taskId;
  *     int virtualServerId;
  *     int loadBalancerId;
  *     int taskCounter;
@@ -37,6 +38,7 @@
 class TaskRequest : public ::WaveShortMessage
 {
   protected:
+    int taskId;
     int virtualServerId;
     int loadBalancerId;
     int taskCounter;
@@ -59,6 +61,8 @@ class TaskRequest : public ::WaveShortMessage
     virtual void parsimUnpack(omnetpp::cCommBuffer *b) override;
 
     // field getter/setter methods
+    virtual int getTaskId() const;
+    virtual void setTaskId(int taskId);
     virtual int getVirtualServerId() const;
     virtual void setVirtualServerId(int virtualServerId);
     virtual int getLoadBalancerId() const;

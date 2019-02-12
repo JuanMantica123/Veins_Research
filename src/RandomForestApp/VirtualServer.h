@@ -29,9 +29,12 @@ class VirtualServer : public BaseWaveApplLayer {
         double penaltyTime;
         double timeFailed;
         double penaltyInterval;
+
         int id;
         int loadBalancerId;
         int taskCounter;
+        int taskId;
+
         bool finishCalled;
         bool hasTask;
         cMessage* sendWSMEvt;

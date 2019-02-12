@@ -181,6 +181,7 @@ Register_Class(TaskRequest)
 
 TaskRequest::TaskRequest(const char *name, short kind) : ::WaveShortMessage(name,kind)
 {
+    this->taskId = 0;
     this->virtualServerId = 0;
     this->loadBalancerId = 0;
     this->taskCounter = 0;
@@ -206,6 +207,7 @@ TaskRequest& TaskRequest::operator=(const TaskRequest& other)
 
 void TaskRequest::copy(const TaskRequest& other)
 {
+    this->taskId = other.taskId;
     this->virtualServerId = other.virtualServerId;
     this->loadBalancerId = other.loadBalancerId;
     this->taskCounter = other.taskCounter;
@@ -215,6 +217,7 @@ void TaskRequest::copy(const TaskRequest& other)
 void TaskRequest::parsimPack(omnetpp::cCommBuffer *b) const
 {
     ::WaveShortMessage::parsimPack(b);
+    doParsimPacking(b,this->taskId);
     doParsimPacking(b,this->virtualServerId);
     doParsimPacking(b,this->loadBalancerId);
     doParsimPacking(b,this->taskCounter);
@@ -224,10 +227,21 @@ void TaskRequest::parsimPack(omnetpp::cCommBuffer *b) const
 void TaskRequest::parsimUnpack(omnetpp::cCommBuffer *b)
 {
     ::WaveShortMessage::parsimUnpack(b);
+    doParsimUnpacking(b,this->taskId);
     doParsimUnpacking(b,this->virtualServerId);
     doParsimUnpacking(b,this->loadBalancerId);
     doParsimUnpacking(b,this->taskCounter);
     doParsimUnpacking(b,this->computationWork);
+}
+
+int TaskRequest::getTaskId() const
+{
+    return this->taskId;
+}
+
+void TaskRequest::setTaskId(int taskId)
+{
+    this->taskId = taskId;
 }
 
 int TaskRequest::getVirtualServerId() const
@@ -335,7 +349,7 @@ const char *TaskRequestDescriptor::getProperty(const char *propertyname) const
 int TaskRequestDescriptor::getFieldCount() const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 4+basedesc->getFieldCount() : 4;
+    return basedesc ? 5+basedesc->getFieldCount() : 5;
 }
 
 unsigned int TaskRequestDescriptor::getFieldTypeFlags(int field) const
@@ -351,8 +365,9 @@ unsigned int TaskRequestDescriptor::getFieldTypeFlags(int field) const
         FD_ISEDITABLE,
         FD_ISEDITABLE,
         FD_ISEDITABLE,
+        FD_ISEDITABLE,
     };
-    return (field>=0 && field<4) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<5) ? fieldTypeFlags[field] : 0;
 }
 
 const char *TaskRequestDescriptor::getFieldName(int field) const
@@ -364,22 +379,24 @@ const char *TaskRequestDescriptor::getFieldName(int field) const
         field -= basedesc->getFieldCount();
     }
     static const char *fieldNames[] = {
+        "taskId",
         "virtualServerId",
         "loadBalancerId",
         "taskCounter",
         "computationWork",
     };
-    return (field>=0 && field<4) ? fieldNames[field] : nullptr;
+    return (field>=0 && field<5) ? fieldNames[field] : nullptr;
 }
 
 int TaskRequestDescriptor::findField(const char *fieldName) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount() : 0;
-    if (fieldName[0]=='v' && strcmp(fieldName, "virtualServerId")==0) return base+0;
-    if (fieldName[0]=='l' && strcmp(fieldName, "loadBalancerId")==0) return base+1;
-    if (fieldName[0]=='t' && strcmp(fieldName, "taskCounter")==0) return base+2;
-    if (fieldName[0]=='c' && strcmp(fieldName, "computationWork")==0) return base+3;
+    if (fieldName[0]=='t' && strcmp(fieldName, "taskId")==0) return base+0;
+    if (fieldName[0]=='v' && strcmp(fieldName, "virtualServerId")==0) return base+1;
+    if (fieldName[0]=='l' && strcmp(fieldName, "loadBalancerId")==0) return base+2;
+    if (fieldName[0]=='t' && strcmp(fieldName, "taskCounter")==0) return base+3;
+    if (fieldName[0]=='c' && strcmp(fieldName, "computationWork")==0) return base+4;
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 
@@ -395,9 +412,10 @@ const char *TaskRequestDescriptor::getFieldTypeString(int field) const
         "int",
         "int",
         "int",
+        "int",
         "double",
     };
-    return (field>=0 && field<4) ? fieldTypeStrings[field] : nullptr;
+    return (field>=0 && field<5) ? fieldTypeStrings[field] : nullptr;
 }
 
 const char **TaskRequestDescriptor::getFieldPropertyNames(int field) const
@@ -464,10 +482,11 @@ std::string TaskRequestDescriptor::getFieldValueAsString(void *object, int field
     }
     TaskRequest *pp = (TaskRequest *)object; (void)pp;
     switch (field) {
-        case 0: return long2string(pp->getVirtualServerId());
-        case 1: return long2string(pp->getLoadBalancerId());
-        case 2: return long2string(pp->getTaskCounter());
-        case 3: return double2string(pp->getComputationWork());
+        case 0: return long2string(pp->getTaskId());
+        case 1: return long2string(pp->getVirtualServerId());
+        case 2: return long2string(pp->getLoadBalancerId());
+        case 3: return long2string(pp->getTaskCounter());
+        case 4: return double2string(pp->getComputationWork());
         default: return "";
     }
 }
@@ -482,10 +501,11 @@ bool TaskRequestDescriptor::setFieldValueAsString(void *object, int field, int i
     }
     TaskRequest *pp = (TaskRequest *)object; (void)pp;
     switch (field) {
-        case 0: pp->setVirtualServerId(string2long(value)); return true;
-        case 1: pp->setLoadBalancerId(string2long(value)); return true;
-        case 2: pp->setTaskCounter(string2long(value)); return true;
-        case 3: pp->setComputationWork(string2double(value)); return true;
+        case 0: pp->setTaskId(string2long(value)); return true;
+        case 1: pp->setVirtualServerId(string2long(value)); return true;
+        case 2: pp->setLoadBalancerId(string2long(value)); return true;
+        case 3: pp->setTaskCounter(string2long(value)); return true;
+        case 4: pp->setComputationWork(string2double(value)); return true;
         default: return false;
     }
 }

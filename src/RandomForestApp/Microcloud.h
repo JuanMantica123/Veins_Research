@@ -86,6 +86,13 @@ public:
         this->taskCounter++;
     }
 
+    int getTaskId() const {
+        return taskId;
+    }
+
+    void setTaskId(int taskId) {
+        this->taskId = taskId;
+    }
 
 private:
     double latestComputationWork;
@@ -95,6 +102,7 @@ private:
     int virtualServerId;
     int computationPower;
     int taskCounter;
+    int taskId;
     bool idle;
     bool functioning;
     bool latestTaskReplicated;

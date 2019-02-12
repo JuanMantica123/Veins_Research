@@ -25,6 +25,7 @@ void VirtualServer::initialize(int stage) {
         currentComputationWork = 0;
 
         taskCounter = -1;
+        taskId = 0;
 
         reliability = normalReliability(expectedReliability);
         EV_WARN << "Virtual Server with id: " << id <<" will have a reliability of :"<<reliability<< endl;
@@ -65,9 +66,11 @@ void VirtualServer::onWSM(WaveShortMessage* wsm) {
             if(!failed()){
                 currentComputationWork = task->getComputationWork();
                 taskCounter = task->getTaskCounter();
+                taskId = task->getTaskId();
                 progress = 0;
                 hasTask = true;
-                EV_WARN << "Virtual Server with id: " << id <<" received task of load :"<<currentComputationWork<< endl;
+                EV_WARN << "Virtual Server with id: " << id <<" received task of load :"<<currentComputationWork
+                        <<" for a task id of : "<<task->getTaskId()<< endl;
             }
             else{
                 hasTask = false;
@@ -105,14 +108,17 @@ TaskCompletion * VirtualServer::generateTaskCompletion(double computationWork,in
     taskCompletion->setComputationWork(computationWork);
     taskCompletion->setTaskCounter(taskCounter);
     taskCompletion->setComputationPower(computationPower);
+    taskCompletion->setTaskId(taskId);
     EV_WARN << "Virtual Server with id: " << id
-                   << " sending task completion message for a task load of : "<<computationWork << endl;
+                   << " sending task completion message for a task load of : "
+                   << computationWork <<" for the task id of: "<<
+                   taskId<< endl;
     return taskCompletion;
 }
 
 double VirtualServer::normalReliability(double expectedReliability){
     //While unlikely the following normal distribution can output values less than 0 and more than 1
-    std::normal_distribution<double> distribution(expectedReliability,.1);
+    std::normal_distribution<double> distribution(expectedReliability,.2);
     std::default_random_engine generator;
     generator.seed(time(NULL));
     double reliability = distribution(generator);
