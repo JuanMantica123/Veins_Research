@@ -1,0 +1,285 @@
+version 2
+run General-0-20190210-20:18:15-20336
+attr configname General
+attr datetime 20190210-20:18:15
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network ManhattanSimulation.MCManhattanScenario
+attr processid 20336
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+param **.debug false
+param **.coreDebug false
+param *.playgroundSizeX 1000m
+param *.playgroundSizeY 1000m
+param *.playgroundSizeZ 100m
+param *.annotations.draw true
+param *.manager.updateInterval 1s
+param *.manager.host "\"localhost\""
+param *.manager.port 9999
+param *.manager.autoShutdown true
+param *.manager.launchConfig "xmldoc(\"manhattan.launchd.xml\")"
+param *.rsu[0].mobility.x 616
+param *.rsu[0].mobility.y 23
+param *.rsu[0].mobility.z 0
+param *.rsu[1].mobility.x 16
+param *.rsu[1].mobility.y 23
+param *.rsu[1].mobility.z 0
+param *.rsu[2].mobility.x 216
+param *.rsu[2].mobility.y 23
+param *.rsu[2].mobility.z 0
+param *.rsu[3].mobility.x 416
+param *.rsu[3].mobility.y 23
+param *.rsu[3].mobility.z 0
+param *.rsu[*].applType "\"CNNApp.CNNAppRSU\""
+param *.rsu[*].appl.headerLength "80 bit"
+param *.rsu[*].appl.sendBeacons false
+param *.rsu[*].appl.dataOnSch false
+param *.rsu[*].appl.beaconInterval 1s
+param *.rsu[*].appl.beaconUserPriority 7
+param *.rsu[*].appl.dataUserPriority 5
+param *.rsu[0].appl.rsuId 0
+param *.rsu[1].appl.rsuId 1
+param *.rsu[2].appl.rsuId 2
+param *.rsu[3].appl.rsuId 3
+param *.connectionManager.sendDirect true
+param *.connectionManager.maxInterfDist 2600m
+param *.connectionManager.drawMaxIntfDist false
+param *.**.nic.mac1609_4.useServiceChannel false
+param *.**.nic.mac1609_4.txPower 20mW
+param *.**.nic.mac1609_4.bitrate 6Mbps
+param *.**.nic.phy80211p.sensitivity -89dBm
+param *.**.nic.phy80211p.useThermalNoise true
+param *.**.nic.phy80211p.thermalNoise -110dBm
+param *.**.nic.phy80211p.decider "xmldoc(\"config.xml\")"
+param *.**.nic.phy80211p.analogueModels "xmldoc(\"config.xml\")"
+param *.**.nic.phy80211p.usePropagationDelay true
+param *.**.nic.phy80211p.antenna "xmldoc(\"antenna.xml\", \"/root/Antenna[@id='monopole']\")"
+param *.node[*].applType "\"CNNApp.CNNAppCar\""
+param *.node[*].appl.headerLength "80 bit"
+param *.node[*].appl.sendBeacons false
+param *.node[*].appl.dataOnSch false
+param *.node[*].appl.beaconInterval 1s
+param *.node[*].veinsmobilityType.debug true
+param *.node[*].veinsmobility.x -1
+param *.node[*].veinsmobility.y -1
+param *.node[*].veinsmobility.z 1.895
+param *.**.nic.mac1609_4.useServiceChannel true
+param *.node[*].appl.dataOnSch true
+param *.rsu[*].appl.dataOnSch true
+
+scalar MCManhattanScenario.node[6].appl generatedWSMs 2
+scalar MCManhattanScenario.node[6].appl receivedWSMs 25
+scalar MCManhattanScenario.node[6].appl generatedBSMs 0
+scalar MCManhattanScenario.node[6].appl receivedBSMs 0
+scalar MCManhattanScenario.node[6].appl generatedWSAs 0
+scalar MCManhattanScenario.node[6].appl receivedWSAs 0
+scalar MCManhattanScenario.node[6].nic.phy80211p busyTime 0.00016571428571429
+scalar MCManhattanScenario.node[6].nic.mac1609_4 ReceivedUnicastPackets 0
+scalar MCManhattanScenario.node[6].nic.mac1609_4 ReceivedBroadcasts 25
+scalar MCManhattanScenario.node[6].nic.mac1609_4 SentPackets 2
+scalar MCManhattanScenario.node[6].nic.mac1609_4 SNIRLostPackets 0
+scalar MCManhattanScenario.node[6].nic.mac1609_4 RXTXLostPackets 0
+scalar MCManhattanScenario.node[6].nic.mac1609_4 TotalLostPackets 0
+scalar MCManhattanScenario.node[6].nic.mac1609_4 DroppedPacketsInMac 0
+scalar MCManhattanScenario.node[6].nic.mac1609_4 TooLittleTime 0
+scalar MCManhattanScenario.node[6].nic.mac1609_4 TimesIntoBackoff 2
+scalar MCManhattanScenario.node[6].nic.mac1609_4 SlotsBackoff 2
+scalar MCManhattanScenario.node[6].nic.mac1609_4 NumInternalContention 0
+scalar MCManhattanScenario.node[6].nic.mac1609_4 totalBusyTime 0.006266
+scalar MCManhattanScenario.node[6].veinsmobility startTime 7
+scalar MCManhattanScenario.node[6].veinsmobility totalTime 34
+scalar MCManhattanScenario.node[6].veinsmobility stopTime 42
+scalar MCManhattanScenario.node[6].veinsmobility minSpeed 1.5130976005225
+scalar MCManhattanScenario.node[6].veinsmobility maxSpeed 13.850046946807
+scalar MCManhattanScenario.node[6].veinsmobility totalDistance 386.15179919212
+scalar MCManhattanScenario.node[6].veinsmobility totalCO2Emission 115.77905491889
+scalar MCManhattanScenario.node[7].appl generatedWSMs 11
+scalar MCManhattanScenario.node[7].appl receivedWSMs 81
+scalar MCManhattanScenario.node[7].appl generatedBSMs 0
+scalar MCManhattanScenario.node[7].appl receivedBSMs 0
+scalar MCManhattanScenario.node[7].appl generatedWSAs 0
+scalar MCManhattanScenario.node[7].appl receivedWSAs 0
+scalar MCManhattanScenario.node[7].nic.phy80211p busyTime 0.00036138461538461
+scalar MCManhattanScenario.node[7].nic.mac1609_4 ReceivedUnicastPackets 0
+scalar MCManhattanScenario.node[7].nic.mac1609_4 ReceivedBroadcasts 81
+scalar MCManhattanScenario.node[7].nic.mac1609_4 SentPackets 11
+scalar MCManhattanScenario.node[7].nic.mac1609_4 SNIRLostPackets 0
+scalar MCManhattanScenario.node[7].nic.mac1609_4 RXTXLostPackets 0
+scalar MCManhattanScenario.node[7].nic.mac1609_4 TotalLostPackets 0
+scalar MCManhattanScenario.node[7].nic.mac1609_4 DroppedPacketsInMac 0
+scalar MCManhattanScenario.node[7].nic.mac1609_4 TooLittleTime 0
+scalar MCManhattanScenario.node[7].nic.mac1609_4 TimesIntoBackoff 11
+scalar MCManhattanScenario.node[7].nic.mac1609_4 SlotsBackoff 10
+scalar MCManhattanScenario.node[7].nic.mac1609_4 NumInternalContention 0
+scalar MCManhattanScenario.node[7].nic.mac1609_4 totalBusyTime 0.021355
+scalar MCManhattanScenario.node[7].veinsmobility startTime 8
+scalar MCManhattanScenario.node[7].veinsmobility totalTime 51
+scalar MCManhattanScenario.node[7].veinsmobility stopTime 60
+scalar MCManhattanScenario.node[7].veinsmobility minSpeed 1.3556982993847
+scalar MCManhattanScenario.node[7].veinsmobility maxSpeed 13.878383639711
+scalar MCManhattanScenario.node[7].veinsmobility totalDistance 585.11485145671
+scalar MCManhattanScenario.node[7].veinsmobility totalCO2Emission 159.57912476879
+scalar MCManhattanScenario.node[0].appl generatedWSMs 11
+scalar MCManhattanScenario.node[0].appl receivedWSMs 34
+scalar MCManhattanScenario.node[0].appl generatedBSMs 0
+scalar MCManhattanScenario.node[0].appl receivedBSMs 0
+scalar MCManhattanScenario.node[0].appl generatedWSAs 0
+scalar MCManhattanScenario.node[0].appl receivedWSAs 0
+scalar MCManhattanScenario.node[0].nic.phy80211p busyTime 0.00012135384615385
+scalar MCManhattanScenario.node[0].nic.mac1609_4 ReceivedUnicastPackets 0
+scalar MCManhattanScenario.node[0].nic.mac1609_4 ReceivedBroadcasts 34
+scalar MCManhattanScenario.node[0].nic.mac1609_4 SentPackets 11
+scalar MCManhattanScenario.node[0].nic.mac1609_4 SNIRLostPackets 0
+scalar MCManhattanScenario.node[0].nic.mac1609_4 RXTXLostPackets 0
+scalar MCManhattanScenario.node[0].nic.mac1609_4 TotalLostPackets 0
+scalar MCManhattanScenario.node[0].nic.mac1609_4 DroppedPacketsInMac 0
+scalar MCManhattanScenario.node[0].nic.mac1609_4 TooLittleTime 0
+scalar MCManhattanScenario.node[0].nic.mac1609_4 TimesIntoBackoff 11
+scalar MCManhattanScenario.node[0].nic.mac1609_4 SlotsBackoff 16
+scalar MCManhattanScenario.node[0].nic.mac1609_4 NumInternalContention 0
+scalar MCManhattanScenario.node[0].nic.mac1609_4 totalBusyTime 0.010451
+scalar MCManhattanScenario.node[0].veinsmobility startTime 1
+scalar MCManhattanScenario.node[0].veinsmobility totalTime 64
+scalar MCManhattanScenario.node[0].veinsmobility stopTime 66
+scalar MCManhattanScenario.node[0].veinsmobility minSpeed 1.8865424470045
+scalar MCManhattanScenario.node[0].veinsmobility maxSpeed 13.887836287729
+scalar MCManhattanScenario.node[0].veinsmobility totalDistance 773.15258264726
+scalar MCManhattanScenario.node[0].veinsmobility totalCO2Emission 176.74828277928
+scalar MCManhattanScenario.node[2].appl generatedWSMs 11
+scalar MCManhattanScenario.node[2].appl receivedWSMs 54
+scalar MCManhattanScenario.node[2].appl generatedBSMs 0
+scalar MCManhattanScenario.node[2].appl receivedBSMs 0
+scalar MCManhattanScenario.node[2].appl generatedWSAs 0
+scalar MCManhattanScenario.node[2].appl receivedWSAs 0
+scalar MCManhattanScenario.node[2].nic.phy80211p busyTime 0.00019575
+scalar MCManhattanScenario.node[2].nic.mac1609_4 ReceivedUnicastPackets 0
+scalar MCManhattanScenario.node[2].nic.mac1609_4 ReceivedBroadcasts 54
+scalar MCManhattanScenario.node[2].nic.mac1609_4 SentPackets 11
+scalar MCManhattanScenario.node[2].nic.mac1609_4 SNIRLostPackets 0
+scalar MCManhattanScenario.node[2].nic.mac1609_4 RXTXLostPackets 0
+scalar MCManhattanScenario.node[2].nic.mac1609_4 TotalLostPackets 0
+scalar MCManhattanScenario.node[2].nic.mac1609_4 DroppedPacketsInMac 0
+scalar MCManhattanScenario.node[2].nic.mac1609_4 TooLittleTime 0
+scalar MCManhattanScenario.node[2].nic.mac1609_4 TimesIntoBackoff 11
+scalar MCManhattanScenario.node[2].nic.mac1609_4 SlotsBackoff 11
+scalar MCManhattanScenario.node[2].nic.mac1609_4 NumInternalContention 0
+scalar MCManhattanScenario.node[2].nic.mac1609_4 totalBusyTime 0.015091
+scalar MCManhattanScenario.node[2].veinsmobility startTime 3
+scalar MCManhattanScenario.node[2].veinsmobility totalTime 63
+scalar MCManhattanScenario.node[2].veinsmobility stopTime 67
+scalar MCManhattanScenario.node[2].veinsmobility minSpeed 1.4846706941957
+scalar MCManhattanScenario.node[2].veinsmobility maxSpeed 13.878641479346
+scalar MCManhattanScenario.node[2].veinsmobility totalDistance 764.09875269741
+scalar MCManhattanScenario.node[2].veinsmobility totalCO2Emission 178.88110726212
+scalar MCManhattanScenario.node[4].appl generatedWSMs 21
+scalar MCManhattanScenario.node[4].appl receivedWSMs 130
+scalar MCManhattanScenario.node[4].appl generatedBSMs 0
+scalar MCManhattanScenario.node[4].appl receivedBSMs 0
+scalar MCManhattanScenario.node[4].appl generatedWSAs 0
+scalar MCManhattanScenario.node[4].appl receivedWSAs 0
+scalar MCManhattanScenario.node[4].nic.phy80211p busyTime 0.0003633734939759
+scalar MCManhattanScenario.node[4].nic.mac1609_4 ReceivedUnicastPackets 0
+scalar MCManhattanScenario.node[4].nic.mac1609_4 ReceivedBroadcasts 130
+scalar MCManhattanScenario.node[4].nic.mac1609_4 SentPackets 21
+scalar MCManhattanScenario.node[4].nic.mac1609_4 SNIRLostPackets 0
+scalar MCManhattanScenario.node[4].nic.mac1609_4 RXTXLostPackets 0
+scalar MCManhattanScenario.node[4].nic.mac1609_4 TotalLostPackets 0
+scalar MCManhattanScenario.node[4].nic.mac1609_4 DroppedPacketsInMac 0
+scalar MCManhattanScenario.node[4].nic.mac1609_4 TooLittleTime 0
+scalar MCManhattanScenario.node[4].nic.mac1609_4 TimesIntoBackoff 21
+scalar MCManhattanScenario.node[4].nic.mac1609_4 SlotsBackoff 21
+scalar MCManhattanScenario.node[4].nic.mac1609_4 NumInternalContention 0
+scalar MCManhattanScenario.node[4].nic.mac1609_4 totalBusyTime 0.035053
+scalar MCManhattanScenario.node[4].veinsmobility startTime 5
+scalar MCManhattanScenario.node[4].veinsmobility totalTime 82
+scalar MCManhattanScenario.node[4].veinsmobility stopTime 88
+scalar MCManhattanScenario.node[4].veinsmobility minSpeed 1.4406950977165
+scalar MCManhattanScenario.node[4].veinsmobility maxSpeed 13.899928044528
+scalar MCManhattanScenario.node[4].veinsmobility totalDistance 974.52757755169
+scalar MCManhattanScenario.node[4].veinsmobility totalCO2Emission 248.40441121205
+scalar MCManhattanScenario.node[8].appl generatedWSMs 47
+scalar MCManhattanScenario.node[8].appl receivedWSMs 91
+scalar MCManhattanScenario.node[8].appl generatedBSMs 0
+scalar MCManhattanScenario.node[8].appl receivedBSMs 0
+scalar MCManhattanScenario.node[8].appl generatedWSAs 0
+scalar MCManhattanScenario.node[8].appl receivedWSAs 0
+scalar MCManhattanScenario.node[8].nic.phy80211p busyTime 0.00024837647058823
+scalar MCManhattanScenario.node[8].nic.mac1609_4 ReceivedUnicastPackets 0
+scalar MCManhattanScenario.node[8].nic.mac1609_4 ReceivedBroadcasts 91
+scalar MCManhattanScenario.node[8].nic.mac1609_4 SentPackets 47
+scalar MCManhattanScenario.node[8].nic.mac1609_4 SNIRLostPackets 0
+scalar MCManhattanScenario.node[8].nic.mac1609_4 RXTXLostPackets 0
+scalar MCManhattanScenario.node[8].nic.mac1609_4 TotalLostPackets 0
+scalar MCManhattanScenario.node[8].nic.mac1609_4 DroppedPacketsInMac 0
+scalar MCManhattanScenario.node[8].nic.mac1609_4 TooLittleTime 0
+scalar MCManhattanScenario.node[8].nic.mac1609_4 TimesIntoBackoff 47
+scalar MCManhattanScenario.node[8].nic.mac1609_4 SlotsBackoff 69
+scalar MCManhattanScenario.node[8].nic.mac1609_4 NumInternalContention 0
+scalar MCManhattanScenario.node[8].nic.mac1609_4 totalBusyTime 0.032063
+scalar MCManhattanScenario.node[8].veinsmobility startTime 9
+scalar MCManhattanScenario.node[8].veinsmobility totalTime 84
+scalar MCManhattanScenario.node[8].veinsmobility stopTime 94
+scalar MCManhattanScenario.node[8].veinsmobility minSpeed 2.0000768283615
+scalar MCManhattanScenario.node[8].veinsmobility maxSpeed 13.882356865564
+scalar MCManhattanScenario.node[8].veinsmobility totalDistance 974.71038138806
+scalar MCManhattanScenario.node[8].veinsmobility totalCO2Emission 246.59039049867
+scalar MCManhattanScenario.node[1].appl generatedWSMs 53
+scalar MCManhattanScenario.node[1].appl receivedWSMs 59
+scalar MCManhattanScenario.node[1].appl generatedBSMs 0
+scalar MCManhattanScenario.node[1].appl receivedBSMs 0
+scalar MCManhattanScenario.node[1].appl generatedWSAs 0
+scalar MCManhattanScenario.node[1].appl receivedWSAs 0
+scalar MCManhattanScenario.node[1].nic.phy80211p busyTime 0.00014258333333333
+scalar MCManhattanScenario.node[1].nic.mac1609_4 ReceivedUnicastPackets 0
+scalar MCManhattanScenario.node[1].nic.mac1609_4 ReceivedBroadcasts 59
+scalar MCManhattanScenario.node[1].nic.mac1609_4 SentPackets 53
+scalar MCManhattanScenario.node[1].nic.mac1609_4 SNIRLostPackets 0
+scalar MCManhattanScenario.node[1].nic.mac1609_4 RXTXLostPackets 0
+scalar MCManhattanScenario.node[1].nic.mac1609_4 TotalLostPackets 0
+scalar MCManhattanScenario.node[1].nic.mac1609_4 DroppedPacketsInMac 0
+scalar MCManhattanScenario.node[1].nic.mac1609_4 TooLittleTime 0
+scalar MCManhattanScenario.node[1].nic.mac1609_4 TimesIntoBackoff 53
+scalar MCManhattanScenario.node[1].nic.mac1609_4 SlotsBackoff 81
+scalar MCManhattanScenario.node[1].nic.mac1609_4 NumInternalContention 0
+scalar MCManhattanScenario.node[1].nic.mac1609_4 totalBusyTime 0.026037
+scalar MCManhattanScenario.node[1].veinsmobility startTime 2
+scalar MCManhattanScenario.node[1].veinsmobility totalTime 95
+scalar MCManhattanScenario.node[1].veinsmobility stopTime 98
+scalar MCManhattanScenario.node[1].veinsmobility minSpeed 1.6702538255369
+scalar MCManhattanScenario.node[1].veinsmobility maxSpeed 13.82936061814
+scalar MCManhattanScenario.node[1].veinsmobility totalDistance 1156.833072347
+scalar MCManhattanScenario.node[1].veinsmobility totalCO2Emission 264.34077873065
+scalar MCManhattanScenario.node[3].appl generatedWSMs 2
+scalar MCManhattanScenario.node[3].appl receivedWSMs 152
+scalar MCManhattanScenario.node[3].appl generatedBSMs 0
+scalar MCManhattanScenario.node[3].appl receivedBSMs 0
+scalar MCManhattanScenario.node[3].appl generatedWSAs 0
+scalar MCManhattanScenario.node[3].appl receivedWSAs 0
+scalar MCManhattanScenario.node[3].nic.phy80211p busyTime 0.00036733333333333
+scalar MCManhattanScenario.node[3].nic.mac1609_4 ReceivedUnicastPackets 0
+scalar MCManhattanScenario.node[3].nic.mac1609_4 ReceivedBroadcasts 152
+scalar MCManhattanScenario.node[3].nic.mac1609_4 SentPackets 2
+scalar MCManhattanScenario.node[3].nic.mac1609_4 SNIRLostPackets 0
+scalar MCManhattanScenario.node[3].nic.mac1609_4 RXTXLostPackets 0
+scalar MCManhattanScenario.node[3].nic.mac1609_4 TotalLostPackets 0
+scalar MCManhattanScenario.node[3].nic.mac1609_4 DroppedPacketsInMac 0
+scalar MCManhattanScenario.node[3].nic.mac1609_4 TooLittleTime 0
+scalar MCManhattanScenario.node[3].nic.mac1609_4 TimesIntoBackoff 2
+scalar MCManhattanScenario.node[3].nic.mac1609_4 SlotsBackoff 1
+scalar MCManhattanScenario.node[3].nic.mac1609_4 NumInternalContention 0
+scalar MCManhattanScenario.node[3].nic.mac1609_4 totalBusyTime 0.03573
+scalar MCManhattanScenario.node[3].veinsmobility startTime 4
+scalar MCManhattanScenario.node[3].veinsmobility totalTime 95
+scalar MCManhattanScenario.node[3].veinsmobility stopTime 100
+scalar MCManhattanScenario.node[3].veinsmobility minSpeed 1.7893671946833
+scalar MCManhattanScenario.node[3].veinsmobility maxSpeed 13.894737462769
+scalar MCManhattanScenario.node[3].veinsmobility totalDistance 1174.466154812
+scalar MCManhattanScenario.node[3].veinsmobility totalCO2Emission 273.71844580731
+
