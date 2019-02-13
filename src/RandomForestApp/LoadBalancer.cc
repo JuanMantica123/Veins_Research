@@ -69,10 +69,9 @@ void LoadBalancer::handleSelfMsg(cMessage* msg) {
             taskId+=1;
             currentComputationWork = expectedComputationWork;
 
-            if(!finishCalled){
-                taskCompletedVector.recordWithTimestamp(simTime(),taskId);
-                workFinishedVector.recordWithTimestamp(simTime(),workFinished);
-            }
+            taskCompletedVector.recordWithTimestamp(simTime(),taskId);
+            workFinishedVector.recordWithTimestamp(simTime(),workFinished);
+
 
             progress = 0;
             EV_WARN << "New task of load :" << currentComputationWork <<" total work finished: "<<workFinished<<endl;

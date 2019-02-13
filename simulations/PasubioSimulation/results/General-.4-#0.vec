@@ -1,0 +1,157 @@
+version 2
+run General-0-20190212-16:21:47-6699
+attr configname General
+attr datetime 20190212-16:21:47
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars $0=.4
+attr iterationvarsf .4-
+attr measurement $0=.4
+attr network PasubioSimulation.MCPasubioScenario
+attr processid 6699
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 1
+param **.debug false
+param **.coreDebug false
+param *.playgroundSizeX 3000m
+param *.playgroundSizeY 3000m
+param *.playgroundSizeZ 100m
+param *.annotations.draw true
+param *.manager.updateInterval 1s
+param *.manager.host "\"localhost\""
+param *.manager.port 9999
+param *.manager.autoShutdown true
+param *.manager.launchConfig "xmldoc(\"pasubio.launchd.xml\")"
+param *.rsu[0].mobility.x 330
+param *.rsu[0].mobility.y 381.49
+param *.rsu[0].mobility.z 0
+param *.rsu[1].mobility.x 390.79
+param *.rsu[1].mobility.y 206.97
+param *.rsu[1].mobility.z 0
+param *.rsu[2].mobility.x 360.45
+param *.rsu[2].mobility.y 294.23
+param *.rsu[2].mobility.z 0
+param *.rsu[0..1].applType "\"RandomForestApp.VirtualServer\""
+param *.rsu[0..1].appl.computationPower 5
+param *.rsu[0..1].appl.loadBalancerId 2
+param *.rsu[0].appl.id 0
+param *.rsu[1].appl.id 1
+param *.rsu[0..1].appl.penaltyInterval 10
+param *.rsu[0..1].appl.expectedReliability .4
+param *.rsu[2].applType "\"RandomForestApp.LoadBalancer\""
+param *.rsu[2].appl.id 2
+param *.rsu[2].appl.upperBound 1
+param *.rsu[2].appl.lowerBound 0
+param *.rsu[2].appl.timeOutIntervals 3
+param *.rsu[2].appl.expectedComputationWork 10
+param *.rsu[2].appl.replicationFactor 2
+param *.rsu[2].appl.reputationOn false
+param *.rsu[*].appl.headerLength "80 bit"
+param *.rsu[*].appl.sendBeacons false
+param *.rsu[*].appl.dataOnSch false
+param *.rsu[*].appl.beaconInterval 1s
+param *.connectionManager.sendDirect true
+param *.connectionManager.maxInterfDist 2600m
+param *.connectionManager.drawMaxIntfDist false
+param *.**.nic.mac1609_4.useServiceChannel false
+param *.**.nic.mac1609_4.txPower 20mW
+param *.**.nic.mac1609_4.bitrate 6Mbps
+param *.**.nic.phy80211p.sensitivity -89dBm
+param *.**.nic.phy80211p.useThermalNoise true
+param *.**.nic.phy80211p.thermalNoise -110dBm
+param *.**.nic.phy80211p.decider "xmldoc(\"config.xml\")"
+param *.**.nic.phy80211p.analogueModels "xmldoc(\"config.xml\")"
+param *.**.nic.phy80211p.usePropagationDelay true
+param *.**.nic.phy80211p.antenna "xmldoc(\"antenna.xml\", \"/root/Antenna[@id='monopole']\")"
+param *.node[*].applType "\"RandomForestApp.NoAppCar\""
+param *.node[*].appl.headerLength "80 bit"
+param *.node[*].appl.sendBeacons false
+param *.node[*].appl.dataOnSch false
+param *.node[*].appl.beaconInterval 1s
+param *.node[*].veinsmobilityType.debug true
+param *.node[*].veinsmobility.x -1
+param *.node[*].veinsmobility.y -1
+param *.node[*].veinsmobility.z 1.895
+
+vector 0 MCPasubioScenario.rsu[2].appl "Task Completed" ETV
+vector 1 MCPasubioScenario.rsu[2].appl "Work finished" ETV
+0	0	0	0
+0	69	2.387107814522	1
+0	473	48.387107814522	2
+0	625	61.387107814522	3
+0	777	74.387107814522	4
+0	1013	98.387107814522	5
+0	1249	122.387107814522	6
+0	1317	124.387107814522	7
+0	1469	137.387107814522	8
+0	1789	172.387107814522	9
+0	1857	174.387107814522	10
+0	2093	198.387107814522	11
+0	2665	266.387107814522	12
+0	2733	268.387107814522	13
+0	2969	292.387107814522	14
+0	3037	294.387107814522	15
+0	3861	395.387107814522	16
+0	4013	408.387107814522	17
+0	4837	509.387107814522	18
+0	4905	511.387107814522	19
+0	5057	524.387107814522	20
+0	5545	581.387107814522	21
+0	5613	583.387107814522	22
+0	5933	618.387107814522	23
+0	6085	631.387107814522	24
+0	6489	677.387107814522	25
+0	6557	679.387107814522	26
+0	6793	703.387107814522	27
+0	7029	727.387107814522	28
+0	7349	762.387107814522	29
+0	7417	764.387107814522	30
+0	7737	799.387107814522	31
+0	7973	823.387107814522	32
+0	8041	825.387107814522	33
+0	8109	827.387107814522	34
+0	8429	862.387107814522	35
+0	8581	875.387107814522	36
+0	8649	877.387107814522	37
+1	0	0	0
+1	69	2.387107814522	10
+1	473	48.387107814522	20
+1	625	61.387107814522	30
+1	777	74.387107814522	40
+1	1013	98.387107814522	50
+1	1249	122.387107814522	60
+1	1317	124.387107814522	70
+1	1469	137.387107814522	80
+1	1789	172.387107814522	90
+1	1857	174.387107814522	100
+1	2093	198.387107814522	110
+1	2665	266.387107814522	120
+1	2733	268.387107814522	130
+1	2969	292.387107814522	140
+1	3037	294.387107814522	150
+1	3861	395.387107814522	160
+1	4013	408.387107814522	170
+1	4837	509.387107814522	180
+1	4905	511.387107814522	190
+1	5057	524.387107814522	200
+1	5545	581.387107814522	210
+1	5613	583.387107814522	220
+1	5933	618.387107814522	230
+1	6085	631.387107814522	240
+1	6489	677.387107814522	250
+1	6557	679.387107814522	260
+1	6793	703.387107814522	270
+1	7029	727.387107814522	280
+1	7349	762.387107814522	290
+1	7417	764.387107814522	300
+1	7737	799.387107814522	310
+1	7973	823.387107814522	320
+1	8041	825.387107814522	330
+1	8109	827.387107814522	340
+1	8429	862.387107814522	350
+1	8581	875.387107814522	360
+1	8649	877.387107814522	370
+

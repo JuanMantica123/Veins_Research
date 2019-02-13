@@ -1,0 +1,130 @@
+version 2
+run General-0-20190212-16:21:47-6699
+attr configname General
+attr datetime 20190212-16:21:47
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars $0=.4
+attr iterationvarsf .4-
+attr measurement $0=.4
+attr network PasubioSimulation.MCPasubioScenario
+attr processid 6699
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 1
+param **.debug false
+param **.coreDebug false
+param *.playgroundSizeX 3000m
+param *.playgroundSizeY 3000m
+param *.playgroundSizeZ 100m
+param *.annotations.draw true
+param *.manager.updateInterval 1s
+param *.manager.host "\"localhost\""
+param *.manager.port 9999
+param *.manager.autoShutdown true
+param *.manager.launchConfig "xmldoc(\"pasubio.launchd.xml\")"
+param *.rsu[0].mobility.x 330
+param *.rsu[0].mobility.y 381.49
+param *.rsu[0].mobility.z 0
+param *.rsu[1].mobility.x 390.79
+param *.rsu[1].mobility.y 206.97
+param *.rsu[1].mobility.z 0
+param *.rsu[2].mobility.x 360.45
+param *.rsu[2].mobility.y 294.23
+param *.rsu[2].mobility.z 0
+param *.rsu[0..1].applType "\"RandomForestApp.VirtualServer\""
+param *.rsu[0..1].appl.computationPower 5
+param *.rsu[0..1].appl.loadBalancerId 2
+param *.rsu[0].appl.id 0
+param *.rsu[1].appl.id 1
+param *.rsu[0..1].appl.penaltyInterval 10
+param *.rsu[0..1].appl.expectedReliability .4
+param *.rsu[2].applType "\"RandomForestApp.LoadBalancer\""
+param *.rsu[2].appl.id 2
+param *.rsu[2].appl.upperBound 1
+param *.rsu[2].appl.lowerBound 0
+param *.rsu[2].appl.timeOutIntervals 3
+param *.rsu[2].appl.expectedComputationWork 10
+param *.rsu[2].appl.replicationFactor 2
+param *.rsu[2].appl.reputationOn false
+param *.rsu[*].appl.headerLength "80 bit"
+param *.rsu[*].appl.sendBeacons false
+param *.rsu[*].appl.dataOnSch false
+param *.rsu[*].appl.beaconInterval 1s
+param *.connectionManager.sendDirect true
+param *.connectionManager.maxInterfDist 2600m
+param *.connectionManager.drawMaxIntfDist false
+param *.**.nic.mac1609_4.useServiceChannel false
+param *.**.nic.mac1609_4.txPower 20mW
+param *.**.nic.mac1609_4.bitrate 6Mbps
+param *.**.nic.phy80211p.sensitivity -89dBm
+param *.**.nic.phy80211p.useThermalNoise true
+param *.**.nic.phy80211p.thermalNoise -110dBm
+param *.**.nic.phy80211p.decider "xmldoc(\"config.xml\")"
+param *.**.nic.phy80211p.analogueModels "xmldoc(\"config.xml\")"
+param *.**.nic.phy80211p.usePropagationDelay true
+param *.**.nic.phy80211p.antenna "xmldoc(\"antenna.xml\", \"/root/Antenna[@id='monopole']\")"
+param *.node[*].applType "\"RandomForestApp.NoAppCar\""
+param *.node[*].appl.headerLength "80 bit"
+param *.node[*].appl.sendBeacons false
+param *.node[*].appl.dataOnSch false
+param *.node[*].appl.beaconInterval 1s
+param *.node[*].veinsmobilityType.debug true
+param *.node[*].veinsmobility.x -1
+param *.node[*].veinsmobility.y -1
+param *.node[*].veinsmobility.z 1.895
+
+scalar MCPasubioScenario.rsu[0].appl "Micro-cloud :0 failed" 760
+scalar MCPasubioScenario.rsu[1].appl "Micro-cloud :1 failed" 0
+scalar MCPasubioScenario.rsu[2].appl "Micro-cloud : 0 work finished" 370
+scalar MCPasubioScenario.rsu[2].appl "Micro-cloud : 1 work finished" 0
+scalar MCPasubioScenario.rsu[2].appl "Load Balancer : 2 work finished" 370
+scalar MCPasubioScenario.rsu[2].appl "Load Balancer : 2 task finished" 37
+scalar MCPasubioScenario.rsu[0].appl "Micro-cloud :0 failed" 840
+scalar MCPasubioScenario.rsu[0].nic.phy80211p busyTime 2.8536e-05
+scalar MCPasubioScenario.rsu[0].nic.mac1609_4 ReceivedUnicastPackets 0
+scalar MCPasubioScenario.rsu[0].nic.mac1609_4 ReceivedBroadcasts 123
+scalar MCPasubioScenario.rsu[0].nic.mac1609_4 SentPackets 161
+scalar MCPasubioScenario.rsu[0].nic.mac1609_4 SNIRLostPackets 0
+scalar MCPasubioScenario.rsu[0].nic.mac1609_4 RXTXLostPackets 0
+scalar MCPasubioScenario.rsu[0].nic.mac1609_4 TotalLostPackets 0
+scalar MCPasubioScenario.rsu[0].nic.mac1609_4 DroppedPacketsInMac 0
+scalar MCPasubioScenario.rsu[0].nic.mac1609_4 TooLittleTime 0
+scalar MCPasubioScenario.rsu[0].nic.mac1609_4 TimesIntoBackoff 161
+scalar MCPasubioScenario.rsu[0].nic.mac1609_4 SlotsBackoff 245
+scalar MCPasubioScenario.rsu[0].nic.mac1609_4 NumInternalContention 0
+scalar MCPasubioScenario.rsu[0].nic.mac1609_4 totalBusyTime 0.066049
+scalar MCPasubioScenario.rsu[1].appl "Micro-cloud :1 failed" 0
+scalar MCPasubioScenario.rsu[1].nic.phy80211p busyTime 6.5888e-05
+scalar MCPasubioScenario.rsu[1].nic.mac1609_4 ReceivedUnicastPackets 0
+scalar MCPasubioScenario.rsu[1].nic.mac1609_4 ReceivedBroadcasts 284
+scalar MCPasubioScenario.rsu[1].nic.mac1609_4 SentPackets 0
+scalar MCPasubioScenario.rsu[1].nic.mac1609_4 SNIRLostPackets 0
+scalar MCPasubioScenario.rsu[1].nic.mac1609_4 RXTXLostPackets 0
+scalar MCPasubioScenario.rsu[1].nic.mac1609_4 TotalLostPackets 0
+scalar MCPasubioScenario.rsu[1].nic.mac1609_4 DroppedPacketsInMac 0
+scalar MCPasubioScenario.rsu[1].nic.mac1609_4 TooLittleTime 0
+scalar MCPasubioScenario.rsu[1].nic.mac1609_4 TimesIntoBackoff 0
+scalar MCPasubioScenario.rsu[1].nic.mac1609_4 SlotsBackoff 0
+scalar MCPasubioScenario.rsu[1].nic.mac1609_4 NumInternalContention 0
+scalar MCPasubioScenario.rsu[1].nic.mac1609_4 totalBusyTime 0.065888
+scalar MCPasubioScenario.rsu[2].appl "Micro-cloud : 0 work finished" 390
+scalar MCPasubioScenario.rsu[2].appl "Micro-cloud : 1 work finished" 0
+scalar MCPasubioScenario.rsu[2].appl "Load Balancer : 2 work finished" 390
+scalar MCPasubioScenario.rsu[2].appl "Load Balancer : 2 task finished" 39
+scalar MCPasubioScenario.rsu[2].nic.phy80211p busyTime 3.7352e-05
+scalar MCPasubioScenario.rsu[2].nic.mac1609_4 ReceivedUnicastPackets 0
+scalar MCPasubioScenario.rsu[2].nic.mac1609_4 ReceivedBroadcasts 161
+scalar MCPasubioScenario.rsu[2].nic.mac1609_4 SentPackets 123
+scalar MCPasubioScenario.rsu[2].nic.mac1609_4 SNIRLostPackets 0
+scalar MCPasubioScenario.rsu[2].nic.mac1609_4 RXTXLostPackets 0
+scalar MCPasubioScenario.rsu[2].nic.mac1609_4 TotalLostPackets 0
+scalar MCPasubioScenario.rsu[2].nic.mac1609_4 DroppedPacketsInMac 0
+scalar MCPasubioScenario.rsu[2].nic.mac1609_4 TooLittleTime 0
+scalar MCPasubioScenario.rsu[2].nic.mac1609_4 TimesIntoBackoff 123
+scalar MCPasubioScenario.rsu[2].nic.mac1609_4 SlotsBackoff 187
+scalar MCPasubioScenario.rsu[2].nic.mac1609_4 NumInternalContention 0
+scalar MCPasubioScenario.rsu[2].nic.mac1609_4 totalBusyTime 0.066011
+
