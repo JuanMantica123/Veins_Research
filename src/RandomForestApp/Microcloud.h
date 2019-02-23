@@ -1,3 +1,5 @@
+#include "Task.h"
+#include <assert.h>
 #ifndef MicroCloud_H
 #define MicroCloud_H
 
@@ -9,14 +11,6 @@ public:
 
     void setComputationPower(int computationPower) {
         this->computationPower = computationPower;
-    }
-
-    bool isIdle() const {
-        return idle;
-    }
-
-    void setIdle(bool idle) {
-        this->idle = idle;
     }
 
     double getLastHeartbeat() const {
@@ -38,18 +32,12 @@ public:
     double getReputation() const {
         return reputation;
     }
-    void setReputation(double reputation) {
+    void changeReputation(double change){
+        this->reputation += change;
+    }
+    void setReputation(double reputation){
         this->reputation = reputation;
     }
-
-    double getLatestComputationWork() const {
-        return latestComputationWork;
-    }
-
-    void setLatestComputationWork(double latestComputationWork) {
-        this->latestComputationWork = latestComputationWork;
-    }
-
     bool isFunctioning() const {
         return functioning;
     }
@@ -58,54 +46,58 @@ public:
         this->functioning = functioning;
     }
 
-
     double getWorkDone() const {
         return workDone;
     }
-
-    void setWorkDone(double workDone) {
+    void setWorkDone(double workDone){
         this->workDone = workDone;
     }
 
-    bool isLatestTaskReplicated() const {
-        return latestTaskReplicated;
+    void incrementWorkDone(double latestWorkDone) {
+        this->workDone = latestWorkDone;
+    }
+    void pushTask(Task * task){
+        tasks.push_back(task);
+        currentWorkLoad+=task->getWorkLoad();
+
+    }
+    int getLatestTaskId(){
+        return tasks.front()->getId();
     }
 
-    void setLatestTaskReplicated(bool latestTaskReplicated) {
-        this->latestTaskReplicated = latestTaskReplicated;
+    void recordFailure(){
+        tasks.clear();
+        currentWorkLoad = 0;
+        functioning =false;
     }
 
-    int getTaskCounter() const {
-        return taskCounter;
+    double getCurrentWorkLoad() const {
+        return currentWorkLoad;
     }
 
-    void initializeCounter(){
-        this->taskCounter = 0;
+    const std::deque<Task*>& getTasks() const {
+        return tasks;
     }
-    void incrementCounter() {
-        this->taskCounter++;
-    }
-
-    int getTaskId() const {
-        return taskId;
-    }
-
-    void setTaskId(int taskId) {
-        this->taskId = taskId;
+    void deleteTask(int taskId) {
+        for (auto task = tasks.begin(); task != tasks.end(); ++task) {
+            Task * iteratingTask = *task;
+            if (iteratingTask->getId() == taskId) {
+                currentWorkLoad -= iteratingTask->getWorkLoad();
+                tasks.erase(task);
+                break;
+            }
+        }
     }
 
 private:
-    double latestComputationWork;
+    std::deque<Task*> tasks;
     double lastHeartbeat;
     double reputation;
     double workDone;
-    int virtualServerId;
+    double currentWorkLoad;
+    int virtualServerId = 1;
     int computationPower;
-    int taskCounter;
-    int taskId;
-    bool idle;
     bool functioning;
-    bool latestTaskReplicated;
 
 };
 

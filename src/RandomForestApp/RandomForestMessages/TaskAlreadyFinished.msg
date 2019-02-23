@@ -4,9 +4,7 @@ cplusplus {{
 
 class WaveShortMessage;
 
-packet TaskRequest extends WaveShortMessage {
-   	int taskId;
-	int virtualServerId;
+packet TaskAlreadyFinished extends WaveShortMessage {
 	int loadBalancerId;
-	double computationWork;
+	int taskId;
 }

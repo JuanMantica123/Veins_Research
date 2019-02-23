@@ -14,84 +14,105 @@ void VirtualServer::initialize(int stage) {
         sendWSMEvt = new cMessage("wsm evt");
     }
     if (stage == 1) {
-        id =  par("id").intValue();
-        loadBalancerId = par("loadBalancerId").intValue();
-        computationPower = par("computationPower").intValue();
+        id =  par("id").longValue();
+        loadBalancerId = par("loadBalancerId").longValue();
+        computationPower = par("computationPower").longValue();
         penaltyInterval = par("penaltyInterval").doubleValue();
         double expectedReliability = par("expectedReliability").doubleValue();
-        timeFailed = 0;
-        progress = 0;
-        latestWorkTime = 0;
-        currentComputationWork = 0;
-
-        taskCounter = -1;
-        taskId = 0;
-
-        reliability = normalReliability(expectedReliability);
+        reliability =  expectedReliability;
+//                normalReliability(expectedReliability);
         EV_WARN << "Virtual Server with id: " << id <<" will have a reliability of :"<<reliability<< endl;
 
-        finishCalled = false;
-        hasTask = false;
+        latestTimeFailedCalled = 0;
+        timeFailed = 0;
+        latestWorkTime = 0;
+        currentTask = NULL;
 
         scheduleAt(simTime() + beaconInterval+uniform(.2, .4), sendWSMEvt);
     }
 }
 void VirtualServer::handleSelfMsg(cMessage* msg) {
-    perhapsFinish();
-    if(simTime().dbl()>penaltyTime){
-        if(hasTask){
-            progress += computationPower*(simTime().dbl()-latestWorkTime);
-            if(progress>=currentComputationWork){
-                sendDown(generateTaskCompletion(currentComputationWork,taskCounter));
-            }
-            else{
+    if (simTime().dbl() > penaltyTime && !failed()) {
+        if (currentTask != NULL) {
+            double latestProgress = computationPower * (simTime().dbl() - latestWorkTime);
+            currentTask->incrementProgress(latestProgress);
+            if (currentTask->getProgress() >= currentTask->getWorkLoad()) {
+                sendDown(generateTaskCompletion(currentTask->getWorkLoad(), currentTask->getId()));
+                loadNewTask();
+            } else {
                 sendDown(generateHeartbeat());
             }
-            latestWorkTime = simTime().dbl();
-        }
-        else{
+        } else {
+            if (currentTask == NULL && !tasks.empty()) {
+                loadNewTask();
+            }
             sendDown(generateHeartbeat());
         }
+        latestWorkTime = simTime().dbl();
     }
-
     scheduleAt(simTime() + beaconInterval, sendWSMEvt);
 }
-
 
 
 void VirtualServer::onWSM(WaveShortMessage* wsm) {
    if (TaskRequest* task = dynamic_cast<TaskRequest*>(wsm)) {
         if (loadBalancerId == task->getLoadBalancerId()
                 && id == task->getVirtualServerId() && simTime().dbl()>penaltyTime) {
-            if(!failed()){
-                currentComputationWork = task->getComputationWork();
-                taskCounter = task->getTaskCounter();
-                taskId = task->getTaskId();
-                progress = 0;
-                hasTask = true;
-                EV_WARN << "Virtual Server with id: " << id <<" received task of load :"<<currentComputationWork
-                        <<" for a task id of : "<<task->getTaskId()<< endl;
-            }
-            else{
-                hasTask = false;
-            }
+
+            Task * newTask = new Task(task->getTaskId(),task->getComputationWork());
+            tasks.push_back(newTask);
+
+
+        }
+    }
+   else if (TaskAlreadyFinished* finishedTask = dynamic_cast<TaskAlreadyFinished*>(wsm)) {
+        if (loadBalancerId == finishedTask->getLoadBalancerId()) {
+            deleteTask(finishedTask->getTaskId());
+        }
+    }
+}
+
+void VirtualServer::deleteTask(int taskId){
+    for (auto task = tasks.begin(); task != tasks.end(); ++task) {
+        Task * iteratingTask = *task;
+        if (iteratingTask->getId() == taskId) {
+            EV_WARN<<"Virtu Server : "<<id<<"  will delete task "<<taskId<<endl;
+            tasks.erase(task);
+            break;
         }
     }
 }
 
 bool VirtualServer::failed(){
     if (uniform(0, 1) > reliability) {
-        double failingPeriod = penaltyInterval* beaconInterval.dbl();
-        timeFailed+=failingPeriod;
-        penaltyTime = failingPeriod +simTime().dbl();
+        timeFailed+=penaltyInterval;
+        penaltyTime = penaltyInterval +simTime().dbl();
         EV_WARN << "Virtual Server with id: " << id
                        << " will fail until : "<<penaltyTime << endl;
         latestWorkTime = penaltyTime;
+        tasks.clear();
         return true;
     }
     return false;
 }
 
+void VirtualServer::loadNewTask(){
+    if (!tasks.empty()) {
+        currentTask =tasks.front();
+        tasks.pop_front();
+    } else {
+        currentTask = NULL;
+    }
+}
+
+void VirtualServer::refreshDisplay() const
+{
+    std::string display = "Task : ";
+    for(auto task : tasks){
+        display+= std::to_string(task->getId()) + " ";
+    }
+    findHost()->getDisplayString().setTagArg("t", 0, display.c_str());
+}
 
 Heartbeat * VirtualServer::generateHeartbeat() {
     Heartbeat* heartbeat = new Heartbeat();
@@ -101,12 +122,11 @@ Heartbeat * VirtualServer::generateHeartbeat() {
     return heartbeat;
 
 }
-TaskCompletion * VirtualServer::generateTaskCompletion(double computationWork,int taskCounter) {
+TaskCompletion * VirtualServer::generateTaskCompletion(double computationWork,int taskId) {
     TaskCompletion* taskCompletion = new TaskCompletion();
     populateWSM(taskCompletion);
     taskCompletion->setVirtualServerId(id);
     taskCompletion->setComputationWork(computationWork);
-    taskCompletion->setTaskCounter(taskCounter);
     taskCompletion->setComputationPower(computationPower);
     taskCompletion->setTaskId(taskId);
     EV_WARN << "Virtual Server with id: " << id
@@ -131,12 +151,6 @@ double VirtualServer::normalReliability(double expectedReliability){
     return reliability;
 }
 
-void VirtualServer::perhapsFinish(){
-    if(simTime().dbl()>900 && !finishCalled){
-        callFinish();
-        finishCalled = true;
-    }
-}
 
 void VirtualServer::finish(){
     EV_WARN << "Virtual Server with id: " << id<< " time failed "<<timeFailed << endl;

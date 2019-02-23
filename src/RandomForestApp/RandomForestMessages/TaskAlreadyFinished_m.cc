@@ -1,5 +1,5 @@
 //
-// Generated file, do not edit! Created by nedtool 5.1 from src/messages/ResponseMessage.msg.
+// Generated file, do not edit! Created by nedtool 5.1 from src/RandomForestApp/RandomForestMessages/TaskAlreadyFinished.msg.
 //
 
 // Disable warnings about unused variables, empty switch stmts, etc:
@@ -26,7 +26,7 @@
 
 #include <iostream>
 #include <sstream>
-#include "ResponseMessage_m.h"
+#include "TaskAlreadyFinished_m.h"
 
 namespace omnetpp {
 
@@ -177,23 +177,24 @@ inline std::ostream& operator<<(std::ostream& out, const std::vector<T,A>& vec)
     return out;
 }
 
-Register_Class(ResponseMessage)
+Register_Class(TaskAlreadyFinished)
 
-ResponseMessage::ResponseMessage(const char *name, short kind) : ::WaveShortMessage(name,kind)
+TaskAlreadyFinished::TaskAlreadyFinished(const char *name, short kind) : ::WaveShortMessage(name,kind)
 {
-    this->responseValue = 0;
+    this->loadBalancerId = 0;
+    this->taskId = 0;
 }
 
-ResponseMessage::ResponseMessage(const ResponseMessage& other) : ::WaveShortMessage(other)
+TaskAlreadyFinished::TaskAlreadyFinished(const TaskAlreadyFinished& other) : ::WaveShortMessage(other)
 {
     copy(other);
 }
 
-ResponseMessage::~ResponseMessage()
+TaskAlreadyFinished::~TaskAlreadyFinished()
 {
 }
 
-ResponseMessage& ResponseMessage::operator=(const ResponseMessage& other)
+TaskAlreadyFinished& TaskAlreadyFinished::operator=(const TaskAlreadyFinished& other)
 {
     if (this==&other) return *this;
     ::WaveShortMessage::operator=(other);
@@ -201,40 +202,53 @@ ResponseMessage& ResponseMessage::operator=(const ResponseMessage& other)
     return *this;
 }
 
-void ResponseMessage::copy(const ResponseMessage& other)
+void TaskAlreadyFinished::copy(const TaskAlreadyFinished& other)
 {
-    this->responseValue = other.responseValue;
+    this->loadBalancerId = other.loadBalancerId;
+    this->taskId = other.taskId;
 }
 
-void ResponseMessage::parsimPack(omnetpp::cCommBuffer *b) const
+void TaskAlreadyFinished::parsimPack(omnetpp::cCommBuffer *b) const
 {
     ::WaveShortMessage::parsimPack(b);
-    doParsimPacking(b,this->responseValue);
+    doParsimPacking(b,this->loadBalancerId);
+    doParsimPacking(b,this->taskId);
 }
 
-void ResponseMessage::parsimUnpack(omnetpp::cCommBuffer *b)
+void TaskAlreadyFinished::parsimUnpack(omnetpp::cCommBuffer *b)
 {
     ::WaveShortMessage::parsimUnpack(b);
-    doParsimUnpacking(b,this->responseValue);
+    doParsimUnpacking(b,this->loadBalancerId);
+    doParsimUnpacking(b,this->taskId);
 }
 
-int ResponseMessage::getResponseValue() const
+int TaskAlreadyFinished::getLoadBalancerId() const
 {
-    return this->responseValue;
+    return this->loadBalancerId;
 }
 
-void ResponseMessage::setResponseValue(int responseValue)
+void TaskAlreadyFinished::setLoadBalancerId(int loadBalancerId)
 {
-    this->responseValue = responseValue;
+    this->loadBalancerId = loadBalancerId;
 }
 
-class ResponseMessageDescriptor : public omnetpp::cClassDescriptor
+int TaskAlreadyFinished::getTaskId() const
+{
+    return this->taskId;
+}
+
+void TaskAlreadyFinished::setTaskId(int taskId)
+{
+    this->taskId = taskId;
+}
+
+class TaskAlreadyFinishedDescriptor : public omnetpp::cClassDescriptor
 {
   private:
     mutable const char **propertynames;
   public:
-    ResponseMessageDescriptor();
-    virtual ~ResponseMessageDescriptor();
+    TaskAlreadyFinishedDescriptor();
+    virtual ~TaskAlreadyFinishedDescriptor();
 
     virtual bool doesSupport(omnetpp::cObject *obj) const override;
     virtual const char **getPropertyNames() const override;
@@ -256,24 +270,24 @@ class ResponseMessageDescriptor : public omnetpp::cClassDescriptor
     virtual void *getFieldStructValuePointer(void *object, int field, int i) const override;
 };
 
-Register_ClassDescriptor(ResponseMessageDescriptor)
+Register_ClassDescriptor(TaskAlreadyFinishedDescriptor)
 
-ResponseMessageDescriptor::ResponseMessageDescriptor() : omnetpp::cClassDescriptor("ResponseMessage", "WaveShortMessage")
+TaskAlreadyFinishedDescriptor::TaskAlreadyFinishedDescriptor() : omnetpp::cClassDescriptor("TaskAlreadyFinished", "WaveShortMessage")
 {
     propertynames = nullptr;
 }
 
-ResponseMessageDescriptor::~ResponseMessageDescriptor()
+TaskAlreadyFinishedDescriptor::~TaskAlreadyFinishedDescriptor()
 {
     delete[] propertynames;
 }
 
-bool ResponseMessageDescriptor::doesSupport(omnetpp::cObject *obj) const
+bool TaskAlreadyFinishedDescriptor::doesSupport(omnetpp::cObject *obj) const
 {
-    return dynamic_cast<ResponseMessage *>(obj)!=nullptr;
+    return dynamic_cast<TaskAlreadyFinished *>(obj)!=nullptr;
 }
 
-const char **ResponseMessageDescriptor::getPropertyNames() const
+const char **TaskAlreadyFinishedDescriptor::getPropertyNames() const
 {
     if (!propertynames) {
         static const char *names[] = {  nullptr };
@@ -284,19 +298,19 @@ const char **ResponseMessageDescriptor::getPropertyNames() const
     return propertynames;
 }
 
-const char *ResponseMessageDescriptor::getProperty(const char *propertyname) const
+const char *TaskAlreadyFinishedDescriptor::getProperty(const char *propertyname) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     return basedesc ? basedesc->getProperty(propertyname) : nullptr;
 }
 
-int ResponseMessageDescriptor::getFieldCount() const
+int TaskAlreadyFinishedDescriptor::getFieldCount() const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 1+basedesc->getFieldCount() : 1;
+    return basedesc ? 2+basedesc->getFieldCount() : 2;
 }
 
-unsigned int ResponseMessageDescriptor::getFieldTypeFlags(int field) const
+unsigned int TaskAlreadyFinishedDescriptor::getFieldTypeFlags(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -306,11 +320,12 @@ unsigned int ResponseMessageDescriptor::getFieldTypeFlags(int field) const
     }
     static unsigned int fieldTypeFlags[] = {
         FD_ISEDITABLE,
+        FD_ISEDITABLE,
     };
-    return (field>=0 && field<1) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<2) ? fieldTypeFlags[field] : 0;
 }
 
-const char *ResponseMessageDescriptor::getFieldName(int field) const
+const char *TaskAlreadyFinishedDescriptor::getFieldName(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -319,20 +334,22 @@ const char *ResponseMessageDescriptor::getFieldName(int field) const
         field -= basedesc->getFieldCount();
     }
     static const char *fieldNames[] = {
-        "responseValue",
+        "loadBalancerId",
+        "taskId",
     };
-    return (field>=0 && field<1) ? fieldNames[field] : nullptr;
+    return (field>=0 && field<2) ? fieldNames[field] : nullptr;
 }
 
-int ResponseMessageDescriptor::findField(const char *fieldName) const
+int TaskAlreadyFinishedDescriptor::findField(const char *fieldName) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount() : 0;
-    if (fieldName[0]=='r' && strcmp(fieldName, "responseValue")==0) return base+0;
+    if (fieldName[0]=='l' && strcmp(fieldName, "loadBalancerId")==0) return base+0;
+    if (fieldName[0]=='t' && strcmp(fieldName, "taskId")==0) return base+1;
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 
-const char *ResponseMessageDescriptor::getFieldTypeString(int field) const
+const char *TaskAlreadyFinishedDescriptor::getFieldTypeString(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -342,11 +359,12 @@ const char *ResponseMessageDescriptor::getFieldTypeString(int field) const
     }
     static const char *fieldTypeStrings[] = {
         "int",
+        "int",
     };
-    return (field>=0 && field<1) ? fieldTypeStrings[field] : nullptr;
+    return (field>=0 && field<2) ? fieldTypeStrings[field] : nullptr;
 }
 
-const char **ResponseMessageDescriptor::getFieldPropertyNames(int field) const
+const char **TaskAlreadyFinishedDescriptor::getFieldPropertyNames(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -359,7 +377,7 @@ const char **ResponseMessageDescriptor::getFieldPropertyNames(int field) const
     }
 }
 
-const char *ResponseMessageDescriptor::getFieldProperty(int field, const char *propertyname) const
+const char *TaskAlreadyFinishedDescriptor::getFieldProperty(int field, const char *propertyname) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -372,7 +390,7 @@ const char *ResponseMessageDescriptor::getFieldProperty(int field, const char *p
     }
 }
 
-int ResponseMessageDescriptor::getFieldArraySize(void *object, int field) const
+int TaskAlreadyFinishedDescriptor::getFieldArraySize(void *object, int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -380,13 +398,13 @@ int ResponseMessageDescriptor::getFieldArraySize(void *object, int field) const
             return basedesc->getFieldArraySize(object, field);
         field -= basedesc->getFieldCount();
     }
-    ResponseMessage *pp = (ResponseMessage *)object; (void)pp;
+    TaskAlreadyFinished *pp = (TaskAlreadyFinished *)object; (void)pp;
     switch (field) {
         default: return 0;
     }
 }
 
-const char *ResponseMessageDescriptor::getFieldDynamicTypeString(void *object, int field, int i) const
+const char *TaskAlreadyFinishedDescriptor::getFieldDynamicTypeString(void *object, int field, int i) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -394,13 +412,13 @@ const char *ResponseMessageDescriptor::getFieldDynamicTypeString(void *object, i
             return basedesc->getFieldDynamicTypeString(object,field,i);
         field -= basedesc->getFieldCount();
     }
-    ResponseMessage *pp = (ResponseMessage *)object; (void)pp;
+    TaskAlreadyFinished *pp = (TaskAlreadyFinished *)object; (void)pp;
     switch (field) {
         default: return nullptr;
     }
 }
 
-std::string ResponseMessageDescriptor::getFieldValueAsString(void *object, int field, int i) const
+std::string TaskAlreadyFinishedDescriptor::getFieldValueAsString(void *object, int field, int i) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -408,14 +426,15 @@ std::string ResponseMessageDescriptor::getFieldValueAsString(void *object, int f
             return basedesc->getFieldValueAsString(object,field,i);
         field -= basedesc->getFieldCount();
     }
-    ResponseMessage *pp = (ResponseMessage *)object; (void)pp;
+    TaskAlreadyFinished *pp = (TaskAlreadyFinished *)object; (void)pp;
     switch (field) {
-        case 0: return long2string(pp->getResponseValue());
+        case 0: return long2string(pp->getLoadBalancerId());
+        case 1: return long2string(pp->getTaskId());
         default: return "";
     }
 }
 
-bool ResponseMessageDescriptor::setFieldValueAsString(void *object, int field, int i, const char *value) const
+bool TaskAlreadyFinishedDescriptor::setFieldValueAsString(void *object, int field, int i, const char *value) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -423,14 +442,15 @@ bool ResponseMessageDescriptor::setFieldValueAsString(void *object, int field, i
             return basedesc->setFieldValueAsString(object,field,i,value);
         field -= basedesc->getFieldCount();
     }
-    ResponseMessage *pp = (ResponseMessage *)object; (void)pp;
+    TaskAlreadyFinished *pp = (TaskAlreadyFinished *)object; (void)pp;
     switch (field) {
-        case 0: pp->setResponseValue(string2long(value)); return true;
+        case 0: pp->setLoadBalancerId(string2long(value)); return true;
+        case 1: pp->setTaskId(string2long(value)); return true;
         default: return false;
     }
 }
 
-const char *ResponseMessageDescriptor::getFieldStructName(int field) const
+const char *TaskAlreadyFinishedDescriptor::getFieldStructName(int field) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -443,7 +463,7 @@ const char *ResponseMessageDescriptor::getFieldStructName(int field) const
     };
 }
 
-void *ResponseMessageDescriptor::getFieldStructValuePointer(void *object, int field, int i) const
+void *TaskAlreadyFinishedDescriptor::getFieldStructValuePointer(void *object, int field, int i) const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -451,7 +471,7 @@ void *ResponseMessageDescriptor::getFieldStructValuePointer(void *object, int fi
             return basedesc->getFieldStructValuePointer(object, field, i);
         field -= basedesc->getFieldCount();
     }
-    ResponseMessage *pp = (ResponseMessage *)object; (void)pp;
+    TaskAlreadyFinished *pp = (TaskAlreadyFinished *)object; (void)pp;
     switch (field) {
         default: return nullptr;
     }

@@ -5,8 +5,10 @@
 #include "RandomForestMessages/TaskCompletion_m.h"
 #include "RandomForestMessages/Heartbeat_m.h"
 #include "RandomForestMessages/TaskRequest_m.h"
+#include "RandomForestMessages/TaskAlreadyFinished_m.h"
 #include "Microcloud.h"
 #include <omnetpp.h>
+#include <unordered_set>
 
 class LoadBalancer : public BaseWaveApplLayer {
     public:
@@ -16,35 +18,54 @@ class LoadBalancer : public BaseWaveApplLayer {
 		virtual void onWSM(WaveShortMessage* wsm);
         virtual void handleSelfMsg(cMessage* msg);
 	private:
-        void distributeWorkLoad(double computationTask);
-        double clearFailingMicroClouds();
-        bool isAnMCIdle();
-        TaskRequest* generateTaskRequest(double virtualServertask,int virtualServerId,int taskCounter);
-        void perhapsFinish();
-        void sendFirstTask();
+        struct MC_Compare_Work {
+             bool operator() (MicroCloud * a, MicroCloud * b) const {
+                 return b->getCurrentWorkLoad()>a->getCurrentWorkLoad();
+             }
+         };
+
+        void createNewTask(int taskId);
+        void sendTasks();
+        int sendTask(std::set<MicroCloud *,MC_Compare_Work> functioningClouds);
+        void clearFailingMcs();
+        void perhapsAddFailedTask(std::deque<Task *> failedTasks, int mcId);
+        void deleteTaskFromMCs(int taskId);
+
+        TaskRequest* generateTaskRequest(double virtualServerWork,int virtualServerId,int taskId);
+        TaskAlreadyFinished * generateTaskAlreadyFinished(int taskId);
+
+        struct Task_Compare {
+            bool operator() (Task * a, Task * b) const {
+                return b->getId()>a->getId();
+            }
+        };
+
+
+        std::set<Task *, Task_Compare> tasks;
+
 
         std::map<int,MicroCloud *> idToMicrocloud;
-        cMessage* sendWSMEvt;
+        std::map<int,std::set<MicroCloud *>> taskIdToMcs;
+
+
+        std::unordered_set<int> finishedTaskIds;
 
         double heartBeatTimeout;
-        double currentComputationWork;
         double failedWork;
         double workFinished;
-        double progress;
         double expectedComputationWork;
         double replicationFactor;
 
         int id;
         int upperBound;
         int lowerBound;
-        int taskId;
+        int desiredNumTask;
 
         bool reputationOn;
-        bool sentFirstTask;
-        bool finishCalled;
 
-        cOutVector taskCompletedVector;
+
         cOutVector workFinishedVector;
+        cMessage* sendWSMEvt;
 };
 
 #endif

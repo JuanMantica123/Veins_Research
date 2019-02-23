@@ -11,41 +11,37 @@
 class Task{
 public:
 
-    Task(double loadRemaining,int identifier,double creationTime){
-        this.loadRemaining = loadRemaining;
-        this.identifier = identifier;
-        this.creationTime = creationTime;
+    Task(int id,double workLoad){
+        this-> workLoad = workLoad;
+        this->id = id;
 
-    }
-
-    double getLoadRemaining() const {
-        return load;
-    }
-
-    void setLoadRemaining(double load) {
-        this->load = load;
-    }
-
-    int getIdentifier() const {
-        return identifier;
-    }
-
-    void setIdentifier(int identifier) {
-        this->identifier = identifier;
     }
 
     double getCreationTime() const {
         return creationTime;
     }
 
-    void setCreationTime(double creationTime) {
-        this->creationTime = creationTime;
+    int getId() const {
+        return id;
+    }
+
+    double getProgress() const {
+        return progress;
+    }
+    void incrementProgress(double latestProgress){
+        this->progress+=latestProgress;
+    }
+
+    double getWorkLoad() const {
+        return workLoad;
     }
 
 private:
-    double loadRemaining;
-    int identifier;
+    double workLoad;
+    double progress;
     double creationTime;
+    int id;
+
 };
 
 #endif /* SRC_RANDOMFORESTAPP_TASK_H_ */

@@ -12,7 +12,7 @@ void CNNAppRSU::initialize(int stage){
     if(stage==0){
         storedValues = {1,2,3,4};
     } else if (stage == 1) {
-        rsuId = par("rsuId").intValue();
+        rsuId = par("rsuId").longValue();
         EV_WARN<<"Initiated with rsu id:  "<<rsuId<<endl;
 
     }
