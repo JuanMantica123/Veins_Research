@@ -26,7 +26,7 @@ class VirtualServer : public BaseWaveApplLayer {
         double normalReliability(double expectedReliability);
         void deleteTask(int id);
         bool failed();
-        void loadNewTask();
+        void loadNewTask(double unacountedProgress);
 
         std::deque<Task *> tasks;
 

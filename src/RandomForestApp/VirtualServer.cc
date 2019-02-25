@@ -38,13 +38,13 @@ void VirtualServer::handleSelfMsg(cMessage* msg) {
             currentTask->incrementProgress(latestProgress);
             if (currentTask->getProgress() >= currentTask->getWorkLoad()) {
                 sendDown(generateTaskCompletion(currentTask->getWorkLoad(), currentTask->getId()));
-                loadNewTask();
+                loadNewTask(currentTask->getProgress()-currentTask->getWorkLoad());
             } else {
                 sendDown(generateHeartbeat());
             }
         } else {
             if (currentTask == NULL && !tasks.empty()) {
-                loadNewTask();
+                loadNewTask(0);
             }
             sendDown(generateHeartbeat());
         }
@@ -84,21 +84,25 @@ void VirtualServer::deleteTask(int taskId){
 }
 
 bool VirtualServer::failed(){
-    if (uniform(0, 1) > reliability) {
-        timeFailed+=penaltyInterval;
-        penaltyTime = penaltyInterval +simTime().dbl();
-        EV_WARN << "Virtual Server with id: " << id
-                       << " will fail until : "<<penaltyTime << endl;
-        latestWorkTime = penaltyTime;
-        tasks.clear();
-        return true;
+    if(latestTimeFailedCalled+penaltyInterval<simTime().dbl()){
+        latestTimeFailedCalled = simTime().dbl();
+        if (((double) rand() / (RAND_MAX)) > reliability) {
+            timeFailed+=penaltyInterval;
+            penaltyTime = penaltyInterval +simTime().dbl();
+            EV_WARN << "Virtual Server with id: " << id
+                           << " will fail until : "<<penaltyTime << endl;
+            latestWorkTime = penaltyTime;
+            tasks.clear();
+            return true;
+        }
     }
     return false;
 }
 
-void VirtualServer::loadNewTask(){
+void VirtualServer::loadNewTask(double unacountedProgress){
     if (!tasks.empty()) {
         currentTask =tasks.front();
+        currentTask->incrementProgress(unacountedProgress);
         tasks.pop_front();
     } else {
         currentTask = NULL;

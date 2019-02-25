@@ -80,26 +80,30 @@ void LoadBalancer::onWSM(WaveShortMessage* wsm) {
         microcloud->setComputationPower(completion->getComputationPower());
 
         int taskId = microcloud->getLatestTaskId();
+//  TODO: Figure why this assert throws failure
 //        assert(completion->getTaskId()==taskId);
 
-        sendDown(generateTaskAlreadyFinished(taskId));
-        deleteTaskFromMCs(taskId);
 
         double completedComputationWork = completion->getComputationWork();
         microcloud->incrementWorkDone(completedComputationWork);
-        workFinished+=completedComputationWork;
-        workFinishedVector.recordWithTimestamp(simTime(),workFinished);
+        sendDown(generateTaskAlreadyFinished(taskId));
+        deleteTaskFromMCs(taskId);
 
-
-        if(reputationOn){
-            microcloud ->changeReputation(.05);
-            EV_WARN << "Received task completion message from: " << virtualServerId
-                           << " which completed a task of load :" <<completedComputationWork<<" ,new reputation is : "
-                           <<microcloud->getReputation()<<endl;
-        }
-        else{
-            EV_WARN << "Received task completion message from: " << virtualServerId
-                           << " which completed a task of load :" <<completedComputationWork<<endl;
+        //We are using this set, to be extremely certain that no task is double counted
+        if(finishedTaskIds.find(taskId) == finishedTaskIds.end()){
+            workFinished+=completedComputationWork;
+            workFinishedVector.recordWithTimestamp(simTime(),workFinished);
+            finishedTaskIds.insert(taskId);
+            if(reputationOn){
+                microcloud ->changeReputation(.05);
+                EV_WARN << "Received task completion message from: " << virtualServerId
+                               << " which completed a task of load :" <<completedComputationWork<<" ,new reputation is : "
+                               <<microcloud->getReputation()<<endl;
+            }
+            else{
+                EV_WARN << "Received task completion message from: " << virtualServerId
+                               << " which completed a task of load :" <<completedComputationWork<<endl;
+            }
         }
     }
 
@@ -124,11 +128,30 @@ void LoadBalancer::sendTasks() {
             taskToSend+=std::max(0,taskDeficit);
         }
     }
-    EV_WARN<<"Number of functioning clouds : "<<functioningClouds.size()<<endl;
+
+    EV_WARN<<"Number of functioning clouds : "<<functioningClouds.size()<<" task to send "<<taskToSend<<endl;
     while(taskToSend>0){
-         taskToSend -= sendTask(functioningClouds);
+        std::set<MicroCloud *> cloudsReplicatedTo;
+        auto taskIterator = tasks.begin();
+        Task * task = *taskIterator;
+        tasks.erase(taskIterator);
+        while(functioningClouds.size()>0 && cloudsReplicatedTo.size()<replicationFactor){
+            auto mcIterator = functioningClouds.begin();
+            MicroCloud * mostIdleCloud = *mcIterator;
+            cloudsReplicatedTo.insert(mostIdleCloud);
+            functioningClouds.erase(mcIterator);
+            mostIdleCloud->pushTask(task);
+            sendDown(generateTaskRequest(task->getWorkLoad(), mostIdleCloud->getVirtualServerId(),task->getId()));
+        }
+        //Resorting MCs in functioning clouds
+        for(auto mc: cloudsReplicatedTo){
+            functioningClouds.insert(mc);
+        }
+        taskIdToMcs[task->getId()]=cloudsReplicatedTo;
+        taskToSend-=cloudsReplicatedTo.size();
     }
 }
+
 
 void LoadBalancer::clearFailingMcs() {
     for (auto const& x : idToMicrocloud) {
@@ -152,28 +175,6 @@ void LoadBalancer::clearFailingMcs() {
 
 }
 
-int LoadBalancer::sendTask(std::set<MicroCloud *,MC_Compare_Work> functioningClouds){
-    std::set<MicroCloud *> cloudsReplicatedTo;
-    auto taskIterator = tasks.begin();
-    Task * task = *taskIterator;
-    tasks.erase(taskIterator);
-    while(functioningClouds.size()>0 && cloudsReplicatedTo.size()<replicationFactor){
-        auto mcIterator = functioningClouds.begin();
-        MicroCloud * mostIdleCloud = *mcIterator;
-        cloudsReplicatedTo.insert(mostIdleCloud);
-        functioningClouds.erase(mcIterator);
-        mostIdleCloud->pushTask(task);
-        sendDown(generateTaskRequest(task->getWorkLoad(), mostIdleCloud->getVirtualServerId(),task->getId()));
-    }
-    //Resorting MCs in functioning clouds
-    for(auto mc: cloudsReplicatedTo){
-        functioningClouds.insert(mc);
-    }
-    taskIdToMcs[task->getId()]=cloudsReplicatedTo;
-    return cloudsReplicatedTo.size();
-
-
-}
 void LoadBalancer::createNewTask(int taskId) {
     Task * newTask = new Task(taskId, expectedComputationWork);
     tasks.insert(newTask);
@@ -237,5 +238,16 @@ void LoadBalancer::finish(){
     std::string scWork = "Load Balancer : "+std::to_string(id)+" work finished";
     recordScalar(scWork.c_str(),workFinished);
     EV_WARN << "Load balancer : " <<id<<" finished a total work of: "<<workFinished<<endl;
+
+    int sequentialTask = 1;
+    while(finishedTaskIds.find(sequentialTask)!=finishedTaskIds.end()){
+        sequentialTask++;
+    }
+    sequentialTask--;
+    std::string lbSequential = "Load Balancer : "+std::to_string(id)+" sequential task";
+    recordScalar(scWork.c_str(),sequentialTask);
+    EV_WARN << "Load balancer : " <<id<<" finished "<<sequentialTask<<" sequential task"<<endl;
+    EV_WARN << "Load balancer : " <<id<<" finished "<<finishedTaskIds.size()<<" task"<<endl;
+
 }
 

@@ -20,13 +20,15 @@ class LoadBalancer : public BaseWaveApplLayer {
 	private:
         struct MC_Compare_Work {
              bool operator() (MicroCloud * a, MicroCloud * b) const {
+                 if(b->getCurrentWorkLoad()==a->getCurrentWorkLoad()){
+                     return b->getVirtualServerId()>a->getVirtualServerId();
+                 }
                  return b->getCurrentWorkLoad()>a->getCurrentWorkLoad();
              }
          };
 
         void createNewTask(int taskId);
         void sendTasks();
-        int sendTask(std::set<MicroCloud *,MC_Compare_Work> functioningClouds);
         void clearFailingMcs();
         void perhapsAddFailedTask(std::deque<Task *> failedTasks, int mcId);
         void deleteTaskFromMCs(int taskId);

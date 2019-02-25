@@ -54,7 +54,7 @@ public:
     }
 
     void incrementWorkDone(double latestWorkDone) {
-        this->workDone = latestWorkDone;
+        this->workDone += latestWorkDone;
     }
     void pushTask(Task * task){
         tasks.push_back(task);
