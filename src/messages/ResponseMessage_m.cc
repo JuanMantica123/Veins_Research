@@ -1,5 +1,5 @@
 //
-// Generated file, do not edit! Created by nedtool 5.1 from src/messages/ResponseMessage.msg.
+// Generated file, do not edit! Created by nedtool 5.3 from src/messages/ResponseMessage.msg.
 //
 
 // Disable warnings about unused variables, empty switch stmts, etc:

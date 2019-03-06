@@ -7,7 +7,7 @@ simple VirtualServer extends BaseWaveApplLayer
     parameters:
         double penaltyInterval;
         double expectedReliability;
-        int computationPower;
+        double computationPower;
         int id;
         int loadBalancerId;
         

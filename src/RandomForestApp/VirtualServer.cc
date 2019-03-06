@@ -16,7 +16,7 @@ void VirtualServer::initialize(int stage) {
     if (stage == 1) {
         id =  par("id").longValue();
         loadBalancerId = par("loadBalancerId").longValue();
-        computationPower = par("computationPower").longValue();
+        computationPower = par("computationPower").doubleValue();
         penaltyInterval = par("penaltyInterval").doubleValue();
         double expectedReliability = par("expectedReliability").doubleValue();
         reliability =  expectedReliability;
