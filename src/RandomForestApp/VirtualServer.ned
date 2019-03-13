@@ -10,6 +10,7 @@ simple VirtualServer extends BaseWaveApplLayer
         double computationPower;
         int id;
         int loadBalancerId;
+        int minNumCars = default(3);
         
     @class(VirtualServer);
     @display("i=block/app2");

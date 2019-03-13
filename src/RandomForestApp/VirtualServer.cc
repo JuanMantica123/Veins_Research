@@ -1,6 +1,7 @@
 #include "VirtualServer.h"
 #include <random>
 #include <math.h>
+#include "csv.h"
 
 #ifndef DBG_APP
 #define EV_WARN
@@ -14,26 +15,51 @@ void VirtualServer::initialize(int stage) {
         sendWSMEvt = new cMessage("wsm evt");
     }
     if (stage == 1) {
-        id =  par("id").longValue();
-        loadBalancerId = par("loadBalancerId").longValue();
-        computationPower = par("computationPower").doubleValue();
+        id =  par("id").intValue();
+        loadBalancerId = par("loadBalancerId").intValue();
+        computationPower = 0;
+        //computationPower = par("computationPower").doubleValue();
         penaltyInterval = par("penaltyInterval").doubleValue();
-        double expectedReliability = par("expectedReliability").doubleValue();
-        reliability =  expectedReliability;
-//                normalReliability(expectedReliability);
-        EV_WARN << "Virtual Server with id: " << id <<" will have a reliability of :"<<reliability<< endl;
+        reliability = par("expectedReliability").doubleValue();
+        minNumCars = par("minNumCars").intValue();
 
         latestTimeFailedCalled = 0;
         timeFailed = 0;
         latestWorkTime = 0;
+        penaltyTime = 0;
         currentTask = NULL;
 
-        scheduleAt(simTime() + beaconInterval+uniform(.2, .4), sendWSMEvt);
+
+        std::string configFolder = "/home/pedro/Documents/juan_work/Veins_Research/src/RandomForestApp/VirtualServerConfig/";
+
+        io::CSVReader<1> in(configFolder+"lb0_server_power.csv");
+        in.read_header(io::ignore_extra_column, std::to_string(id));
+        double computationPower; int time = 0;
+        while(in.read_row(computationPower)){
+            timeToComputationPower[time] = computationPower;
+            time++;
+        }
+
+        io::CSVReader<1> inCars(configFolder+"lb0_virtual_servers.csv");
+            inCars.read_header(io::ignore_extra_column, std::to_string(id));
+                int numCars; time = 0;
+                while(inCars.read_row(numCars)){
+                    timetoNumCars[time] = numCars;
+                    time++;
+                }
+
+       scheduleAt(simTime() + beaconInterval+uniform(.2, .4), sendWSMEvt);
     }
 }
+
 void VirtualServer::handleSelfMsg(cMessage* msg) {
-    if (simTime().dbl() > penaltyTime && !failed()) {
+    int time = (int)simTime().dbl();
+    if (simTime().dbl() > penaltyTime  && !failed(time)) {
+        if(id==6){
+            EV_WARN<<"I am alive"<<computationPower<<endl;
+        }
         if (currentTask != NULL) {
+            computationPower = timeToComputationPower[time];
             double latestProgress = computationPower * (simTime().dbl() - latestWorkTime);
             currentTask->incrementProgress(latestProgress);
             if (currentTask->getProgress() >= currentTask->getWorkLoad()) {
@@ -48,8 +74,8 @@ void VirtualServer::handleSelfMsg(cMessage* msg) {
             }
             sendDown(generateHeartbeat());
         }
-        latestWorkTime = simTime().dbl();
     }
+    latestWorkTime = simTime().dbl();
     scheduleAt(simTime() + beaconInterval, sendWSMEvt);
 }
 
@@ -76,27 +102,36 @@ void VirtualServer::deleteTask(int taskId){
     for (auto task = tasks.begin(); task != tasks.end(); ++task) {
         Task * iteratingTask = *task;
         if (iteratingTask->getId() == taskId) {
-            EV_WARN<<"Virtu Server : "<<id<<"  will delete task "<<taskId<<endl;
+            EV_WARN<<"Virtual Server : "<<id<<"  will delete task "<<taskId<<endl;
             tasks.erase(task);
             break;
         }
     }
 }
 
-bool VirtualServer::failed(){
-    if(latestTimeFailedCalled+penaltyInterval<simTime().dbl()){
+bool VirtualServer::failed(int time){
+    int numCars = timetoNumCars[time];
+    if(numCars<minNumCars){
+        fail();
+        return true;
+    }
+    else if(latestTimeFailedCalled+penaltyInterval<simTime().dbl()){
         latestTimeFailedCalled = simTime().dbl();
         if (((double) rand() / (RAND_MAX)) > reliability) {
-            timeFailed+=penaltyInterval;
-            penaltyTime = penaltyInterval +simTime().dbl();
-            EV_WARN << "Virtual Server with id: " << id
-                           << " will fail until : "<<penaltyTime << endl;
-            latestWorkTime = penaltyTime;
-            tasks.clear();
+            fail();
             return true;
         }
     }
     return false;
+}
+
+void VirtualServer::fail(){
+    timeFailed+=penaltyInterval;
+    penaltyTime = penaltyInterval +simTime().dbl();
+    EV_WARN << "Virtual Server with id: " << id
+                   << " will fail until : "<<penaltyTime << endl;
+    latestWorkTime = penaltyTime;
+    tasks.clear();
 }
 
 void VirtualServer::loadNewTask(double unacountedProgress){
@@ -139,22 +174,6 @@ TaskCompletion * VirtualServer::generateTaskCompletion(double computationWork,in
                    taskId<< endl;
     return taskCompletion;
 }
-
-double VirtualServer::normalReliability(double expectedReliability){
-    //While unlikely the following normal distribution can output values less than 0 and more than 1
-    std::normal_distribution<double> distribution(expectedReliability,.2);
-    std::default_random_engine generator;
-    generator.seed(time(NULL));
-    double reliability = distribution(generator);
-    if(reliability<0){
-        reliability = 0;
-    }
-    else if(reliability>1){
-        reliability = 1;
-    }
-    return reliability;
-}
-
 
 void VirtualServer::finish(){
     EV_WARN << "Virtual Server with id: " << id<< " time failed "<<timeFailed << endl;

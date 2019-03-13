@@ -22,6 +22,7 @@ void LoadBalancer::initialize(int stage) {
         expectedComputationWork = par("expectedComputationWork").doubleValue();
         replicationFactor = par("replicationFactor").doubleValue();
 
+
         workFinished = 0;
         failedWork = 0;
         desiredNumTask = 2;
@@ -79,18 +80,19 @@ void LoadBalancer::onWSM(WaveShortMessage* wsm) {
         microcloud->setFunctioning(true);
         microcloud->setComputationPower(completion->getComputationPower());
 
-        int taskId = microcloud->getLatestTaskId();
+//        int taskId = microcloud->getLatestTaskId();
+         int taskId = completion->getTaskId();
 //  TODO: Figure why this assert throws failure
 //        assert(completion->getTaskId()==taskId);
 
 
         double completedComputationWork = completion->getComputationWork();
-        microcloud->incrementWorkDone(completedComputationWork);
         sendDown(generateTaskAlreadyFinished(taskId));
         deleteTaskFromMCs(taskId);
 
         //We are using this set, to be extremely certain that no task is double counted
         if(finishedTaskIds.find(taskId) == finishedTaskIds.end()){
+            microcloud->incrementWorkDone(completedComputationWork);
             workFinished+=completedComputationWork;
             workFinishedVector.recordWithTimestamp(simTime(),workFinished);
             finishedTaskIds.insert(taskId);
@@ -245,7 +247,7 @@ void LoadBalancer::finish(){
     }
     sequentialTask--;
     std::string lbSequential = "Load Balancer : "+std::to_string(id)+" sequential task";
-    recordScalar(scWork.c_str(),sequentialTask);
+    recordScalar(lbSequential.c_str(),sequentialTask);
     EV_WARN << "Load balancer : " <<id<<" finished "<<sequentialTask<<" sequential task"<<endl;
     EV_WARN << "Load balancer : " <<id<<" finished "<<finishedTaskIds.size()<<" task"<<endl;
 

@@ -25,10 +25,14 @@ class VirtualServer : public BaseWaveApplLayer {
         TaskCompletion* generateTaskCompletion(double computationWork,int taskId);
         double normalReliability(double expectedReliability);
         void deleteTask(int id);
-        bool failed();
+        bool failed(int time);
+        void fail();
         void loadNewTask(double unacountedProgress);
 
         std::deque<Task *> tasks;
+
+        std::map<int,double> timeToComputationPower;
+        std::map<int,int> timetoNumCars;
 
         Task * currentTask;
 
@@ -40,6 +44,7 @@ class VirtualServer : public BaseWaveApplLayer {
         double penaltyInterval;
         double latestTimeFailedCalled;
 
+        int minNumCars;
         int id;
         int loadBalancerId;
 
