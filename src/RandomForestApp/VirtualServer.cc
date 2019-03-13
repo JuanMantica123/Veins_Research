@@ -27,7 +27,12 @@ void VirtualServer::initialize(int stage) {
         timeFailed = 0;
         latestWorkTime = 0;
         penaltyTime = 0;
+        workFinished = 0;
         currentTask = NULL;
+
+        std::string mcWorkTag = "Work finished on microcloud : "+ std::to_string(id);
+        workFinishedVector.setName(mcWorkTag.c_str());
+        workFinishedVector.recordWithTimestamp(simTime(),workFinished);
 
 
         std::string configFolder = "/home/pedro/Documents/juan_work/Veins_Research/src/RandomForestApp/VirtualServerConfig/";
@@ -172,6 +177,8 @@ TaskCompletion * VirtualServer::generateTaskCompletion(double computationWork,in
                    << " sending task completion message for a task load of : "
                    << computationWork <<" for the task id of: "<<
                    taskId<< endl;
+    workFinished+=computationWork;
+    workFinishedVector.recordWithTimestamp(simTime(), workFinished);
     return taskCompletion;
 }
 

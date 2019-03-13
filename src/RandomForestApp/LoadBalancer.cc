@@ -27,7 +27,7 @@ void LoadBalancer::initialize(int stage) {
         failedWork = 0;
         desiredNumTask = 2;
 
-        workFinishedVector.setName("Work finished");
+        workFinishedVector.setName("Work finished load balancer");
         workFinishedVector.recordWithTimestamp(simTime(),workFinished);
 
 

@@ -43,11 +43,13 @@ class VirtualServer : public BaseWaveApplLayer {
         double timeFailed;
         double penaltyInterval;
         double latestTimeFailedCalled;
+        double workFinished;
 
         int minNumCars;
         int id;
         int loadBalancerId;
 
+        cOutVector workFinishedVector;
         cMessage* sendWSMEvt;
 
 };
